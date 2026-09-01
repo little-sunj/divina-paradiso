@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>낙천사구역 (Fallen Angel Zone) - Official</title>
+    <!-- Google Fonts: Cinzel for high-fantasy English, Noto Serif KR for elegant Korean -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Serif+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 1. Intro Screen with Feather Storm -->
+    <div id="intro-screen">
+        <div class="intro-bg-glow"></div>
+        <div id="intro-content">
+            <h1 class="intro-title">FALLEN ANGEL ZONE</h1>
+            <p class="intro-subtitle">낙 천 사 구 역</p>
+            <div class="enter-prompt">
+                <span class="pulse-text">화면을 클릭하여 진입하십시오</span>
+                <i class="fa-solid fa-angle-double-down arrow-down"></i>
+            </div>
+        </div>
+        <!-- Feathers will be generated dynamically via JS inside this container -->
+        <div id="feather-container"></div>
+        <!-- Hidden Image preloaders to bypass file:// local WebGL CORS blocks -->
+        <div style="display: none;">
+            <img id="img-moon" src="assets/images/moon.jpg">
+            <img id="img-earth" src="assets/images/earth.jpg">
+            <img id="img-earth-night" src="assets/images/earth_night.jpg">
+        </div>
+    </div>
+
+    <!-- 2. Main Page Content (Initially hidden/transparent) -->
+    <div id="main-container" class="hidden">
+        <!-- Background Stars dynamic element -->
+        <div class="stars-bg"></div>
+        <!-- Vertical Center Axis Line -->
+        <div class="center-axis-line"></div>
+
+        <!-- Upper Part: Glowing and Rotating Moon -->
+        <div class="moon-wrapper">
+            <div class="moon-glow"></div>
+            <div class="moon" id="moon-canvas-container"></div>
+        </div>
+
+        <!-- Middle Part: Interactive Orbit Layers -->
+        <div class="orbits-container">
+            <div class="orbit-line-wrapper" data-layer="3">
+                <div class="orbit-line"></div>
+                <div class="orbit-spinner">
+                    <div class="orbit-rotator spinner-1">
+                        <div class="orbit-sparkle"></div>
+                    </div>
+                </div>
+                <div class="orbit-content">
+                    <span class="orbit-number">III</span>
+                    <h3 class="orbit-title">제3층: 천계 (Celestial Realm)</h3>
+                    <p class="orbit-desc">추방당한 고결한 영혼들이 도달하려는 마지막 영원의 구역</p>
+                </div>
+            </div>
+            
+            <div class="orbit-line-wrapper" data-layer="2">
+                <div class="orbit-line"></div>
+                <div class="orbit-spinner">
+                    <div class="orbit-rotator spinner-2">
+                        <div class="orbit-sparkle"></div>
+                    </div>
+                </div>
+                <div class="orbit-content">
+                    <span class="orbit-number">II</span>
+                    <h3 class="orbit-title">제2층: 연옥 (Purgatory)</h3>
+                    <p class="orbit-desc">빛과 어둠의 경계, 징벌을 기다리는 영혼들의 안식처</p>
+                </div>
+            </div>
+
+            <div class="orbit-line-wrapper" data-layer="1">
+                <div class="orbit-line"></div>
+                <div class="orbit-spinner">
+                    <div class="orbit-rotator spinner-3">
+                        <div class="orbit-sparkle"></div>
+                    </div>
+                </div>
+                <div class="orbit-content">
+                    <span class="orbit-number">I</span>
+                    <h3 class="orbit-title">제1층: 현계 (Mortal Realm)</h3>
+                    <p class="orbit-desc">낙천사가 지상에 내려와 최초로 닿는 인간의 공간</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lower Part: Earth -->
+        <div class="earth-wrapper">
+            <div class="earth-glow"></div>
+            <div class="earth" id="earth-canvas-container"></div>
+        </div>
+    </div>
+
+    <!-- 3. Detail Views for Layers (Initially hidden) -->
+    <div id="detail-container" class="hidden">
+        <!-- Close Button -->
+        <button class="close-btn"><i class="fa-solid fa-times"></i> BACK TO SPACE</button>
+        
+        <!-- Detail Card for Layer 1 -->
+        <div class="detail-card" id="detail-1">
+            <div class="card-image img-mortal"></div>
+            <div class="card-info">
+                <span class="card-category">LAYER I</span>
+                <h2>현계 (Mortal Realm)</h2>
+                <div class="card-divider"></div>
+                <p class="card-text">
+                    인간들이 거주하는 물질적인 세계이며, 타락한 천사들이 처음으로 당도하게 되는 하계입니다.
+                    하늘에서 떨어진 이들이 빛을 잃고 인간의 욕망과 마주하게 되는 고통의 서막이 펼쳐지는 공간입니다.
+                </p>
+                <div class="characters-preview">
+                    <h4>대표 등장인물</h4>
+                    <div class="char-list">
+                        <div class="char-item">
+                            <span class="char-avatar char1"></span>
+                            <span class="char-name">아라엘 (Arael)</span>
+                        </div>
+                        <div class="char-item">
+                            <span class="char-avatar char2"></span>
+                            <span class="char-name">레오나드 (Leonard)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detail Card for Layer 2 -->
+        <div class="detail-card" id="detail-2">
+            <div class="card-image img-purgatory"></div>
+            <div class="card-info">
+                <span class="card-category">LAYER II</span>
+                <h2>연옥 (Purgatory)</h2>
+                <div class="card-divider"></div>
+                <p class="card-text">
+                    빛도 어둠도 닿지 않는 영원한 경계선입니다. 과거의 기억을 정화하기 위해 머무는 차가운 안개로 가득 차 있으며, 
+                    그레이톤의 장엄한 건축물들이 늘어서 있습니다. 이곳의 천사들은 속죄의 찬가를 부르며 자신을 시험합니다.
+                </p>
+                <div class="characters-preview">
+                    <h4>대표 등장인물</h4>
+                    <div class="char-list">
+                        <div class="char-item">
+                            <span class="char-avatar char3"></span>
+                            <span class="char-name">루시엘 (Luciel)</span>
+                        </div>
+                        <div class="char-item">
+                            <span class="char-avatar char4"></span>
+                            <span class="char-name">세라핌 (Seraphim)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detail Card for Layer 3 -->
+        <div class="detail-card" id="detail-3">
+            <div class="card-image img-celestial"></div>
+            <div class="card-info">
+                <span class="card-category">LAYER III</span>
+                <h2>천계 (Celestial Realm)</h2>
+                <div class="card-divider"></div>
+                <p class="card-text">
+                    추방자들이 끊임없이 갈망하고 다시 닿으려 애쓰는 눈부신 영원의 세계입니다. 
+                    신성한 금빛 기둥과 푸른 구름으로 덮여 있으나, 도달하기 위해서는 모든 지상 및 연옥의 형벌을 완수한 고결함만이 증명되어야 합니다.
+                </p>
+                <div class="characters-preview">
+                    <h4>대표 등장인물</h4>
+                    <div class="char-list">
+                        <div class="char-item">
+                            <span class="char-avatar char5"></span>
+                            <span class="char-name">미카엘 (Michael)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Three.js and Anime.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
