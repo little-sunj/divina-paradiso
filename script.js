@@ -122,22 +122,22 @@ document.addEventListener("DOMContentLoaded", () => {
         let size, opacity, blurVal;
 
         if (depthTier < 0.25) {
-            // Foreground (Large brilliant crystal stars)
-            size = anime.random(34, 48);
-            opacity = anime.random(85, 100) / 100;
-            blurVal = 0;
+            // Foreground (Soft glowing crystal stars with subtle bokeh)
+            size = anime.random(30, 42);
+            opacity = anime.random(55, 75) / 100;
+            blurVal = anime.random(0.8, 1.5);
             itemDiv.style.zIndex = "5";
         } else if (depthTier < 0.7) {
-            // Midground (Standard glowing stars)
-            size = anime.random(20, 32);
-            opacity = anime.random(60, 85) / 100;
-            blurVal = 0;
+            // Midground (Dreamy soft blur stars)
+            size = anime.random(18, 28);
+            opacity = anime.random(35, 55) / 100;
+            blurVal = anime.random(1.5, 2.4);
             itemDiv.style.zIndex = "3";
         } else {
-            // Background (Tiny shimmering stardust dots)
-            size = anime.random(10, 18);
-            opacity = anime.random(35, 60) / 100;
-            blurVal = anime.random(0.3, 0.8);
+            // Background (Deep atmospheric stardust haze)
+            size = anime.random(10, 16);
+            opacity = anime.random(20, 38) / 100;
+            blurVal = anime.random(2.5, 3.8);
             itemDiv.style.zIndex = "1";
         }
 
@@ -146,9 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
         itemDiv.style.left = `${anime.random(2, 98)}%`;
         itemDiv.style.top = `${anime.random(2, 98)}%`;
 
-        if (blurVal > 0) {
-            itemDiv.style.filter = `drop-shadow(0 0 6px rgba(255, 255, 255, 0.7)) blur(${blurVal}px)`;
-        }
+        itemDiv.style.filter = `drop-shadow(0 0 6px rgba(200, 180, 255, 0.4)) blur(${blurVal}px)`;
 
         const initialRotation = anime.random(0, 360);
         itemDiv.style.transform = `rotate(${initialRotation}deg)`;
@@ -158,15 +156,15 @@ document.addEventListener("DOMContentLoaded", () => {
         stardustElements.push(itemDiv);
     }
 
-    // Shimmering, Twinkling & Gentle Floating Animation Loop
+    // Shimmering, Twinkling & Gentle Floating Animation Loop (Soft & Ethereal)
     const idleTwinkleAnimation = anime({
         targets: '.stardust-item',
-        scale: () => [anime.random(65, 85) / 100, anime.random(115, 140) / 100],
-        opacity: () => [anime.random(30, 60) / 100, anime.random(85, 100) / 100],
+        scale: () => [anime.random(75, 90) / 100, anime.random(110, 130) / 100],
+        opacity: () => [anime.random(20, 40) / 100, anime.random(55, 75) / 100],
         translateY: () => anime.random(-15, 15),
         translateX: () => anime.random(-12, 12),
         rotate: () => `+=${anime.random(-30, 30)}`,
-        duration: () => anime.random(2200, 4800),
+        duration: () => anime.random(2500, 5000),
         delay: () => anime.random(0, 2000),
         direction: 'alternate',
         loop: true,
