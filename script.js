@@ -1,7 +1,14 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const introScreen = document.getElementById("intro-screen");
+    const introContent = document.getElementById("intro-content");
+    const stardustContainer = document.getElementById("stardust-container") || document.getElementById("feather-container");
+    const mainContainer = document.getElementById("main-container");
+    const detailContainer = document.getElementById("detail-container");
+    const closeBtn = document.querySelector(".close-btn");
+    
     // ----------------------------------------------------
     // 1. Generate Celestial Stardust & Prism Crystals (5 Magical Types)
     // ----------------------------------------------------
-    const stardustContainer = document.getElementById("stardust-container") || document.getElementById("feather-container");
     const stardustCount = 85;
     const stardustElements = [];
 
