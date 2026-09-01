@@ -8,158 +8,173 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // ----------------------------------------------------
     // ----------------------------------------------------
-    // 1. Generate Realistic Anatomical SVG Feathers for Intro Screen
+    // 1. Generate Hand-Drawn Sketch Feathers (8 Distinct Styles)
     // ----------------------------------------------------
-    const featherCount = 70;
+    const featherCount = 75;
     const feathers = [];
 
-    // 4 Ultra-Realistic Feather SVG Templates with Notches, Quill Shafts, Downy Fluff, and Barb Textures
+    // 8 Hand-Drawn Sketch Line Art Feather SVG Templates (Adobe Stock Inspired)
     const featherTemplates = [
-        // Type 1: High-Fantasy Archangel Primary Flight Feather (갈라진 깃홈과 깃가지 결이 섬세한 주익깃)
+        // 1. S-Curved Swirling Flight Feather (S자 회오리형 깃털)
         (id) => `
             <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                    <linearGradient id="rf_grad1_${id}" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-                        <stop offset="35%" stop-color="#f8fafc" stop-opacity="0.85"/>
-                        <stop offset="70%" stop-color="#e2e8f0" stop-opacity="0.6"/>
-                        <stop offset="100%" stop-color="#cbd5e1" stop-opacity="0.25"/>
-                    </linearGradient>
-                    <linearGradient id="rf_spine_${id}" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-                        <stop offset="80%" stop-color="#e2e8f0" stop-opacity="0.9"/>
-                        <stop offset="100%" stop-color="#94a3b8" stop-opacity="0.6"/>
+                    <linearGradient id="hd1_${id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+                        <stop offset="50%" stop-color="#e2e8f0" stop-opacity="0.55"/>
+                        <stop offset="100%" stop-color="#cbd5e1" stop-opacity="0.15"/>
                     </linearGradient>
                 </defs>
-                <!-- Feather Silhouette with Deep Barbs Notches (갈라진 깃털 톱니홈) -->
-                <path d="M60,12 
-                         C65,22 72,32 78,44 
-                         L71,48 L79,56 
-                         C82,68 83,80 81,94 
-                         L73,98 L80,106 
-                         C77,118 70,128 62,138 
-                         C60,140 59,142 58,144
-                         C57,143 55,138 52,132 
-                         L56,128 L49,122 
-                         C43,110 39,96 38,82 
-                         L44,78 L38,72 
-                         C39,58 43,44 50,30 
-                         C54,22 57,16 60,12 Z" 
-                      fill="url(#rf_grad1_${id})"/>
-                <!-- Central Rachis & Calamus Shaft (중심 깃대 대롱) -->
-                <path d="M60,10 Q59,80 58,168" stroke="url(#rf_spine_${id})" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-                <path d="M58,144 L58,168" stroke="rgba(255,255,255,0.95)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-                <!-- Downy fluff at base (하단 솜털 가닥들) -->
-                <path d="M58,142 Q50,146 45,152 M58,140 Q52,143 48,148 M58,138 Q65,143 70,150 M58,136 Q64,140 68,145" stroke="rgba(255,255,255,0.7)" stroke-width="0.8" stroke-linecap="round" fill="none"/>
-                <!-- Fine Feather Barb Strands (촘촘한 빗살 깃가지 결) -->
-                <path d="M47,38 L59,46 M44,52 L59,60 M41,66 L59,74 M41,80 L59,88 M43,96 L58,104 M47,110 L58,118 M51,124 L58,130
-                         M73,32 L60,40 M76,46 L60,54 M79,62 L60,70 M81,78 L59,86 M80,92 L59,100 M75,108 L59,116 M68,122 L58,130" 
-                      stroke="rgba(255,255,255,0.35)" stroke-width="0.75" stroke-linecap="round" fill="none"/>
+                <path d="M72,12 C78,24 86,42 84,62 C82,78 72,94 62,112 C56,122 52,132 48,142 C47,138 46,130 44,120 C40,98 42,76 50,54 C56,38 64,22 72,12 Z" fill="url(#hd1_${id})"/>
+                <path d="M72,10 Q60,78 44,168" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                <path d="M44,142 L43,168" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+                <path d="M72,12 C78,24 86,42 84,62 L76,66 L83,74 C80,88 73,100 62,112 L56,116 L61,123 C56,132 52,138 48,142 M48,142 C46,135 44,124 43,116 L49,112 L42,104 C40,88 41,70 49,52 L55,48 L48,42 C54,28 64,18 72,12" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+                <path d="M52,44 L67,52 M49,54 L65,62 M47,64 L63,72 M46,74 L61,82 M46,84 L59,92 M47,94 L57,102 M48,104 L55,112 M47,114 L53,122 M46,124 L50,132
+                         M82,38 L68,46 M84,48 L67,56 M85,58 L65,66 M81,68 L63,76 M78,78 L61,86 M73,88 L59,96 M68,98 L57,106 M62,108 L55,116 M57,118 L53,126
+                         M44,142 Q36,146 30,154 M44,139 Q37,143 33,149 M44,136 Q52,142 58,150 M44,133 Q51,138 56,145" 
+                      stroke="rgba(255,255,255,0.72)" stroke-width="0.8" stroke-linecap="round" fill="none"/>
             </svg>
         `,
-        // Type 2: Wind-Swept Asymmetric Quill (바람에 휘날리는 비대칭 주익 깃털)
+        // 2. Plump & Rounded Down Feather (통통하고 둥근 솜깃털)
         (id) => `
             <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                    <linearGradient id="rf_grad2_${id}" x1="10%" y1="0%" x2="90%" y2="100%">
-                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-                        <stop offset="35%" stop-color="#f1f5f9" stop-opacity="0.8"/>
-                        <stop offset="75%" stop-color="#e0e7ff" stop-opacity="0.55"/>
-                        <stop offset="100%" stop-color="#c7d2fe" stop-opacity="0.2"/>
+                    <linearGradient id="hd2_${id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.88"/>
+                        <stop offset="60%" stop-color="#f1f5f9" stop-opacity="0.55"/>
+                        <stop offset="100%" stop-color="#cbd5e1" stop-opacity="0.15"/>
                     </linearGradient>
                 </defs>
-                <!-- Curving Asymmetric Silhouette with Notches -->
-                <path d="M68,10 
-                         C74,22 84,38 86,56 
-                         L78,60 L85,68 
-                         C86,84 81,102 70,118 
-                         L64,121 L69,127
-                         C63,135 57,141 52,146 
-                         C51,145 50,140 48,134 
-                         L53,130 L46,124 
-                         C39,108 38,90 41,72 
-                         L48,68 L42,62 
-                         C46,44 54,26 68,10 Z" 
-                      fill="url(#rf_grad2_${id})"/>
-                <!-- Curved Shaft & Calamus -->
-                <path d="M68,8 Q60,75 50,170" stroke="rgba(255,255,255,0.92)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-                <path d="M51,146 L50,170" stroke="rgba(255,255,255,0.95)" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-                <!-- Base Fluff -->
-                <path d="M51,144 Q42,148 36,155 M51,142 Q44,146 40,150 M51,140 Q58,145 64,152 M51,138 Q57,142 62,147" stroke="rgba(255,255,255,0.7)" stroke-width="0.8" stroke-linecap="round" fill="none"/>
-                <!-- Herringbone Barbs -->
-                <path d="M49,34 L65,44 M45,48 L63,58 M43,64 L61,74 M43,80 L59,90 M46,96 L57,106 M49,112 L55,122
-                         M79,32 L67,42 M83,48 L65,58 M85,64 L63,74 M84,80 L61,90 M78,96 L59,106 M71,112 L56,122" 
-                      stroke="rgba(255,255,255,0.36)" stroke-width="0.75" stroke-linecap="round" fill="none"/>
+                <path d="M57,18 C70,28 84,44 86,68 C88,92 80,114 66,132 C62,136 58,140 57,142 C56,140 52,136 48,132 C34,114 26,92 28,68 C30,44 44,28 57,18 Z" fill="url(#hd2_${id})"/>
+                <path d="M57,18 C67,26 80,40 85,58 L77,62 L86,72 C87,88 82,106 72,122 L65,125 L70,131 C65,137 61,140 57,142 M57,142 C53,140 49,137 44,131 L49,125 L42,122 C32,106 27,88 28,72 L37,62 L29,58 C34,40 47,26 57,18" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+                <path d="M57,16 L57,168" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                <path d="M57,142 L57,168" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+                <path d="M38,42 L56,52 M34,54 L56,64 M31,66 L56,76 M31,78 L56,88 M34,90 L56,100 M38,102 L56,112 M44,114 L56,122 M49,124 L56,132
+                         M76,42 L58,52 M80,54 L58,64 M83,66 L58,76 M83,78 L58,88 M80,90 L58,100 M76,102 L58,112 M70,114 L58,122 M65,124 L58,132
+                         M57,140 Q44,146 36,155 M57,137 Q47,142 41,149 M57,140 Q70,146 78,155 M57,137 Q67,142 73,149"
+                      stroke="rgba(255,255,255,0.72)" stroke-width="0.8" stroke-linecap="round" fill="none"/>
             </svg>
         `,
-        // Type 3: Soft Angelic Down Feather (사방으로 흩날리는 부드러운 솜깃털)
+        // 3. Slender Straight Primary Quill (길고 날렵한 스트레이트 주익깃)
         (id) => `
             <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                    <linearGradient id="rf_grad3_${id}" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-                        <stop offset="40%" stop-color="#fdf4ff" stop-opacity="0.8"/>
-                        <stop offset="80%" stop-color="#e0e7ff" stop-opacity="0.5"/>
-                        <stop offset="100%" stop-color="#d8b4fe" stop-opacity="0.2"/>
-                    </linearGradient>
-                </defs>
-                <!-- Multi-Fringed Fluffy Body -->
-                <path d="M60,16 
-                         C66,26 76,36 82,48 
-                         L74,52 L83,60 
-                         C86,72 84,86 78,98 
-                         L70,102 L78,110 
-                         C72,122 64,132 56,140 
-                         C55,138 52,134 48,128 
-                         L54,124 L46,118 
-                         C40,106 38,92 41,78 
-                         L49,74 L42,68 
-                         C44,54 50,38 60,16 Z" 
-                      fill="url(#rf_grad3_${id})"/>
-                <!-- Thin Shaft & Calamus -->
-                <path d="M60,14 L56,166" stroke="rgba(255,255,255,0.9)" stroke-width="1.3" stroke-linecap="round" fill="none"/>
-                <path d="M56,140 L56,166" stroke="rgba(255,255,255,0.95)" stroke-width="2.0" stroke-linecap="round" fill="none"/>
-                <!-- Rich Downy Fluff Tufts (사방으로 흩날리는 솜털) -->
-                <path d="M57,138 Q46,144 38,154 M57,135 Q48,141 42,148 M57,130 Q47,136 40,143
-                         M57,138 Q68,144 76,154 M57,135 Q66,141 72,148 M57,130 Q67,136 74,143
-                         M45,46 C52,49 56,53 59,56 M42,60 C50,63 55,67 58,70 M43,76 C51,79 55,83 58,86 M45,92 C52,95 55,98 57,102
-                         M76,46 C69,49 65,53 61,56 M78,60 C70,63 65,67 61,70 M75,76 C67,79 63,83 60,86 M72,92 C65,95 62,98 59,102" 
-                      stroke="rgba(255,255,255,0.45)" stroke-width="0.85" stroke-linecap="round" fill="none"/>
-            </svg>
-        `,
-        // Type 4: Seraphim Grand Primary Feather (세라핌의 웅장한 대형 주익 깃털)
-        (id) => `
-            <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="rf_grad4_${id}" x1="30%" y1="0%" x2="70%" y2="100%">
-                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-                        <stop offset="35%" stop-color="#f8fafc" stop-opacity="0.82"/>
-                        <stop offset="70%" stop-color="#cbd5e1" stop-opacity="0.55"/>
+                    <linearGradient id="hd3_${id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                        <stop offset="50%" stop-color="#e2e8f0" stop-opacity="0.6"/>
                         <stop offset="100%" stop-color="#94a3b8" stop-opacity="0.2"/>
                     </linearGradient>
                 </defs>
-                <!-- Distinct Notched Wing Vanes -->
-                <path d="M60,8 
-                         C67,18 78,32 84,48 
-                         L76,52 L85,62 
-                         C88,78 84,94 76,110 
-                         L68,114 L76,122 
-                         C70,132 63,140 57,146 
-                         C56,144 53,138 48,130 
-                         L54,126 L46,120 
-                         C38,104 36,86 40,68 
-                         L48,64 L41,56 
-                         C44,40 51,22 60,8 Z" 
-                      fill="url(#rf_grad4_${id})"/>
-                <!-- Strong Quill Rachis & Hollow Calamus -->
-                <path d="M60,6 L57,172" stroke="rgba(255,255,255,0.95)" stroke-width="1.7" stroke-linecap="round" fill="none"/>
-                <path d="M57,146 L57,172" stroke="rgba(255,255,255,0.98)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                <ellipse cx="57" cy="171" rx="1.3" ry="0.6" fill="rgba(200,210,230,0.8)"/>
-                <!-- Downy Fluff & Detailed Barbs -->
-                <path d="M57,144 Q46,149 40,158 M57,141 Q49,145 44,152 M57,144 Q68,149 74,158 M57,141 Q65,145 70,152" stroke="rgba(255,255,255,0.72)" stroke-width="0.85" stroke-linecap="round" fill="none"/>
-                <path d="M47,32 L59,42 M43,46 L59,56 M41,60 L59,70 M41,74 L58,84 M43,88 L58,98 M46,102 L58,112 M50,116 L57,126
-                         M75,28 L60,38 M80,42 L60,52 M83,56 L59,66 M83,70 L59,80 M80,84 L59,94 M74,98 L58,108 M67,112 L58,122" 
-                      stroke="rgba(255,255,255,0.38)" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+                <path d="M60,6 C66,20 74,40 76,65 C78,90 72,115 62,138 L58,144 C56,140 52,126 48,112 C42,90 44,65 48,42 C52,24 56,12 60,6 Z" fill="url(#hd3_${id})"/>
+                <path d="M60,6 C66,20 74,40 76,65 L68,69 L76,77 C77,95 72,116 62,138 L58,144 M58,144 C54,136 50,122 47,108 L53,104 L46,96 C42,76 43,54 48,36 C52,22 56,12 60,6" stroke="#ffffff" stroke-width="1.2" fill="none"/>
+                <path d="M60,4 L58,172" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                <path d="M58,144 L58,172" stroke="#ffffff" stroke-width="2.7" stroke-linecap="round" fill="none"/>
+                <path d="M50,28 L59,38 M47,42 L59,52 M45,56 L59,66 M45,70 L59,80 M46,84 L59,94 M48,98 L58,108 M51,112 L58,122 M53,126 L58,134
+                         M70,24 L60,34 M74,38 L60,48 M76,52 L60,62 M76,66 L60,76 M74,80 L60,90 M71,94 L59,104 M67,108 L59,118 M63,122 L58,130"
+                      stroke="rgba(255,255,255,0.72)" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+            </svg>
+        `,
+        // 4. Multi-Notched Rough Wing Feather (여러 군데 갈라진 거친 깃털)
+        (id) => `
+            <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="hd4_${id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.88"/>
+                        <stop offset="50%" stop-color="#e0e7ff" stop-opacity="0.55"/>
+                        <stop offset="100%" stop-color="#cbd5e1" stop-opacity="0.15"/>
+                    </linearGradient>
+                </defs>
+                <path d="M60,10 C66,22 75,34 78,48 L70,52 L79,62 C82,76 80,92 72,108 L64,112 L71,120 C65,130 58,138 54,142 C53,140 48,132 44,124 L50,120 L42,112 C36,96 35,78 39,60 L47,56 L40,48 C44,32 52,18 60,10 Z" fill="url(#hd4_${id})"/>
+                <path d="M60,10 C66,22 75,34 78,48 L70,52 L79,62 C82,76 80,92 72,108 L64,112 L71,120 C65,130 58,138 54,142 M54,142 C53,140 48,132 44,124 L50,120 L42,112 C36,96 35,78 39,60 L47,56 L40,48 C44,32 52,18 60,10" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+                <path d="M60,8 L54,168" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                <path d="M54,142 L54,168" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+                <path d="M47,38 L58,46 M43,50 L57,58 M40,64 L56,72 M40,76 L56,84 M42,90 L55,98 M45,102 L55,110 M48,114 L54,122
+                         M72,34 L59,42 M76,46 L58,54 M78,58 L57,66 M78,72 L57,80 M76,86 L56,94 M70,100 L55,108 M64,114 L54,122
+                         M54,140 Q44,145 38,153 M54,137 Q46,142 41,148 M54,140 Q64,145 70,153 M54,137 Q62,142 67,148"
+                      stroke="rgba(255,255,255,0.72)" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+            </svg>
+        `,
+        // 5. Right-Bent Asymmetric Feather (우측 굴곡 깃털)
+        (id) => `
+            <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="hd5_${id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                        <stop offset="50%" stop-color="#f8fafc" stop-opacity="0.55"/>
+                        <stop offset="100%" stop-color="#cbd5e1" stop-opacity="0.15"/>
+                    </linearGradient>
+                </defs>
+                <path d="M80,14 C86,28 92,48 88,68 C84,88 74,106 62,124 C57,132 52,138 48,142 C47,138 45,128 42,118 C37,96 38,74 46,52 C54,34 66,20 80,14 Z" fill="url(#hd5_${id})"/>
+                <path d="M80,14 C86,28 92,48 88,68 L80,72 L87,80 C82,96 73,112 62,124 L56,128 L61,135 C56,139 52,141 48,142 M48,142 C47,138 45,128 42,118 L48,114 L41,106 C36,88 38,70 46,52 L53,48 L46,42 C54,28 66,18 80,14" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+                <path d="M80,12 Q66,80 48,170" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                <path d="M48,142 L48,170" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+                <path d="M51,46 L69,56 M47,58 L66,68 M45,70 L63,80 M44,82 L60,92 M45,94 L57,104 M47,106 L55,114 M48,116 L53,124
+                         M87,42 L72,50 M89,54 L70,62 M87,66 L67,74 M83,78 L64,86 M78,90 L61,98 M71,102 L58,110 M63,114 L55,122
+                         M48,140 Q38,145 32,153 M48,137 Q41,142 36,148 M48,140 Q58,145 64,153 M48,137 Q56,142 61,148"
+                      stroke="rgba(255,255,255,0.72)" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+            </svg>
+        `,
+        // 6. Left-Bent Asymmetric Feather (좌측 굴곡 깃털)
+        (id) => `
+            <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="hd6_${id}" x1="100%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                        <stop offset="50%" stop-color="#f8fafc" stop-opacity="0.55"/>
+                        <stop offset="100%" stop-color="#cbd5e1" stop-opacity="0.15"/>
+                    </linearGradient>
+                </defs>
+                <path d="M40,14 C34,28 28,48 32,68 C36,88 46,106 58,124 C63,132 68,138 72,142 C73,138 75,128 78,118 C83,96 82,74 74,52 C66,34 54,20 40,14 Z" fill="url(#hd6_${id})"/>
+                <path d="M40,14 C34,28 28,48 32,68 L40,72 L33,80 C38,96 47,112 58,124 L64,128 L59,135 C64,139 68,141 72,142 M72,142 C73,138 75,128 78,118 L72,114 L79,106 C84,88 82,70 74,52 L67,48 L74,42 C66,28 54,18 40,14" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+                <path d="M40,12 Q54,80 72,170" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+                <path d="M72,142 L72,170" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+                <path d="M69,46 L51,56 M73,58 L54,68 M75,70 L57,80 M76,82 L60,92 M75,94 L63,104 M73,106 L65,114 M72,116 L67,124
+                         M33,42 L48,50 M31,54 L50,62 M33,66 L53,74 M37,78 L56,86 M42,90 L59,98 M49,102 L62,110 M57,114 L65,122
+                         M72,140 Q82,145 88,153 M72,137 Q79,142 84,148 M72,140 Q62,145 56,153 M72,137 Q64,142 59,148"
+                      stroke="rgba(255,255,255,0.72)" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+            </svg>
+        `,
+        // 7. Wild Fluffy Down Plumelet (사방으로 뻗친 아기 솜깃털)
+        (id) => `
+            <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="hd7_${id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+                        <stop offset="50%" stop-color="#fdf4ff" stop-opacity="0.5"/>
+                        <stop offset="100%" stop-color="#c4b5fd" stop-opacity="0.15"/>
+                    </linearGradient>
+                </defs>
+                <path d="M60,24 C72,34 82,48 84,66 C86,84 80,102 70,118 C66,124 62,130 58,136 C54,130 50,124 46,118 C36,102 30,84 32,66 C34,48 44,34 60,24 Z" fill="url(#hd7_${id})"/>
+                <path d="M60,20 L58,164" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+                <path d="M58,136 L58,164" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+                <!-- Wild Fluffy Pen Hatching Curves -->
+                <path d="M59,32 Q42,38 34,48 M59,44 Q38,50 28,62 M59,56 Q36,64 26,78 M59,68 Q38,76 30,90 M59,80 Q40,88 34,102 M59,92 Q44,98 38,112 M59,104 Q46,110 42,122 M59,116 Q49,122 46,130
+                         M59,32 Q76,38 84,48 M59,44 Q80,50 90,62 M59,56 Q82,64 92,78 M59,68 Q80,76 88,90 M59,80 Q78,88 84,102 M59,92 Q74,98 80,112 M59,104 Q72,110 76,122 M59,116 Q69,122 72,130
+                         M58,134 Q44,140 36,150 M58,130 Q47,136 41,144 M58,134 Q72,140 80,150 M58,130 Q69,136 75,144"
+                      stroke="rgba(255,255,255,0.75)" stroke-width="0.85" stroke-linecap="round" fill="none"/>
+            </svg>
+        `,
+        // 8. Classic Hand-Drawn Quill Pen Feather (핸드 드로잉 깃털펜 스타일)
+        (id) => `
+            <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="hd8_${id}" x1="20%" y1="0%" x2="80%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                        <stop offset="50%" stop-color="#e2e8f0" stop-opacity="0.6"/>
+                        <stop offset="100%" stop-color="#94a3b8" stop-opacity="0.2"/>
+                    </linearGradient>
+                </defs>
+                <path d="M60,6 C68,18 80,34 82,54 L74,58 L83,68 C84,86 78,104 68,122 L62,126 L67,134 C62,140 58,143 56,145 C54,142 50,135 46,126 L52,122 L44,114 C38,98 38,78 44,58 L52,54 L44,46 C48,28 54,16 60,6 Z" fill="url(#hd8_${id})"/>
+                <path d="M60,6 C68,18 80,34 82,54 L74,58 L83,68 C84,86 78,104 68,122 L62,126 L67,134 C62,140 58,143 56,145 M56,145 C54,142 50,135 46,126 L52,122 L44,114 C38,98 38,78 44,58 L52,54 L44,46 C48,28 54,16 60,6" stroke="#ffffff" stroke-width="1.3" stroke-linejoin="round" fill="none"/>
+                <!-- Prominent Quill Nib / Shaft -->
+                <path d="M60,4 L56,174" stroke="#ffffff" stroke-width="1.9" stroke-linecap="round" fill="none"/>
+                <path d="M56,145 L56,174" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+                <!-- Nib split slit -->
+                <path d="M56,166 L56,174" stroke="rgba(180,200,230,0.9)" stroke-width="0.9" fill="none"/>
+                <path d="M48,32 L58,42 M44,46 L58,56 M42,60 L57,70 M42,74 L57,84 M45,88 L57,98 M48,102 L56,112 M51,116 L56,124
+                         M75,28 L59,38 M80,42 L59,52 M81,56 L58,66 M80,70 L58,80 M77,84 L57,94 M71,98 L57,108 M65,112 L56,122
+                         M56,143 Q44,148 38,156 M56,140 Q47,144 42,150 M56,143 Q68,148 74,156 M56,140 Q65,144 70,150"
+                      stroke="rgba(255,255,255,0.72)" stroke-width="0.8" stroke-linecap="round" fill="none"/>
             </svg>
         `
     ];
