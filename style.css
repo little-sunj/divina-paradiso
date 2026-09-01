@@ -104,9 +104,16 @@ body {
 .feather {
     position: absolute;
     pointer-events: none;
-    fill: rgba(255, 255, 255, 0.55);
-    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2)) blur(0.5px);
-    transform-origin: center;
+    transform-origin: center center;
+    filter: drop-shadow(0 2px 8px rgba(200, 215, 255, 0.25));
+    transition: filter 0.3s ease;
+    will-change: transform, opacity;
+}
+
+.feather svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
 }
 
 /* 2. Main Page Container */

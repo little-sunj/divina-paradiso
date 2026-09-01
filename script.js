@@ -7,46 +7,169 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeBtn = document.querySelector(".close-btn");
     
     // ----------------------------------------------------
-    // 1. Generate Feathers for Intro Screen
+    // 1. Generate Diverse High-Fidelity SVG Feathers for Intro Screen
     // ----------------------------------------------------
-    const featherCount = 70;
+    const featherCount = 75;
     const feathers = [];
-    const featherSVGPath = "M40,5 C47,15 54,28 58,42 C62,56 61,70 54,82 C48,92 36,96 26,93 C32,85 36,76 38,65 C40,53 39,40 35,28 C32,18 27,10 24,5 C28,4 34,4 40,5 Z";
 
+    // 5 Distinct High-Quality SVG Feather Templates
+    const featherTemplates = [
+        // Type 1: Graceful Curved Archangel Wing Feather
+        (id) => `
+            <svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="fgrad1_${id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+                        <stop offset="35%" stop-color="#f8fafc" stop-opacity="0.8"/>
+                        <stop offset="70%" stop-color="#e2e8f0" stop-opacity="0.5"/>
+                        <stop offset="100%" stop-color="#cbd5e1" stop-opacity="0.15"/>
+                    </linearGradient>
+                </defs>
+                <!-- Left Vane -->
+                <path d="M50,6 C44,18 36,34 32,54 C28,72 32,88 44,104 C47,108 49,111 50,113 C48,98 48,84 47,70 C45,50 48,26 50,6 Z" fill="url(#fgrad1_${id})"/>
+                <!-- Right Vane -->
+                <path d="M50,6 C56,18 67,34 71,52 C75,70 70,88 59,102 C55,107 52,111 50,113 C51,98 52,82 52,66 C52,48 51,26 50,6 Z" fill="url(#fgrad1_${id})"/>
+                <!-- Central Spine/Shaft -->
+                <path d="M50,4 Q49,58 48,122" stroke="rgba(255,255,255,0.9)" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+                <!-- Realistic Barb splits -->
+                <path d="M38,44 L49,50 M34,64 L48,70 M40,82 L49,86 M65,40 L51,46 M68,58 L51,64 M62,76 L50,80" stroke="rgba(255,255,255,0.4)" stroke-width="0.75" stroke-linecap="round" fill="none"/>
+            </svg>
+        `,
+        // Type 2: Broad Classic Angelic Feather
+        (id) => `
+            <svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="fgrad2_${id}" x1="20%" y1="0%" x2="80%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+                        <stop offset="45%" stop-color="#f1f5f9" stop-opacity="0.75"/>
+                        <stop offset="80%" stop-color="#e0e7ff" stop-opacity="0.45"/>
+                        <stop offset="100%" stop-color="#c7d2fe" stop-opacity="0.15"/>
+                    </linearGradient>
+                </defs>
+                <!-- Full broad body -->
+                <path d="M50,5 C58,16 71,32 75,50 C79,70 73,90 61,105 C55,112 52,116 50,118 C48,116 45,112 39,105 C27,90 21,70 25,50 C29,32 42,16 50,5 Z" fill="url(#fgrad2_${id})"/>
+                <!-- Spine -->
+                <path d="M50,3 L50,124" stroke="rgba(255,255,255,0.92)" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+                <!-- Barb textures -->
+                <path d="M34,38 L49,46 M30,58 L49,65 M34,78 L49,84 M66,38 L51,46 M70,58 L51,65 M66,78 L51,84" stroke="rgba(255,255,255,0.38)" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+            </svg>
+        `,
+        // Type 3: Wind-swept Asymmetric Drift Feather
+        (id) => `
+            <svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="fgrad3_${id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.92"/>
+                        <stop offset="50%" stop-color="#f8fafc" stop-opacity="0.7"/>
+                        <stop offset="100%" stop-color="#94a3b8" stop-opacity="0.18"/>
+                    </linearGradient>
+                </defs>
+                <!-- Asymmetric curve -->
+                <path d="M54,6 C62,18 76,36 78,56 C80,76 71,94 58,108 C54,112 52,115 50,117 C48,106 43,88 39,72 C33,52 36,30 46,14 C49,10 52,7 54,6 Z" fill="url(#fgrad3_${id})"/>
+                <!-- Curved Shaft -->
+                <path d="M54,4 Q50,58 48,122" stroke="rgba(255,255,255,0.88)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                <!-- Barb slits -->
+                <path d="M43,36 L51,42 M39,56 L49,62 M41,74 L48,79 M72,42 L53,48 M74,62 L51,68 M66,82 L49,87" stroke="rgba(255,255,255,0.35)" stroke-width="0.75" stroke-linecap="round" fill="none"/>
+            </svg>
+        `,
+        // Type 4: Soft & Fluffy Angelic Down Feather (Plume)
+        (id) => `
+            <svg viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="fgrad4_${id}" x1="50%" y1="0%" x2="50%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+                        <stop offset="40%" stop-color="#fdf4ff" stop-opacity="0.75"/>
+                        <stop offset="80%" stop-color="#e0e7ff" stop-opacity="0.4"/>
+                        <stop offset="100%" stop-color="#c4b5fd" stop-opacity="0.1"/>
+                    </linearGradient>
+                </defs>
+                <!-- Soft fluffy multi-lobed shape -->
+                <path d="M50,10 C56,20 66,30 70,42 C72,48 68,54 72,60 C76,70 73,82 65,92 C59,100 54,105 50,108 C46,105 41,100 35,92 C27,82 24,70 28,60 C32,54 28,48 30,42 C34,30 44,20 50,10 Z" fill="url(#fgrad4_${id})"/>
+                <!-- Soft shaft -->
+                <path d="M50,8 L50,114" stroke="rgba(255,255,255,0.8)" stroke-width="1.0" stroke-linecap="round" fill="none"/>
+                <!-- Fluffy down barbs -->
+                <path d="M34,48 C40,50 45,52 49,54 M31,64 C38,66 44,68 49,70 M36,80 C42,82 46,84 49,86 M66,48 C60,50 55,52 51,54 M69,64 C62,66 56,68 51,70 M64,80 C58,82 54,84 51,86" stroke="rgba(255,255,255,0.45)" stroke-width="0.9" stroke-linecap="round" fill="none"/>
+            </svg>
+        `,
+        // Type 5: Slender & Delicate Floating Breeze Feather
+        (id) => `
+            <svg viewBox="0 0 90 130" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="fgrad5_${id}" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+                        <stop offset="60%" stop-color="#f1f5f9" stop-opacity="0.7"/>
+                        <stop offset="100%" stop-color="#93c5fd" stop-opacity="0.2"/>
+                    </linearGradient>
+                </defs>
+                <!-- Slender silhouette -->
+                <path d="M45,4 C49,15 56,28 60,46 C63,64 59,82 51,98 C47,105 45,109 45,111 C44,109 42,105 38,98 C30,82 26,64 30,46 C34,28 41,15 45,4 Z" fill="url(#fgrad5_${id})"/>
+                <!-- Thin spine -->
+                <path d="M45,2 L45,116" stroke="rgba(255,255,255,0.85)" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+                <!-- Delicate lines -->
+                <path d="M34,36 L44,42 M31,56 L44,61 M34,76 L44,80 M56,36 L46,42 M59,56 L46,61 M56,76 L46,80" stroke="rgba(255,255,255,0.36)" stroke-width="0.7" stroke-linecap="round" fill="none"/>
+            </svg>
+        `
+    ];
+
+    // Generate feathers with depth-of-field variety
     for (let i = 0; i < featherCount; i++) {
-        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("class", "feather");
-        svg.setAttribute("viewBox", "0 0 100 100");
+        const featherDiv = document.createElement("div");
+        featherDiv.className = "feather";
         
-        const size = anime.random(15, 45);
-        svg.style.width = `${size}px`;
-        svg.style.height = `${size}px`;
-        
-        svg.style.left = `${anime.random(2, 98)}%`;
-        svg.style.top = `${anime.random(2, 98)}%`;
-        
-        const rotation = anime.random(0, 360);
-        const opacity = anime.random(25, 75) / 100;
-        
-        svg.style.transform = `rotate(${rotation}deg)`;
-        svg.style.opacity = opacity;
+        // Pick random feather template
+        const templateIdx = i % featherTemplates.length;
+        featherDiv.innerHTML = featherTemplates[templateIdx](i);
 
-        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttribute("d", featherSVGPath);
-        svg.appendChild(path);
-        
-        featherContainer.appendChild(svg);
-        feathers.push(svg);
+        // Natural depth distribution (Foreground, Midground, Background)
+        const depthTier = Math.random();
+        let size, opacity, blurVal;
+
+        if (depthTier < 0.2) {
+            // Foreground (large, clear, prominent)
+            size = anime.random(48, 68);
+            opacity = anime.random(75, 95) / 100;
+            blurVal = 0;
+            featherDiv.style.zIndex = "5";
+        } else if (depthTier < 0.7) {
+            // Midground (standard drifting)
+            size = anime.random(30, 46);
+            opacity = anime.random(45, 75) / 100;
+            blurVal = 0;
+            featherDiv.style.zIndex = "3";
+        } else {
+            // Background (tiny, soft atmospheric depth)
+            size = anime.random(16, 28);
+            opacity = anime.random(25, 45) / 100;
+            blurVal = anime.random(0.5, 1.2);
+            featherDiv.style.zIndex = "1";
+        }
+
+        featherDiv.style.width = `${size}px`;
+        featherDiv.style.height = `${size * 1.3}px`;
+        featherDiv.style.left = `${anime.random(1, 98)}%`;
+        featherDiv.style.top = `${anime.random(1, 98)}%`;
+
+        if (blurVal > 0) {
+            featherDiv.style.filter = `drop-shadow(0 2px 6px rgba(200, 215, 255, 0.2)) blur(${blurVal}px)`;
+        }
+
+        const initialRotation = anime.random(-60, 60);
+        featherDiv.style.transform = `rotate(${initialRotation}deg)`;
+        featherDiv.style.opacity = opacity;
+
+        featherContainer.appendChild(featherDiv);
+        feathers.push(featherDiv);
     }
 
-    // Idle drifting animation for feathers
+    // Natural multi-axis swaying & floating animation for feathers
     const driftAnimation = anime({
         targets: '.feather',
-        translateX: () => anime.random(-15, 15),
-        translateY: () => anime.random(-25, 25),
-        rotate: () => `+=${anime.random(-30, 30)}`,
-        duration: () => anime.random(3000, 6000),
-        delay: () => anime.random(0, 2000),
+        translateX: () => anime.random(-25, 25),
+        translateY: () => anime.random(-35, 35),
+        rotate: () => `+=${anime.random(-35, 35)}`,
+        scaleY: () => anime.random(90, 105) / 100, // 3D tilt fluttering effect
+        duration: () => anime.random(4000, 7500),
+        delay: () => anime.random(0, 3000),
         direction: 'alternate',
         loop: true,
         easing: 'easeInOutSine'
