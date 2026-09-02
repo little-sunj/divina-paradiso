@@ -250,32 +250,33 @@ document.addEventListener("DOMContentLoaded", () => {
         earthRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         earthContainer.appendChild(earthRenderer.domElement);
 
-        // Earth Lights
-        const earthAmbient = new THREE.AmbientLight(0x567bfa, 0.35); // Slight blue/purple space shadow tone
+        // Earth Lights (Deep Dark Fantasy Tone)
+        const earthAmbient = new THREE.AmbientLight(0x18181c, 0.2); // Faint dark ambient
         earthScene.add(earthAmbient);
 
-        const earthDirectional = new THREE.DirectionalLight(0xffffff, 1.8);
+        const earthDirectional = new THREE.DirectionalLight(0x777788, 0.45); // Subtle silver rim light
         earthDirectional.position.set(2, 5, 4);
         earthScene.add(earthDirectional);
 
-        // Earth material setup
+        // Earth material setup - deep black / obsidian surface
         const earthMaterial = new THREE.MeshStandardMaterial({
-            roughness: 0.65,
-            metalness: 0.05,
+            color: new THREE.Color(0x0c0c10),
+            roughness: 0.85,
+            metalness: 0.15,
             transparent: true,
-            opacity: 0.88
+            opacity: 0.92
         });
 
         if (isLocalFile) {
-            // Apply offline procedural fantasy texture for local files to bypass CORS crash
+            // Apply offline procedural dark texture
             earthMaterial.map = createEarthTexture();
             earthMaterial.needsUpdate = true;
         } else {
-            // Use earth_night.jpg as the primary map for a unified dark fantasy night globe
+            // Darkened texture map
             setupPlanetTexture("img-earth-night", earthMaterial, createEarthTexture);
             
-            // Set emissive brightness, then bind Earth Night lights to emissiveMap for glowing cities
-            earthMaterial.emissive = new THREE.Color(0xbbbbbb);
+            // Subdued dark emissive
+            earthMaterial.emissive = new THREE.Color(0x1a1a20);
             setupPlanetTexture("img-earth-night", earthMaterial, () => null, "emissiveMap");
         }
 
