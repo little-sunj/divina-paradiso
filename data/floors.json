@@ -1,0 +1,176 @@
+[
+  {
+    "floor": 7,
+    "roman": "VII",
+    "phase": "월식",
+    "phaseEn": "Eclipse",
+    "icon": "fa-solid fa-circle-notch",
+    "title": "7층: 붉은 관문",
+    "name": "붉은 관문",
+    "spinnerClass": "spinner-7",
+    "orbitClass": "orbit-floor-7",
+    "sparkleClass": "sparkle-crimson",
+    "category": "TOWER OF MOON'S SHADOW · APEX (7F)",
+    "badge": "FINAL FLOOR 07",
+    "phaseSymbol": "월식 (Lunar Eclipse)",
+    "imgClass": "floor-img-7",
+    "isBossCard": true,
+    "description": "월식의 핏빛 달빛이 내리쬐는 탑의 최정상이자, 굳게 봉쇄되어버린 천계 관문 '월구(Moon Sphere)'의 거대한 문이 자리한 최후의 성소입니다. 지상에 버려진 채 인계 침식의 위기를 딛고 오른 제9품계 하급 천사 일행이 마침내 마주하게 되는 미지의 종착지입니다.",
+    "characters": [
+      { "char": "nebbia", "name": "네비아" },
+      { "char": "helio", "name": "헬리오" },
+      { "char": "sinope", "name": "시노페" },
+      { "char": "calliste", "name": "칼리스테" }
+    ]
+  },
+  {
+    "floor": 6,
+    "roman": "VI",
+    "phase": "하현",
+    "phaseEn": "Last Quarter",
+    "icon": "fa-solid fa-moon fa-flip-horizontal",
+    "title": "6층: 침식의 극점",
+    "name": "침식의 극점",
+    "spinnerClass": "spinner-6",
+    "orbitClass": "orbit-floor-6",
+    "sparkleClass": "sparkle-purple",
+    "category": "TOWER OF MOON'S SHADOW · 6F",
+    "badge": "FLOOR 06",
+    "phaseSymbol": "하현 (Last Quarter)",
+    "imgClass": "floor-img-6",
+    "description": "인간계의 오염과 탑의 왜곡된 마력이 융합되어 천사의 영핵(신성 코어)을 한계까지 쥐어짜는 지옥 같은 층입니다. 칼리스테의 날개는 석화에 가깝게 굳어가고, 시노페의 신체 침식은 전신으로 번져가며 모두가 한계에 다다릅니다.",
+    "stats": [
+      { "icon": "fa-solid fa-biohazard", "label": "위험 요소: 신성 영핵 급속 붕괴 & 석화" },
+      { "icon": "fa-solid fa-ghost", "label": "주요 조우: 극점의 침식 괴수" }
+    ],
+    "characters": [
+      { "char": "sinope", "name": "시노페 (침식 억제 유격전)" },
+      { "char": "calliste", "name": "칼리스테 (체념을 딛는 기도)" }
+    ]
+  },
+  {
+    "floor": 5,
+    "roman": "V",
+    "phase": "만월",
+    "phaseEn": "Full Moon",
+    "icon": "fa-solid fa-circle",
+    "title": "5층: 광휘 성당",
+    "name": "광휘 성당",
+    "spinnerClass": "spinner-5",
+    "orbitClass": "orbit-floor-5",
+    "sparkleClass": "sparkle-gold",
+    "category": "TOWER OF MOON'S SHADOW · 5F",
+    "badge": "FLOOR 05",
+    "phaseSymbol": "만월 (Full Moon)",
+    "imgClass": "floor-img-5",
+    "description": "만월의 순백 성광이 눈이 멀도록 쏟아져 내리는 거대한 대성당 구역입니다. 하지만 그 찬란한 빛 속에는 신의 자비가 아닌 잔인한 침묵만이 깃들어 있습니다.",
+    "stats": [
+      { "icon": "fa-solid fa-sun", "label": "위험 요소: 실명 유발 성광 & 자동 방어 성물" },
+      { "icon": "fa-solid fa-monument", "label": "주요 조우: 성당의 백은 수호기사" }
+    ],
+    "characters": [
+      { "char": "helio", "name": "헬리오 (대검 결계 방어)" },
+      { "char": "nebbia", "name": "네비아 (성물 핵심 파괴)" }
+    ]
+  },
+  {
+    "floor": 4,
+    "roman": "IV",
+    "phase": "반월",
+    "phaseEn": "Gibbous Moon",
+    "icon": "fa-solid fa-adjust",
+    "title": "4층: 거울 회랑",
+    "name": "거울 회랑",
+    "spinnerClass": "spinner-4",
+    "orbitClass": "orbit-floor-4",
+    "sparkleClass": "sparkle-cyan",
+    "category": "TOWER OF MOON'S SHADOW · 4F",
+    "badge": "FLOOR 04",
+    "phaseSymbol": "반월 (Gibbous Moon)",
+    "imgClass": "floor-img-4",
+    "description": "수만 개의 차가운 은빛 거울로 둘러싸인 미로 회랑입니다. 거울 속에는 천사들이 지상에서 겪은 수치, 상위 천사에게 버림받았던 상처, 신체에 진행 중인 인계 침식의 모습이 투영됩니다.",
+    "stats": [
+      { "icon": "fa-solid fa-clone", "label": "위험 요소: 죄책감의 도플갱어" },
+      { "icon": "fa-solid fa-gem", "label": "주요 조우: 거울의 복제자" }
+    ],
+    "characters": [
+      { "char": "sinope", "name": "시노페 (쌍단검 거울 파괴)" },
+      { "char": "calliste", "name": "칼리스테 (진실의 직시)" }
+    ]
+  },
+  {
+    "floor": 3,
+    "roman": "III",
+    "phase": "상현",
+    "phaseEn": "First Quarter",
+    "icon": "fa-solid fa-moon",
+    "title": "3층: 이성의 균열",
+    "name": "이성의 균열",
+    "spinnerClass": "spinner-3",
+    "orbitClass": "orbit-floor-3",
+    "sparkleClass": "sparkle-amber",
+    "category": "TOWER OF MOON'S SHADOW · 3F",
+    "badge": "FLOOR 03",
+    "phaseSymbol": "상현 (First Quarter)",
+    "imgClass": "floor-img-3",
+    "description": "탑의 중층부로 접어들며 신의 침묵에 대한 분노와 동료에 대한 불신이 극대화되는 층입니다. 공간 자체가 기하학적으로 찢겨 있으며, 영혼의 파장을 증폭시키는 균열이 이성을 갉아먹습니다.",
+    "stats": [
+      { "icon": "fa-solid fa-brain", "label": "위험 요소: 광기 유발 파동 & 불신 증폭" },
+      { "icon": "fa-solid fa-bolt", "label": "주요 조우: 균열의 사념체" }
+    ],
+    "characters": [
+      { "char": "nebbia", "name": "네비아 (분노의 레이피어)" },
+      { "char": "helio", "name": "헬리오 (냉정한 현실 직시)" }
+    ]
+  },
+  {
+    "floor": 2,
+    "roman": "II",
+    "phase": "초승",
+    "phaseEn": "Crescent",
+    "icon": "fa-solid fa-moon",
+    "title": "2층: 갈망의 안개",
+    "name": "갈망의 안개",
+    "spinnerClass": "spinner-2",
+    "orbitClass": "orbit-floor-2",
+    "sparkleClass": "sparkle-blue",
+    "category": "TOWER OF MOON'S SHADOW · 2F",
+    "badge": "FLOOR 02",
+    "phaseSymbol": "초승 (Waxing Crescent)",
+    "imgClass": "floor-img-2",
+    "description": "돌아가지 못한 천사들의 애끓는 염원이 보랏빛 환각의 안개로 응결된 층입니다. 안개 속에서는 이미 닫혀버린 월구 너머의 그리운 천계 풍경과 신의 따스한 목소리가 환청으로 울려 퍼집니다.",
+    "stats": [
+      { "icon": "fa-solid fa-eye-slash", "label": "위험 요소: 천계 환각 & 청각 교란" },
+      { "icon": "fa-solid fa-wind", "label": "주요 조우: 갈망의 환영체" }
+    ],
+    "characters": [
+      { "char": "calliste", "name": "칼리스테 (기록 및 환각 식별)" },
+      { "char": "sinope", "name": "시노페 (유격 미끼 기동)" }
+    ]
+  },
+  {
+    "floor": 1,
+    "roman": "I",
+    "phase": "삭",
+    "phaseEn": "New Moon",
+    "icon": "fa-regular fa-circle",
+    "title": "1층: 망각의 진흙 늪",
+    "name": "망각의 진흙 늪",
+    "spinnerClass": "spinner-1",
+    "orbitClass": "orbit-floor-1",
+    "sparkleClass": "sparkle-dark",
+    "category": "TOWER OF MOON'S SHADOW · 1F",
+    "badge": "FLOOR 01",
+    "phaseSymbol": "삭 (New Moon)",
+    "imgClass": "floor-img-1",
+    "description": "인간계 전장에서 탑의 기저부로 이어지는 최하층입니다. 신성을 갉아먹는 검은 진흙과 탁한 수맥이 얽혀 있으며, 발을 딛는 순간 과거의 영광스러운 천계 기억을 잃어버리는 '망각의 침식'이 시작됩니다.",
+    "stats": [
+      { "icon": "fa-solid fa-skull", "label": "위험 요소: 망각의 진흙 & 날개 오염" },
+      { "icon": "fa-solid fa-shield-halved", "label": "주요 조우: 침식된 수호령 & 이형의 악마" }
+    ],
+    "characters": [
+      { "char": "helio", "name": "헬리오 (선봉 돌파)" },
+      { "char": "nebbia", "name": "네비아 (진흙 악마 절단)" }
+    ]
+  }
+]

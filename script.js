@@ -5,174 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const mainContainer = document.getElementById("main-container");
     const detailContainer = document.getElementById("detail-container");
     const closeBtn = document.querySelector(".close-btn");
-    
     // ----------------------------------------------------
-    // 1. Generate Celestial Stardust & Prism Crystals (5 Magical Types)
-    // ----------------------------------------------------
-    const stardustCount = 85;
-    const stardustElements = [];
-
-    // 5 High-Definition Geometric Celestial Star & Prism Crystal SVG Templates
-    const stardustTemplates = [
-        // 1. Radiant 4-Pointed Diamond Sparkle Star (영롱한 4각 다이아몬드 별)
-        (id) => `
-            <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <radialGradient id="starGrad1_${id}" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
-                        <stop offset="35%" stop-color="#fdf4ff" stop-opacity="0.9"/>
-                        <stop offset="70%" stop-color="#c084fc" stop-opacity="0.5"/>
-                        <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
-                    </radialGradient>
-                </defs>
-                <circle cx="30" cy="30" r="20" fill="url(#starGrad1_${id})" opacity="0.65"/>
-                <path d="M30,2 Q30,30 2,30 Q30,30 30,58 Q30,30 58,30 Q30,30 30,2 Z" fill="#ffffff"/>
-                <path d="M30,14 Q30,30 14,30 Q30,30 30,46 Q30,30 46,30 Q30,30 30,14 Z" fill="rgba(230, 215, 255, 0.9)" transform="rotate(45 30 30)"/>
-                <circle cx="30" cy="30" r="3.5" fill="#ffffff"/>
-                <circle cx="30" cy="30" r="1.5" fill="#fef08a"/>
-            </svg>
-        `,
-        // 2. 8-Pointed Archangel Celestial Star (8각 대천사 성광 별빛)
-        (id) => `
-            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <radialGradient id="starGrad2_${id}" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
-                        <stop offset="30%" stop-color="#fef08a" stop-opacity="0.85"/>
-                        <stop offset="65%" stop-color="#a855f7" stop-opacity="0.4"/>
-                        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
-                    </radialGradient>
-                </defs>
-                <circle cx="40" cy="40" r="16" stroke="rgba(240, 225, 255, 0.6)" stroke-width="0.8" fill="none"/>
-                <path d="M40,0 Q40,40 0,40 Q40,40 40,80 Q40,40 80,40 Q40,40 40,0 Z" fill="url(#starGrad2_${id})"/>
-                <path d="M40,3 Q40,40 3,40 Q40,40 40,77 Q40,40 77,40 Q40,40 40,3 Z" fill="#ffffff"/>
-                <path d="M40,12 Q40,40 12,40 Q40,40 40,68 Q40,40 68,40 Q40,40 40,12 Z" fill="rgba(245, 235, 255, 0.92)" transform="rotate(45 40 40)"/>
-                <circle cx="40" cy="40" r="4.5" fill="#ffffff"/>
-            </svg>
-        `,
-        // 3. Faceted Prism Diamond Crystal (각진 프리즘 수정 다이아몬드)
-        (id) => `
-            <svg viewBox="0 0 50 65" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="crystA_${id}" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
-                        <stop offset="100%" stop-color="#a855f7" stop-opacity="0.45"/>
-                    </linearGradient>
-                    <linearGradient id="crystB_${id}" x1="100%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#e0e7ff" stop-opacity="0.95"/>
-                        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.5"/>
-                    </linearGradient>
-                </defs>
-                <polygon points="25,2 5,26 25,26" fill="url(#crystA_${id})"/>
-                <polygon points="25,2 45,26 25,26" fill="url(#crystB_${id})"/>
-                <polygon points="25,26 5,26 25,62" fill="url(#crystB_${id})"/>
-                <polygon points="25,26 45,26 25,62" fill="url(#crystA_${id})"/>
-                <polygon points="25,10 15,26 25,48 35,26" fill="#ffffff" opacity="0.65"/>
-                <polygon points="25,2 45,26 25,62 5,26" stroke="#ffffff" stroke-width="1.3" fill="none"/>
-                <line x1="25" y1="2" x2="25" y2="62" stroke="#ffffff" stroke-width="1.0"/>
-                <line x1="5" y1="26" x2="45" y2="26" stroke="#ffffff" stroke-width="1.0"/>
-            </svg>
-        `,
-        // 4. Sacred Shimmer Cross Flare (신성한 십자 광채 & 링)
-        (id) => `
-            <svg viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <radialGradient id="flareGrad_${id}" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
-                        <stop offset="35%" stop-color="#fdf4ff" stop-opacity="0.85"/>
-                        <stop offset="70%" stop-color="#c084fc" stop-opacity="0.4"/>
-                        <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
-                    </radialGradient>
-                </defs>
-                <ellipse cx="35" cy="35" rx="30" ry="7" stroke="rgba(224, 210, 255, 0.55)" stroke-width="1.1" fill="none" transform="rotate(-30 35 35)"/>
-                <line x1="35" y1="2" x2="35" y2="68" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/>
-                <line x1="2" y1="35" x2="68" y2="35" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/>
-                <circle cx="35" cy="35" r="15" fill="url(#flareGrad_${id})"/>
-                <circle cx="35" cy="35" r="4" fill="#ffffff"/>
-            </svg>
-        `,
-        // 5. Glowing Stardust Pearl Orb (신비로운 빛의 보석 구체)
-        (id) => `
-            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <radialGradient id="orbGrad_${id}" cx="35%" cy="35%" r="65%">
-                        <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
-                        <stop offset="30%" stop-color="#fef08a" stop-opacity="0.95"/>
-                        <stop offset="70%" stop-color="#c084fc" stop-opacity="0.6"/>
-                        <stop offset="100%" stop-color="#6366f1" stop-opacity="0.1"/>
-                    </radialGradient>
-                </defs>
-                <circle cx="20" cy="20" r="16" fill="rgba(192, 132, 252, 0.3)"/>
-                <circle cx="20" cy="20" r="10" fill="url(#orbGrad_${id})"/>
-                <circle cx="16" cy="16" r="3.2" fill="#ffffff" opacity="0.95"/>
-                <path d="M20,6 L20,34 M6,20 L34,20" stroke="rgba(255, 255, 255, 0.75)" stroke-width="0.9" stroke-linecap="round"/>
-            </svg>
-        `
-    ];
-
-    // Generate Stardust elements with multi-tiered depth
-    for (let i = 0; i < stardustCount; i++) {
-        const itemDiv = document.createElement("div");
-        itemDiv.className = "stardust-item";
-        
-        const templateIdx = i % stardustTemplates.length;
-        itemDiv.innerHTML = stardustTemplates[templateIdx](i);
-
-        const depthTier = Math.random();
-        let size, opacity, blurVal;
-
-        if (depthTier < 0.25) {
-            // Foreground (Soft glowing crystal stars with subtle bokeh)
-            size = anime.random(30, 42);
-            opacity = anime.random(55, 75) / 100;
-            blurVal = anime.random(0.8, 1.5);
-            itemDiv.style.zIndex = "5";
-        } else if (depthTier < 0.7) {
-            // Midground (Dreamy soft blur stars)
-            size = anime.random(18, 28);
-            opacity = anime.random(35, 55) / 100;
-            blurVal = anime.random(1.5, 2.4);
-            itemDiv.style.zIndex = "3";
-        } else {
-            // Background (Deep atmospheric stardust haze)
-            size = anime.random(10, 16);
-            opacity = anime.random(20, 38) / 100;
-            blurVal = anime.random(2.5, 3.8);
-            itemDiv.style.zIndex = "1";
-        }
-
-        itemDiv.style.width = `${size}px`;
-        itemDiv.style.height = `${size}px`;
-        itemDiv.style.left = `${anime.random(2, 98)}%`;
-        itemDiv.style.top = `${anime.random(2, 98)}%`;
-
-        itemDiv.style.filter = `drop-shadow(0 0 6px rgba(200, 180, 255, 0.4)) blur(${blurVal}px)`;
-
-        const initialRotation = anime.random(0, 360);
-        itemDiv.style.transform = `rotate(${initialRotation}deg)`;
-        itemDiv.style.opacity = opacity;
-
-        stardustContainer.appendChild(itemDiv);
-        stardustElements.push(itemDiv);
-    }
-
-    // Shimmering, Twinkling & Gentle Floating Animation Loop (Soft & Ethereal)
-    const idleTwinkleAnimation = anime({
-        targets: '.stardust-item',
-        scale: () => [anime.random(75, 90) / 100, anime.random(110, 130) / 100],
-        opacity: () => [anime.random(20, 40) / 100, anime.random(55, 75) / 100],
-        translateY: () => anime.random(-15, 15),
-        translateX: () => anime.random(-12, 12),
-        rotate: () => `+=${anime.random(-30, 30)}`,
-        duration: () => anime.random(2500, 5000),
-        delay: () => anime.random(0, 2000),
-        direction: 'alternate',
-        loop: true,
-        easing: 'easeInOutSine'
-    });
-
-    // ----------------------------------------------------
-    // 2. Three.js WebGL 3D Planets Integration
+    // 1. Three.js WebGL 3D Planets Integration
     // ----------------------------------------------------
     let moonMesh, earthMesh;
     let moonRenderer, earthRenderer;
@@ -507,81 +341,27 @@ document.addEventListener("DOMContentLoaded", () => {
     init3DPlanets();
 
     // ----------------------------------------------------
-    // 3. Intro Click Event - Radiant Stardust Scatter & Shockwave Physics
+    // 2. Intro Click Event - Smooth Transition to Main View & BGM Start
     // ----------------------------------------------------
-    introScreen.addEventListener("click", (e) => {
-        idleTwinkleAnimation.pause();
+    introScreen.addEventListener("click", () => {
+        // Auto start background music on first interaction
+        tryStartBgm();
 
-        const clickX = e.clientX;
-        const clickY = e.clientY;
-
-        // 1. Create Radiant Shockwave Ripple Ring at Click Coordinates
-        const shockwave = document.createElement("div");
-        shockwave.className = "stardust-shockwave";
-        shockwave.style.left = `${clickX}px`;
-        shockwave.style.top = `${clickY}px`;
-        introScreen.appendChild(shockwave);
-
-        anime({
-            targets: shockwave,
-            scale: [0, 8],
-            opacity: [1, 0],
-            duration: 1100,
-            easing: 'easeOutQuart',
-            complete: () => {
-                shockwave.remove();
-            }
-        });
-
-        // 2. Disperse Stardust and Crystals outward in a sparkling burst
-        stardustElements.forEach((item) => {
-            const rect = item.getBoundingClientRect();
-            const itemX = rect.left + rect.width / 2;
-            const itemY = rect.top + rect.height / 2;
-
-            let angle = Math.atan2(itemY - clickY, itemX - clickX);
-            if (itemX === clickX && itemY === clickY) {
-                angle = Math.random() * Math.PI * 2;
-            }
-            
-            // Random explosion physics distance
-            const distance = anime.random(700, 1500);
-            const targetX = Math.cos(angle) * distance;
-            const targetY = Math.sin(angle) * distance;
-            const targetRotate = anime.random(-1080, 1080);
-
-            anime({
-                targets: item,
-                translateX: targetX,
-                translateY: targetY,
-                rotate: targetRotate,
-                scale: [
-                    { value: 1.6, duration: 150, easing: 'easeOutQuad' }, // Instant brilliant flash
-                    { value: 0, duration: anime.random(800, 1300), easing: 'easeInQuad' } // Dissolve
-                ],
-                opacity: [
-                    { value: 1, duration: 150 },
-                    { value: 0, duration: anime.random(800, 1300), easing: 'easeInQuad' }
-                ],
-                duration: anime.random(900, 1500),
-                easing: 'easeOutExpo'
-            });
-        });
-
-        // 3. Fade out Title and Intro Screen smoothly
+        // Fade out Title and Intro Content smoothly
         anime({
             targets: '#intro-content',
             opacity: 0,
             scale: 0.95,
-            translateY: -80,
-            duration: 800,
+            translateY: -40,
+            duration: 600,
             easing: 'easeInQuad'
         });
 
+        // Fade out Intro Screen overlay
         anime({
             targets: '#intro-screen',
             opacity: 0,
-            duration: 1400,
+            duration: 900,
             easing: 'easeOutQuad',
             complete: () => {
                 introScreen.classList.add("hidden");
@@ -658,21 +438,301 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ----------------------------------------------------
-    // 6. Interactive Orbits & Layer Selection
+    // 6. Dynamic Floors Data Loader (from data/floors.json)
     // ----------------------------------------------------
-    const orbitWrappers = document.querySelectorAll(".orbit-line-wrapper");
-    orbitWrappers.forEach((wrapper) => {
-        wrapper.addEventListener("click", () => {
-            const layerNum = wrapper.getAttribute("data-layer");
-            openDetailView(layerNum);
+    const orbitsContainer = document.getElementById("orbits-container");
+    const detailCardsContainer = document.getElementById("detail-cards-container");
+    const worldviewModal = document.getElementById("worldview-modal");
+    const charactersModal = document.getElementById("characters-modal");
+    const btnOpenWorldview = document.getElementById("btn-open-worldview");
+    const btnCloseWorldview = document.getElementById("btn-close-worldview");
+    const btnOpenCharacters = document.getElementById("btn-open-characters");
+    const btnCloseCharacters = document.getElementById("btn-close-characters");
+    const charTabsContainer = document.getElementById("char-tabs-container");
+    const charPanesContainer = document.getElementById("char-panes-container");
+
+    let floorsList = [];
+
+    const defaultFloors = [
+        {
+            floor: 7,
+            roman: "VII",
+            phase: "월식",
+            phaseEn: "Eclipse",
+            icon: "fa-solid fa-circle-notch",
+            title: "7층: 붉은 관문",
+            name: "붉은 관문",
+            spinnerClass: "spinner-7",
+            orbitClass: "orbit-floor-7",
+            sparkleClass: "sparkle-crimson",
+            category: "TOWER OF MOON'S SHADOW · APEX (7F)",
+            badge: "FINAL FLOOR 07",
+            phaseSymbol: "월식 (Lunar Eclipse)",
+            imgClass: "floor-img-7",
+            isBossCard: true,
+            description: "월식의 핏빛 달빛이 내리쬐는 탑의 최정상이자, 굳게 봉쇄되어버린 천계 관문 '월구(Moon Sphere)'의 거대한 문이 자리한 최후의 성소입니다. 지상에 버려진 채 인계 침식의 위기를 딛고 오른 제9품계 하급 천사 일행이 마침내 마주하게 되는 미지의 종착지입니다.",
+            characters: [
+                { char: "nebbia", name: "네비아" },
+                { char: "helio", name: "헬리오" },
+                { char: "sinope", name: "시노페" },
+                { char: "calliste", name: "칼리스테" }
+            ]
+        },
+        {
+            floor: 6,
+            roman: "VI",
+            phase: "하현",
+            phaseEn: "Last Quarter",
+            icon: "fa-solid fa-moon fa-flip-horizontal",
+            title: "6층: 침식의 극점",
+            name: "침식의 극점",
+            spinnerClass: "spinner-6",
+            orbitClass: "orbit-floor-6",
+            sparkleClass: "sparkle-purple",
+            category: "TOWER OF MOON'S SHADOW · 6F",
+            badge: "FLOOR 06",
+            phaseSymbol: "하현 (Last Quarter)",
+            imgClass: "floor-img-6",
+            description: "인간계의 오염과 탑의 왜곡된 마력이 융합되어 천사의 영핵(신성 코어)을 한계까지 쥐어짜는 지옥 같은 층입니다. 칼리스테의 날개는 석화에 가깝게 굳어가고, 시노페의 신체 침식은 전신으로 번져가며 모두가 한계에 다다릅니다.",
+            stats: [
+                { icon: "fa-solid fa-biohazard", label: "위험 요소: 신성 영핵 급속 붕괴 & 석화" },
+                { icon: "fa-solid fa-ghost", label: "주요 조우: 극점의 침식 괴수" }
+            ],
+            characters: [
+                { char: "sinope", name: "시노페 (침식 억제 유격전)" },
+                { char: "calliste", name: "칼리스테 (체념을 딛는 기도)" }
+            ]
+        },
+        {
+            floor: 5,
+            roman: "V",
+            phase: "만월",
+            phaseEn: "Full Moon",
+            icon: "fa-solid fa-circle",
+            title: "5층: 광휘 성당",
+            name: "광휘 성당",
+            spinnerClass: "spinner-5",
+            orbitClass: "orbit-floor-5",
+            sparkleClass: "sparkle-gold",
+            category: "TOWER OF MOON'S SHADOW · 5F",
+            badge: "FLOOR 05",
+            phaseSymbol: "만월 (Full Moon)",
+            imgClass: "floor-img-5",
+            description: "만월의 순백 성광이 눈이 멀도록 쏟아져 내리는 거대한 대성당 구역입니다. 하지만 그 찬란한 빛 속에는 신의 자비가 아닌 잔인한 침묵만이 깃들어 있습니다.",
+            stats: [
+                { icon: "fa-solid fa-sun", label: "위험 요소: 실명 유발 성광 & 자동 방어 성물" },
+                { icon: "fa-solid fa-monument", label: "주요 조우: 성당의 백은 수호기사" }
+            ],
+            characters: [
+                { char: "helio", name: "헬리오 (대검 결계 방어)" },
+                { char: "nebbia", name: "네비아 (성물 핵심 파괴)" }
+            ]
+        },
+        {
+            floor: 4,
+            roman: "IV",
+            phase: "반월",
+            phaseEn: "Gibbous Moon",
+            icon: "fa-solid fa-adjust",
+            title: "4층: 거울 회랑",
+            name: "거울 회랑",
+            spinnerClass: "spinner-4",
+            orbitClass: "orbit-floor-4",
+            sparkleClass: "sparkle-cyan",
+            category: "TOWER OF MOON'S SHADOW · 4F",
+            badge: "FLOOR 04",
+            phaseSymbol: "반월 (Gibbous Moon)",
+            imgClass: "floor-img-4",
+            description: "수만 개의 차가운 은빛 거울로 둘러싸인 미로 회랑입니다. 거울 속에는 천사들이 지상에서 겪은 수치, 상위 천사에게 버림받았던 상처, 신체에 진행 중인 인계 침식의 모습이 투영됩니다.",
+            stats: [
+                { icon: "fa-solid fa-clone", label: "위험 요소: 죄책감의 도플갱어" },
+                { icon: "fa-solid fa-gem", label: "주요 조우: 거울의 복제자" }
+            ],
+            characters: [
+                { char: "sinope", name: "시노페 (쌍단검 거울 파괴)" },
+                { char: "calliste", name: "칼리스테 (진실의 직시)" }
+            ]
+        },
+        {
+            floor: 3,
+            roman: "III",
+            phase: "상현",
+            phaseEn: "First Quarter",
+            icon: "fa-solid fa-moon",
+            title: "3층: 이성의 균열",
+            name: "이성의 균열",
+            spinnerClass: "spinner-3",
+            orbitClass: "orbit-floor-3",
+            sparkleClass: "sparkle-amber",
+            category: "TOWER OF MOON'S SHADOW · 3F",
+            badge: "FLOOR 03",
+            phaseSymbol: "상현 (First Quarter)",
+            imgClass: "floor-img-3",
+            description: "탑의 중층부로 접어들며 신의 침묵에 대한 분노와 동료에 대한 불신이 극대화되는 층입니다. 공간 자체가 기하학적으로 찢겨 있으며, 영혼의 파장을 증폭시키는 균열이 이성을 갉아먹습니다.",
+            stats: [
+                { icon: "fa-solid fa-brain", label: "위험 요소: 광기 유발 파동 & 불신 증폭" },
+                { icon: "fa-solid fa-bolt", label: "주요 조우: 균열의 사념체" }
+            ],
+            characters: [
+                { char: "nebbia", name: "네비아 (분노의 레이피어)" },
+                { char: "helio", name: "헬리오 (냉정한 현실 직시)" }
+            ]
+        },
+        {
+            floor: 2,
+            roman: "II",
+            phase: "초승",
+            phaseEn: "Crescent",
+            icon: "fa-solid fa-moon",
+            title: "2층: 갈망의 안개",
+            name: "갈망의 안개",
+            spinnerClass: "spinner-2",
+            orbitClass: "orbit-floor-2",
+            sparkleClass: "sparkle-blue",
+            category: "TOWER OF MOON'S SHADOW · 2F",
+            badge: "FLOOR 02",
+            phaseSymbol: "초승 (Waxing Crescent)",
+            imgClass: "floor-img-2",
+            description: "돌아가지 못한 천사들의 애끓는 염원이 보랏빛 환각의 안개로 응결된 층입니다. 안개 속에서는 이미 닫혀버린 월구 너머의 그리운 천계 풍경과 신의 따스한 목소리가 환청으로 울려 퍼집니다.",
+            stats: [
+                { icon: "fa-solid fa-eye-slash", label: "위험 요소: 천계 환각 & 청각 교란" },
+                { icon: "fa-solid fa-wind", label: "주요 조우: 갈망의 환영체" }
+            ],
+            characters: [
+                { char: "calliste", name: "칼리스테 (기록 및 환각 식별)" },
+                { char: "sinope", name: "시노페 (유격 미끼 기동)" }
+            ]
+        },
+        {
+            floor: 1,
+            roman: "I",
+            phase: "삭",
+            phaseEn: "New Moon",
+            icon: "fa-regular fa-circle",
+            title: "1층: 망각의 진흙 늪",
+            name: "망각의 진흙 늪",
+            spinnerClass: "spinner-1",
+            orbitClass: "orbit-floor-1",
+            sparkleClass: "sparkle-dark",
+            category: "TOWER OF MOON'S SHADOW · 1F",
+            badge: "FLOOR 01",
+            phaseSymbol: "삭 (New Moon)",
+            imgClass: "floor-img-1",
+            description: "인간계 전장에서 탑의 기저부로 이어지는 최하층입니다. 신성을 갉아먹는 검은 진흙과 탁한 수맥이 얽혀 있으며, 발을 딛는 순간 과거의 영광스러운 천계 기억을 잃어버리는 '망각의 침식'이 시작됩니다.",
+            stats: [
+                { icon: "fa-solid fa-skull", label: "위험 요소: 망각의 진흙 & 날개 오염" },
+                { icon: "fa-solid fa-shield-halved", label: "주요 조우: 침식된 수호령 & 이형의 악마" }
+            ],
+            characters: [
+                { char: "helio", name: "헬리오 (선봉 돌파)" },
+                { char: "nebbia", name: "네비아 (진흙 악마 절단)" }
+            ]
+        }
+    ];
+
+    async function loadAndRenderFloors() {
+        try {
+            const res = await fetch('data/floors.json');
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            floorsList = await res.json();
+        } catch (err) {
+            console.warn("Could not load data/floors.json, using fallback floors:", err);
+            floorsList = defaultFloors;
+        }
+        renderFloorsAndOrbits(floorsList);
+    }
+
+    function renderFloorsAndOrbits(floors) {
+        if (!orbitsContainer || !detailCardsContainer) return;
+
+        // 1. Render Orbits
+        orbitsContainer.innerHTML = floors.map(f => `
+            <div class="orbit-line-wrapper ${f.orbitClass || 'orbit-floor-' + f.floor}" data-layer="${f.floor}">
+                <div class="orbit-line"></div>
+                <div class="orbit-spinner">
+                    <div class="orbit-rotator ${f.spinnerClass || 'spinner-' + f.floor}">
+                        <div class="orbit-sparkle ${f.sparkleClass || ''}"></div>
+                    </div>
+                </div>
+                <div class="orbit-content">
+                    <span class="orbit-number"><i class="${f.icon || 'fa-solid fa-moon'}"></i> ${f.roman} · ${f.phase} (${f.phaseEn})</span>
+                    <h3 class="orbit-title">${f.title || `${f.floor}층: ${f.name}`}</h3>
+                </div>
+            </div>
+        `).join('');
+
+        // 2. Render Detail Cards
+        detailCardsContainer.innerHTML = floors.map(f => `
+            <div class="detail-card ${f.isBossCard ? 'special-boss-card' : ''}" id="detail-${f.floor}">
+                <div class="card-image ${f.imgClass || 'floor-img-' + f.floor}">
+                    <div class="floor-badge ${f.isBossCard ? 'boss-badge' : ''}">${f.badge || `FLOOR 0${f.floor}`}</div>
+                    <div class="phase-symbol ${f.isBossCard ? 'eclipse-symbol' : ''}"><i class="${f.icon || 'fa-solid fa-moon'}"></i> ${f.phaseSymbol || f.phase}</div>
+                </div>
+                <div class="card-info">
+                    <span class="card-category ${f.isBossCard ? 'boss-category' : ''}">${f.category || `TOWER OF MOON'S SHADOW · ${f.floor}F`}</span>
+                    <h2 class="${f.isBossCard ? 'boss-title' : ''}">${f.name}</h2>
+                    <div class="card-divider ${f.isBossCard ? 'boss-divider' : ''}"></div>
+                    <p class="card-text">${f.description || ''}</p>
+                    ${f.stats && f.stats.length > 0 ? `
+                        <div class="floor-stats">
+                            ${f.stats.map(s => `<div class="stat-pill"><i class="${s.icon}"></i> ${s.label}</div>`).join('')}
+                        </div>
+                    ` : ''}
+                    ${f.characters && f.characters.length > 0 ? `
+                        <div class="characters-preview">
+                            <h4>${f.isBossCard ? '최후의 총력전' : '층내 주요 대응 천사'}</h4>
+                            <div class="char-list">
+                                ${f.characters.map(ch => `
+                                    <div class="char-item" data-char="${ch.char}">
+                                        <span class="char-avatar char-${ch.char}"></span>
+                                        <span class="char-name">${ch.name}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+            </div>
+        `).join('');
+
+        // 3. Attach Orbit Click Handlers
+        const orbitWrappers = orbitsContainer.querySelectorAll(".orbit-line-wrapper");
+        orbitWrappers.forEach(wrapper => {
+            wrapper.addEventListener("click", () => {
+                const layerNum = wrapper.getAttribute("data-layer");
+                openDetailView(layerNum);
+            });
         });
-    });
+
+        // 4. Attach Quick Character Jump from Floor Detail cards
+        detailCardsContainer.querySelectorAll(".char-item").forEach(item => {
+            item.addEventListener("click", (e) => {
+                e.stopPropagation();
+                const charKey = item.getAttribute("data-char");
+                if (charKey) {
+                    const targetCharId = `char-${charKey}`;
+                    selectCharacterTab(targetCharId);
+                    closeDetailView();
+                    setTimeout(() => {
+                        openCustomModal(charactersModal);
+                    }, 350);
+                }
+            });
+        });
+    }
+
+    // Initialize floors loading
+    loadAndRenderFloors();
 
     // Transition into Layer Detail card Overlay
     function openDetailView(layerNum) {
+        // Close any other open modals first
+        closeCustomModal(worldviewModal);
+        closeCustomModal(charactersModal);
+
         const exitTimeline = anime.timeline({
             easing: 'easeOutExpo',
-            duration: 900
+            duration: 800
         });
 
         exitTimeline
@@ -690,7 +750,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 targets: '.orbit-line-wrapper',
                 opacity: 0,
                 scale: 0.8,
-                delay: anime.stagger(60)
+                delay: anime.stagger(40)
             }, 0)
             .add({
                 targets: '#detail-container',
@@ -698,67 +758,429 @@ document.addEventListener("DOMContentLoaded", () => {
                 begin: () => {
                     detailContainer.classList.remove("hidden");
                     document.querySelectorAll(".detail-card").forEach(card => card.classList.remove("active"));
-                    document.getElementById(`detail-${layerNum}`).classList.add("active");
+                    const targetCard = document.getElementById(`detail-${layerNum}`);
+                    if (targetCard) targetCard.classList.add("active");
                 }
-            }, 300)
+            }, 250)
             .add({
                 targets: `#detail-${layerNum}`,
-                translateY: [100, 0],
+                translateY: [80, 0],
                 opacity: [0, 1],
-                duration: 1000,
-                easing: 'easeOutElastic(1, .8)'
-            }, 450)
+                duration: 900,
+                easing: 'easeOutQuint'
+            }, 350)
             .add({
                 targets: '.close-btn',
                 opacity: [0, 1],
-                translateY: [-20, 0],
-                duration: 500
-            }, 600);
+                translateY: [-15, 0],
+                duration: 400
+            }, 450);
     }
 
-    // Transition back from Detail card Overlay to Space View
-    closeBtn.addEventListener("click", () => {
+    // Close Floor Detail Overlay
+    function closeDetailView() {
         const activeCard = document.querySelector(".detail-card.active");
         
         const returnTimeline = anime.timeline({
             easing: 'easeOutExpo',
-            duration: 800
+            duration: 750
         });
+
+        if (activeCard) {
+            returnTimeline.add({
+                targets: activeCard,
+                translateY: 80,
+                opacity: 0,
+                duration: 500
+            }, 0);
+        }
 
         returnTimeline
             .add({
-                targets: activeCard,
-                translateY: 100,
-                opacity: 0,
-                duration: 600
-            }, 0)
-            .add({
                 targets: '.close-btn',
                 opacity: 0,
-                duration: 400
+                duration: 300
             }, 0)
             .add({
                 targets: '#detail-container',
                 opacity: 0,
                 complete: () => {
                     detailContainer.classList.add("hidden");
+                    if (activeCard) activeCard.classList.remove("active");
                 }
-            }, 200)
+            }, 150)
             .add({
                 targets: '.moon-wrapper',
                 translateY: 0,
                 opacity: 1
-            }, 350)
+            }, 300)
             .add({
                 targets: '.earth-wrapper',
                 translateY: 0,
                 opacity: 1
-            }, 350)
+            }, 300)
             .add({
                 targets: '.orbit-line-wrapper',
                 opacity: 1,
                 scale: 1,
-                delay: anime.stagger(60)
-            }, 350);
+                delay: anime.stagger(40)
+            }, 300);
+    }
+
+    closeBtn.addEventListener("click", closeDetailView);
+
+    // Click outside detail card to close
+    detailContainer.addEventListener("click", (e) => {
+        if (e.target === detailContainer) {
+            closeDetailView();
+        }
+    });
+
+    // Helper functions for Custom Modals (Worldview, Characters)
+    function openCustomModal(modalElement) {
+        modalElement.classList.remove("hidden");
+        anime({
+            targets: modalElement,
+            opacity: [0, 1],
+            duration: 400,
+            easing: 'easeOutQuad'
+        });
+        const box = modalElement.querySelector(".modal-box");
+        if (box) {
+            anime({
+                targets: box,
+                scale: [0.92, 1],
+                translateY: [30, 0],
+                opacity: [0, 1],
+                duration: 500,
+                easing: 'easeOutQuint'
+            });
+        }
+    }
+
+    function closeCustomModal(modalElement) {
+        if (!modalElement || modalElement.classList.contains("hidden")) return;
+        const box = modalElement.querySelector(".modal-box");
+        if (box) {
+            anime({
+                targets: box,
+                scale: 0.94,
+                translateY: 20,
+                opacity: 0,
+                duration: 300,
+                easing: 'easeInQuad'
+            });
+        }
+        anime({
+            targets: modalElement,
+            opacity: 0,
+            duration: 350,
+            easing: 'easeInQuad',
+            complete: () => {
+                modalElement.classList.add("hidden");
+            }
+        });
+    }
+
+    // Worldview Modal
+    if (btnOpenWorldview) {
+        btnOpenWorldview.addEventListener("click", () => openCustomModal(worldviewModal));
+    }
+    if (btnCloseWorldview) {
+        btnCloseWorldview.addEventListener("click", () => closeCustomModal(worldviewModal));
+    }
+    if (worldviewModal) {
+        worldviewModal.addEventListener("click", (e) => {
+            if (e.target === worldviewModal) closeCustomModal(worldviewModal);
+        });
+    }
+
+    // ----------------------------------------------------
+    // 7. Dynamic Characters Data Loader (from data/characters.json)
+    // ----------------------------------------------------
+    let characterList = [];
+
+    // Fallback data for robust offline / local preview support
+    const defaultCharacters = [
+        {
+            id: "nebbia",
+            name: "네비아",
+            enName: "Nebbia",
+            rankBadge: "제9품계 하급 천사 · 전사",
+            meta: "여성 / 전사 / 제9품계",
+            weapon: { icon: "fa-solid fa-wand-magic-sparkles", text: "은빛 레이피어" },
+            tags: ["#까칠한츤데레", "#신의침묵에분노", "#속정깊음", "#잿빛날개"],
+            appearance: "헝클어진 금발 단발, 날카롭고 강렬한 녹안(Emerald Eyes). 지상 전장의 흙먼지가 묻은 은빛 경갑주를 걸쳤으며, 인계 침식으로 인해 본래 순백이던 날개가 잿빛으로 흐려져 있습니다.",
+            personality: "까칠하고 틱틱대는 츤데레 전사. 신의 침묵을 명백한 배신으로 여겨 분노를 감추지 않습니다. 그러나 동료를 누구보다 아끼며, 툭툭 내뱉는 날 선 반말 뒤로 혀를 차거나 시선을 피하며 챙겨줍니다.",
+            quote: "착각하지 마. 널 구한 게 아니라 저놈 모가지를 벤 것뿐이니까. 따라올 거면 발소리나 죽여.",
+            visualClass: "char-visual-nebbia",
+            tabAvatarClass: "tab-nebbia"
+        },
+        {
+            id: "calliste",
+            name: "칼리스테",
+            enName: "Calliste",
+            rankBadge: "제9품계 하급 천사 · 관조·기록",
+            meta: "여성 / 관조·기록 / 제9품계",
+            weapon: { icon: "fa-solid fa-scroll", text: "낡은 면사포 & 경화된 날개" },
+            tags: ["#소심하고조용함", "#체념적성향", "#비행불가", "#서글픈존댓말"],
+            appearance: "풍성하게 구불거리는 긴 은발, 항상 눈물이 고인 듯 맑고 투명한 벽안(Cyan Eyes). 머리에는 올이 풀린 낡은 면사포를 둘렀으며, 한쪽 날개가 완전히 석화처럼 경화되어 더 이상 하늘을 날 수 없습니다.",
+            personality: "소심하고 조용하며, 버려진 처지를 서글프게 직시하는 체념적 성향. 말끝을 흐리는 나지막하고 가녀린 존댓말을 쓰며, 불안할 때면 낡은 옷소매를 꼭 쥐는 버릇이 있습니다.",
+            quote: "돌아갈 수 있을까요……? 우린 버려진 거예요. 그러니…… 너무 애쓰지 마세요.",
+            visualClass: "char-visual-calliste",
+            tabAvatarClass: "tab-calliste"
+        },
+        {
+            id: "helio",
+            name: "헬리오",
+            enName: "Helio",
+            rankBadge: "제9품계 하급 천사 · 전사·선봉",
+            meta: "남성 / 전사·선봉 / 제9품계",
+            weapon: { icon: "fa-solid fa-gavel", text: "묵직한 대검" },
+            tags: ["#철저한현실주의", "#감정절제", "#과거배신경험", "#듬직한탱커"],
+            appearance: "차분하게 정돈된 회색 머리, 건조하고 단호한 회안(Grey Eyes). 단련된 다부진 체격 위에 낡은 검은 가죽 코트를 걸치고 있으며, 거대한 양손 대검을 덤덤하게 짊어지고 있습니다.",
+            personality: "철저한 현실주의자이자 감정에 휘둘리지 않는 든든한 선봉장. 과거 상위 천사에게 희생양으로 버림받았던 기억이 있습니다. 단정하고 건조한 존댓말/반존대를 구사하며 철저히 팩트만을 전달합니다.",
+            quote: "신이 우릴 버렸다는 걸 인정하면 편해집니다. 멍청하게 서 있지 말고 내 뒤로 붙으세요.",
+            visualClass: "char-visual-helio",
+            tabAvatarClass: "tab-helio"
+        },
+        {
+            id: "sinope",
+            name: "시노페",
+            enName: "Sinope",
+            rankBadge: "제9품계 하급 천사 · 전사·유격",
+            meta: "남성 / 전사·유격 / 제9품계",
+            weapon: { icon: "fa-solid fa-khanda", text: "흑은의 쌍단검" },
+            tags: ["#능글맞은장난꾼", "#희생을숨김", "#신체침식진행", "#유쾌한반말"],
+            appearance: "느슨하게 반묶음한 은발, 장난기 가득한 붉은 적안(Ruby Eyes). 헐렁한 제복 셔츠를 입고 있으며, 과거 지상에서 동료들을 보호하려다 인계 침식이 신체 일부로 번져 검게 물들어 있습니다.",
+            personality: "항상 싱글벙글 웃는 유쾌한 트릭스터. 자신의 고통과 침식의 상처를 농담 뒤로 철저히 숨깁니다. 나른하고 리듬감 있는 가벼운 반말을 쓰며 언제든 동료를 위해 미끼가 될 각오를 품고 있습니다.",
+            quote: "대충 해, 대충. 어차피 죽기밖에 더하겠어? 정 안 되면 내가 미끼가 돼 줄 테니까 넌 뛰어.",
+            visualClass: "char-visual-sinope",
+            tabAvatarClass: "tab-sinope"
+        }
+    ];
+
+    async function loadAndRenderCharacters() {
+        try {
+            const res = await fetch('data/characters.json');
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            characterList = await res.json();
+        } catch (err) {
+            console.warn("Could not load data/characters.json, using fallback character list:", err);
+            characterList = defaultCharacters;
+        }
+        renderCharacterDossier(characterList);
+    }
+
+    function renderCharacterDossier(characters) {
+        if (!charTabsContainer || !charPanesContainer) return;
+
+        charTabsContainer.innerHTML = characters.map((c, i) => `
+            <button class="tab-btn ${i === 0 ? 'active' : ''}" data-target="char-${c.id}">
+                <span class="tab-avatar ${c.tabAvatarClass || 'tab-' + c.id}"></span>
+                <span class="tab-name">${c.name}</span>
+            </button>
+        `).join('');
+
+        charPanesContainer.innerHTML = characters.map((c, i) => `
+            <div class="char-pane ${i === 0 ? 'active' : ''}" id="char-${c.id}">
+                <div class="pane-grid">
+                    <div class="pane-visual ${c.visualClass || 'char-visual-' + c.id}">
+                        <div class="char-rank-badge">${c.rankBadge || c.rank || '제9품계 하급 천사'}</div>
+                        <div class="char-weapon-badge"><i class="${c.weapon?.icon || 'fa-solid fa-feather'}"></i> ${c.weapon?.text || ''}</div>
+                    </div>
+                    <div class="pane-details">
+                        <div class="ch-name-row">
+                            <h3>${c.name} <span class="ch-en">${c.enName || ''}</span></h3>
+                            <span class="ch-meta">${c.meta || ''}</span>
+                        </div>
+                        <div class="ch-tags">
+                            ${(c.tags || []).map(t => `<span class="tag">${t}</span>`).join('')}
+                        </div>
+
+                        <div class="ch-section">
+                            <h4><i class="fa-solid fa-user"></i> 외모 및 신체 특징</h4>
+                            <p>${c.appearance || ''}</p>
+                        </div>
+
+                        <div class="ch-section">
+                            <h4><i class="fa-solid fa-comment-dots"></i> 성격 및 말투</h4>
+                            <p>${c.personality || ''}</p>
+                        </div>
+
+                        <div class="ch-quote-box">
+                            <div class="quote-tag"><i class="fa-solid fa-quote-left"></i> 대표 대사</div>
+                            <p class="quote-text">"${c.quote || ''}"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        // Attach click listeners to dynamically created tab buttons
+        const tabs = charTabsContainer.querySelectorAll(".tab-btn");
+        tabs.forEach(tab => {
+            tab.addEventListener("click", () => {
+                const targetId = tab.getAttribute("data-target");
+                selectCharacterTab(targetId);
+            });
+        });
+    }
+
+    function selectCharacterTab(charId) {
+        const tabs = document.querySelectorAll(".char-tabs .tab-btn");
+        const panes = document.querySelectorAll(".char-panes .char-pane");
+
+        tabs.forEach(tab => {
+            if (tab.getAttribute("data-target") === charId) {
+                tab.classList.add("active");
+            } else {
+                tab.classList.remove("active");
+            }
+        });
+
+        panes.forEach(pane => {
+            if (pane.id === charId) {
+                pane.classList.add("active");
+            } else {
+                pane.classList.remove("active");
+            }
+        });
+    }
+
+    // Initialize character loading
+    loadAndRenderCharacters();
+
+    if (btnOpenCharacters) {
+        btnOpenCharacters.addEventListener("click", () => {
+            selectCharacterTab("char-nebbia");
+            openCustomModal(charactersModal);
+        });
+    }
+
+    if (btnCloseCharacters) {
+        btnCloseCharacters.addEventListener("click", () => closeCustomModal(charactersModal));
+    }
+
+    if (charactersModal) {
+        charactersModal.addEventListener("click", (e) => {
+            if (e.target === charactersModal) closeCustomModal(charactersModal);
+        });
+    }
+
+    // ----------------------------------------------------
+    // 9. Background Music (BGM) Player Controller
+    // ----------------------------------------------------
+    const bgmAudio = document.getElementById("bgm-audio");
+    const bgmToggleBtn = document.getElementById("bgm-toggle-btn");
+    const bgmIcon = document.getElementById("bgm-icon");
+    const bgmPlayer = document.getElementById("bgm-player");
+    const bgmVolume = document.getElementById("bgm-volume");
+    const volumeIcon = document.getElementById("volume-icon");
+
+    let isAudioPlaying = false;
+    let lastVolume = 0.5;
+
+    if (bgmAudio) {
+        bgmAudio.volume = 0.5;
+
+        // Auto start helper
+        window.tryStartBgm = function() {
+            if (!isAudioPlaying) {
+                bgmAudio.play().then(() => {
+                    isAudioPlaying = true;
+                    updateBgmUI(true);
+                }).catch(err => {
+                    console.log("Audio autoplay prevented by browser policy:", err);
+                });
+            }
+        };
+
+        function toggleBgm() {
+            if (bgmAudio.paused) {
+                bgmAudio.play().then(() => {
+                    isAudioPlaying = true;
+                    updateBgmUI(true);
+                }).catch(err => {
+                    console.warn("Could not play audio:", err);
+                });
+            } else {
+                bgmAudio.pause();
+                isAudioPlaying = false;
+                updateBgmUI(false);
+            }
+        }
+
+        function updateBgmUI(playing) {
+            if (playing) {
+                bgmPlayer.classList.add("bgm-playing");
+                bgmIcon.className = "fa-solid fa-pause";
+                bgmToggleBtn.setAttribute("title", "음악 일시정지");
+            } else {
+                bgmPlayer.classList.remove("bgm-playing");
+                bgmIcon.className = "fa-solid fa-play";
+                bgmToggleBtn.setAttribute("title", "음악 재생");
+            }
+        }
+
+        if (bgmToggleBtn) {
+            bgmToggleBtn.addEventListener("click", toggleBgm);
+        }
+
+        if (bgmVolume) {
+            bgmVolume.addEventListener("input", (e) => {
+                const vol = parseFloat(e.target.value);
+                bgmAudio.volume = vol;
+                if (vol > 0) lastVolume = vol;
+                updateVolumeIcon(vol);
+            });
+        }
+
+        if (volumeIcon) {
+            volumeIcon.addEventListener("click", () => {
+                if (bgmAudio.volume > 0) {
+                    lastVolume = bgmAudio.volume;
+                    bgmAudio.volume = 0;
+                    if (bgmVolume) bgmVolume.value = 0;
+                    updateVolumeIcon(0);
+                } else {
+                    const restoredVol = lastVolume > 0 ? lastVolume : 0.5;
+                    bgmAudio.volume = restoredVol;
+                    if (bgmVolume) bgmVolume.value = restoredVol;
+                    updateVolumeIcon(restoredVol);
+                }
+            });
+        }
+
+        function updateVolumeIcon(vol) {
+            if (!volumeIcon) return;
+            if (vol === 0) {
+                volumeIcon.className = "fa-solid fa-volume-xmark volume-icon";
+            } else if (vol < 0.5) {
+                volumeIcon.className = "fa-solid fa-volume-low volume-icon";
+            } else {
+                volumeIcon.className = "fa-solid fa-volume-high volume-icon";
+            }
+        }
+
+        bgmAudio.addEventListener("play", () => updateBgmUI(true));
+        bgmAudio.addEventListener("pause", () => updateBgmUI(false));
+    } else {
+        window.tryStartBgm = function() {};
+    }
+
+    // Keyboard Escape Key to close any active modal/detail
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            if (!detailContainer.classList.contains("hidden")) {
+                closeDetailView();
+            }
+            if (!worldviewModal.classList.contains("hidden")) {
+                closeCustomModal(worldviewModal);
+            }
+            if (!charactersModal.classList.contains("hidden")) {
+                closeCustomModal(charactersModal);
+            }
+        }
     });
 });

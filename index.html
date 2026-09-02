@@ -3,26 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>낙천사구역 (Fallen Angel Zone) - Official</title>
+    <title>달의 그림자 탑 (Tower of Moon's Shadow) - Divina Paradiso</title>
     <!-- Google Fonts: Cinzel for high-fantasy English, Noto Serif KR for elegant Korean -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Serif+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Noto+Serif+KR:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 1. Intro Screen with Feather Storm -->
+    <!-- 1. Intro Screen -->
     <div id="intro-screen">
         <div class="intro-bg-glow"></div>
         <div id="intro-content">
-            <h1 class="intro-title">낙 천 사 구 역</h1>
+            <div class="intro-badge">DIVINA PARADISO</div>
+            <div class="intro-sub-tag">월구 - 낙천사영역</div>
+            <h1 class="intro-title">달 의  그 림 자  탑</h1>
+            <p class="intro-quote">"신의 침묵, 닫혀버린 월구의 문…… 지상에 고립된 제9품계 천사들의 순례"</p>
             <div class="enter-prompt">
-                <span class="pulse-text">화면을 클릭하여 진입하십시오</span>
+                <span class="pulse-text">화면을 클릭하여 탑으로 진입하십시오</span>
                 <i class="fa-solid fa-angle-double-down arrow-down"></i>
             </div>
         </div>
-        <!-- Celestial Stardust & Crystals dynamic container -->
-        <div id="stardust-container"></div>
         <!-- Hidden Image preloaders to bypass file:// local WebGL CORS blocks -->
         <div style="display: none;">
             <img id="img-moon" src="assets/images/moon.jpg">
@@ -31,151 +32,150 @@
         </div>
     </div>
 
-    <!-- 2. Main Page Content (Initially hidden/transparent) -->
+    <!-- 2. Main Page Container -->
     <div id="main-container" class="hidden">
         <!-- Background Stars dynamic element -->
         <div class="stars-bg"></div>
-        <!-- Vertical Center Axis Line -->
+        <!-- Vertical Center Axis Line representing the Tower spine -->
         <div class="center-axis-line"></div>
 
-        <!-- Upper Part: Glowing and Rotating Moon -->
+        <!-- Top Navigation Bar -->
+        <header class="top-nav">
+            <div class="nav-brand-group">
+                <div class="nav-brand">
+                    <span class="brand-sub">DIVINA PARADISO</span>
+                    <span class="brand-title"><i class="fa-solid fa-moon"></i> 달의 그림자 탑</span>
+                </div>
+                <!-- Compact BGM Player in GNB -->
+                <div class="bgm-player" id="bgm-player">
+                    <audio id="bgm-audio" loop preload="auto" src="assets/sound/ANGELI LUNAE.mp3"></audio>
+                    <button class="bgm-btn" id="bgm-toggle-btn" title="배경음악 재생 / 일시정지" aria-label="BGM 재생/일시정지">
+                        <i class="fa-solid fa-play" id="bgm-icon"></i>
+                    </button>
+                    <div class="bgm-info">
+                        <div class="bgm-waves" id="bgm-waves">
+                            <span class="wave-bar"></span>
+                            <span class="wave-bar"></span>
+                            <span class="wave-bar"></span>
+                            <span class="wave-bar"></span>
+                        </div>
+                        <span class="bgm-title">ANGELI LUNAE</span>
+                    </div>
+                    <div class="bgm-volume-wrap">
+                        <i class="fa-solid fa-volume-high volume-icon" id="volume-icon"></i>
+                        <input type="range" id="bgm-volume" class="bgm-volume-slider" min="0" max="1" step="0.05" value="0.5" title="음량 조절">
+                    </div>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <button class="nav-btn" id="btn-open-worldview">
+                    <i class="fa-solid fa-scroll"></i> 세계관 & 프롤로그
+                </button>
+                <button class="nav-btn" id="btn-open-characters">
+                    <i class="fa-solid fa-feather-pointed"></i> 제9품계 천사 일행
+                </button>
+            </nav>
+        </header>
+
+        <!-- Upper Part: Glowing and Rotating Moon (Sphere of the Moon / 월구) -->
         <div class="moon-wrapper">
+            <div class="moon-tag">천계 관문 · 월구 (Primo Cielo)</div>
             <div class="moon-glow"></div>
             <div class="moon" id="moon-canvas-container"></div>
         </div>
 
-        <!-- Middle Part: Interactive Orbit Layers -->
-        <div class="orbits-container">
-            <div class="orbit-line-wrapper" data-layer="3">
-                <div class="orbit-line"></div>
-                <div class="orbit-spinner">
-                    <div class="orbit-rotator spinner-1">
-                        <div class="orbit-sparkle"></div>
-                    </div>
-                </div>
-                <div class="orbit-content">
-                    <span class="orbit-number">III</span>
-                    <h3 class="orbit-title">제3층: 천계 (Celestial Realm)</h3>
-                    <p class="orbit-desc">추방당한 고결한 영혼들이 도달하려는 마지막 영원의 구역</p>
-                </div>
-            </div>
-            
-            <div class="orbit-line-wrapper" data-layer="2">
-                <div class="orbit-line"></div>
-                <div class="orbit-spinner">
-                    <div class="orbit-rotator spinner-2">
-                        <div class="orbit-sparkle"></div>
-                    </div>
-                </div>
-                <div class="orbit-content">
-                    <span class="orbit-number">II</span>
-                    <h3 class="orbit-title">제2층: 연옥 (Purgatory)</h3>
-                    <p class="orbit-desc">빛과 어둠의 경계, 징벌을 기다리는 영혼들의 안식처</p>
-                </div>
-            </div>
+        <!-- Middle Part: Interactive 7 Floor Orbit Layers (Tower of Moon's Shadow 1F~7F - Loaded from data/floors.json) -->
+        <div class="orbits-container" id="orbits-container"></div>
 
-            <div class="orbit-line-wrapper" data-layer="1">
-                <div class="orbit-line"></div>
-                <div class="orbit-spinner">
-                    <div class="orbit-rotator spinner-3">
-                        <div class="orbit-sparkle"></div>
-                    </div>
-                </div>
-                <div class="orbit-content">
-                    <span class="orbit-number">I</span>
-                    <h3 class="orbit-title">제1층: 현계 (Mortal Realm)</h3>
-                    <p class="orbit-desc">낙천사가 지상에 내려와 최초로 닿는 인간의 공간</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Lower Part: Earth -->
+        <!-- Lower Part: Earth (Mortal Realm / 인간계 전장) -->
         <div class="earth-wrapper">
+            <div class="earth-tag">인간계 전장 · 고립된 하계 (Mortal Earth)</div>
             <div class="earth-glow"></div>
             <div class="earth" id="earth-canvas-container"></div>
         </div>
     </div>
 
-    <!-- 3. Detail Views for Layers (Initially hidden) -->
-    <div id="detail-container" class="hidden">
+    <!-- 3. Floor Detail Modal (1층 ~ 7층 - Loaded from data/floors.json) -->
+    <div id="detail-container" class="hidden modal-backdrop">
         <!-- Close Button -->
-        <button class="close-btn"><i class="fa-solid fa-times"></i> BACK TO SPACE</button>
-        
-        <!-- Detail Card for Layer 1 -->
-        <div class="detail-card" id="detail-1">
-            <div class="card-image img-mortal"></div>
-            <div class="card-info">
-                <span class="card-category">LAYER I</span>
-                <h2>현계 (Mortal Realm)</h2>
-                <div class="card-divider"></div>
-                <p class="card-text">
-                    인간들이 거주하는 물질적인 세계이며, 타락한 천사들이 처음으로 당도하게 되는 하계입니다.
-                    하늘에서 떨어진 이들이 빛을 잃고 인간의 욕망과 마주하게 되는 고통의 서막이 펼쳐지는 공간입니다.
-                </p>
-                <div class="characters-preview">
-                    <h4>대표 등장인물</h4>
-                    <div class="char-list">
-                        <div class="char-item">
-                            <span class="char-avatar char1"></span>
-                            <span class="char-name">아라엘 (Arael)</span>
-                        </div>
-                        <div class="char-item">
-                            <span class="char-avatar char2"></span>
-                            <span class="char-name">레오나드 (Leonard)</span>
-                        </div>
+        <button class="close-btn"><i class="fa-solid fa-times"></i> SPACE MAP</button>
+        <div id="detail-cards-container"></div>
+    </div>
+
+    <!-- 4. Worldview & Prologue Modal -->
+    <div id="worldview-modal" class="hidden modal-backdrop">
+        <div class="modal-box worldview-box">
+            <button class="modal-close-btn" id="btn-close-worldview"><i class="fa-solid fa-times"></i></button>
+            <div class="modal-header">
+                <span class="section-tag">DIVINA PARADISO LORE</span>
+                <h2>세계관 및 프롤로그</h2>
+                <div class="gold-line"></div>
+            </div>
+            
+            <div class="modal-body-scroll">
+                <!-- Preamble Block -->
+                <div class="lore-preamble-block">
+                    <div class="preamble-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+                    <div class="preamble-lines">
+                        <p>천사들과 악마들의 오랜 전쟁 속에서</p>
+                        <p>천계의 최하층 <strong>'월구(달)'</strong>의 문이 봉쇄되었다.</p>
+                        <br>
+                        <p>미처 돌아가지 못한 채</p>
+                        <p>인간계 전장에 남아 고립된 <strong>제9품계 하급 천사들</strong>은</p>
+                        <p>점차 <strong>'인계 침식'</strong>의 고통에 젖을 위기에 처했다.</p>
+                        <br>
+                        <p class="highlight-ch-line">분노를 품은 채 레이피어를 쥔 <strong>네비아</strong>,</p>
+                        <p class="highlight-ch-line">굳어버린 날개로 체념한 <strong>칼리스테</strong>,</p>
+                        <p class="highlight-ch-line">덤덤히 대검을 내려놓은 <strong>헬리오</strong>,</p>
+                        <p class="highlight-ch-line">능글맞은 미소 뒤로 표정을 감추는 <strong>시노페</strong>.</p>
+                        <br>
+                        <p>이들이 지상에서 벗어나 하늘로 돌아갈 수 있는 유일한 길은</p>
+                        <p>월구의 입구로 이어지는 <strong>달의 그림자 탑</strong>을 오르는 것 뿐이다.</p>
+                    </div>
+                </div>
+
+                <!-- Setting Cards Grid -->
+                <div class="lore-grid">
+                    <div class="lore-card">
+                        <div class="lore-card-icon"><i class="fa-solid fa-book-bible"></i></div>
+                        <h3>단테 《신곡》 모티브</h3>
+                        <p>단테의 《천국편(Paradiso)》 제1천 '월구(Sphere of the Moon)' 설정을 모티브로 한 다크 판타지입니다. 맹세를 온전히 지키지 못했거나 불완전했던 영혼들이 머무는 달의 영역을 현대적 판타지로 재해석했습니다.</p>
+                    </div>
+                    <div class="lore-card">
+                        <div class="lore-card-icon"><i class="fa-solid fa-cross"></i></div>
+                        <h3>신의 절대적 침묵</h3>
+                        <p>천계-마계 100년 전쟁 중 돌연 천계의 모든 관문이 닫히고 신의 응답이 일절 끊겼습니다. 신앙의 대상에게 버림받았다는 사실은 하급 천사들에게 육체적 상처보다 깊은 내면의 균열을 남깁니다.</p>
+                    </div>
+                    <div class="lore-card">
+                        <div class="lore-card-icon"><i class="fa-solid fa-feather"></i></div>
+                        <h3>제9품계 천사의 고립 & 인계 침식</h3>
+                        <p>천사의 품계 중 가장 말단인 제9품계는 인간계의 탁한 기운에 노출되면 신성이 부식되는 '인계 침식'을 겪습니다. 날개가 굳거나 변색되며, 종국에는 천사의 영핵마저 붕괴합니다.</p>
+                    </div>
+                    <div class="lore-card">
+                        <div class="lore-card-icon"><i class="fa-solid fa-tower-observation"></i></div>
+                        <h3>달의 그림자 탑 (1층~7층)</h3>
+                        <p>지상과 월구의 문을 잇는 달의 위상(삭, 초승, 상현, 반월, 만월, 하현, 월식) 구조체입니다. 각 층마다 천사들의 트라우마와 침식 환경, 그리고 최상층의 수호자가 기다립니다.</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Detail Card for Layer 2 -->
-        <div class="detail-card" id="detail-2">
-            <div class="card-image img-purgatory"></div>
-            <div class="card-info">
-                <span class="card-category">LAYER II</span>
-                <h2>연옥 (Purgatory)</h2>
-                <div class="card-divider"></div>
-                <p class="card-text">
-                    빛도 어둠도 닿지 않는 영원한 경계선입니다. 과거의 기억을 정화하기 위해 머무는 차가운 안개로 가득 차 있으며, 
-                    그레이톤의 장엄한 건축물들이 늘어서 있습니다. 이곳의 천사들은 속죄의 찬가를 부르며 자신을 시험합니다.
-                </p>
-                <div class="characters-preview">
-                    <h4>대표 등장인물</h4>
-                    <div class="char-list">
-                        <div class="char-item">
-                            <span class="char-avatar char3"></span>
-                            <span class="char-name">루시엘 (Luciel)</span>
-                        </div>
-                        <div class="char-item">
-                            <span class="char-avatar char4"></span>
-                            <span class="char-name">세라핌 (Seraphim)</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- 5. Characters Dossier Modal -->
+    <div id="characters-modal" class="hidden modal-backdrop">
+        <div class="modal-box characters-box">
+            <button class="modal-close-btn" id="btn-close-characters"><i class="fa-solid fa-times"></i></button>
+            <div class="modal-header">
+                <span class="section-tag">CHARACTER DOSSIER</span>
+                <h2>등장인물 도감</h2>
+                <div class="gold-line"></div>
             </div>
-        </div>
 
-        <!-- Detail Card for Layer 3 -->
-        <div class="detail-card" id="detail-3">
-            <div class="card-image img-celestial"></div>
-            <div class="card-info">
-                <span class="card-category">LAYER III</span>
-                <h2>천계 (Celestial Realm)</h2>
-                <div class="card-divider"></div>
-                <p class="card-text">
-                    추방자들이 끊임없이 갈망하고 다시 닿으려 애쓰는 눈부신 영원의 세계입니다. 
-                    신성한 금빛 기둥과 푸른 구름으로 덮여 있으나, 도달하기 위해서는 모든 지상 및 연옥의 형벌을 완수한 고결함만이 증명되어야 합니다.
-                </p>
-                <div class="characters-preview">
-                    <h4>대표 등장인물</h4>
-                    <div class="char-list">
-                        <div class="char-item">
-                            <span class="char-avatar char5"></span>
-                            <span class="char-name">미카엘 (Michael)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Character Tabs Navigation (Loaded dynamically from data/characters.json) -->
+            <div class="char-tabs" id="char-tabs-container"></div>
+
+            <!-- Character Content Panes (Loaded dynamically from data/characters.json) -->
+            <div class="char-panes" id="char-panes-container"></div>
         </div>
     </div>
 
