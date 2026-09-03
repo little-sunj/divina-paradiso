@@ -18,7 +18,7 @@
     "description": "월식의 핏빛 달빛이 내리쬐는 탑의 최정상이자, 굳게 봉쇄되어버린 천계 관문 '월구(Moon Sphere)'의 거대한 문이 자리한 최후의 성소입니다. 지상에 버려진 채 인계 침식의 위기를 딛고 오른 제9품계 하급 천사 일행이 마침내 마주하게 되는 미지의 종착지입니다.",
     "characters": [
       { "char": "nebbia", "name": "네비아" },
-      { "char": "helio", "name": "헬리오" },
+      { "char": "hellio", "name": "헬리오" },
       { "char": "sinope", "name": "시노페" },
       { "char": "calliste", "name": "칼리스테" }
     ]
@@ -69,7 +69,7 @@
       { "icon": "fa-solid fa-monument", "label": "주요 조우: 성당의 백은 수호기사" }
     ],
     "characters": [
-      { "char": "helio", "name": "헬리오 (대검 결계 방어)" },
+      { "char": "hellio", "name": "헬리오 (대검 결계 방어)" },
       { "char": "nebbia", "name": "네비아 (성물 핵심 파괴)" }
     ]
   },
@@ -120,7 +120,7 @@
     ],
     "characters": [
       { "char": "nebbia", "name": "네비아 (분노의 레이피어)" },
-      { "char": "helio", "name": "헬리오 (냉정한 현실 직시)" }
+      { "char": "hellio", "name": "헬리오 (냉정한 현실 직시)" }
     ]
   },
   {
@@ -169,7 +169,7 @@
       { "icon": "fa-solid fa-shield-halved", "label": "주요 조우: 침식된 수호령 & 이형의 악마" }
     ],
     "characters": [
-      { "char": "helio", "name": "헬리오 (선봉 돌파)" },
+      { "char": "hellio", "name": "헬리오 (선봉 돌파)" },
       { "char": "nebbia", "name": "네비아 (진흙 악마 절단)" }
     ]
   }

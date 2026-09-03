@@ -482,7 +482,7 @@ document.addEventListener("DOMContentLoaded", () => {
             description: "월식의 핏빛 달빛이 내리쬐는 탑의 최정상이자, 굳게 봉쇄되어버린 천계 관문 '월구(Moon Sphere)'의 거대한 문이 자리한 최후의 성소입니다. 지상에 버려진 채 인계 침식의 위기를 딛고 오른 제9품계 하급 천사 일행이 마침내 마주하게 되는 미지의 종착지입니다.",
             characters: [
                 { char: "nebbia", name: "네비아" },
-                { char: "helio", name: "헬리오" },
+                { char: "hellio", name: "헬리오" },
                 { char: "sinope", name: "시노페" },
                 { char: "calliste", name: "칼리스테" }
             ]
@@ -533,7 +533,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 { icon: "fa-solid fa-monument", label: "주요 조우: 성당의 백은 수호기사" }
             ],
             characters: [
-                { char: "helio", name: "헬리오 (대검 결계 방어)" },
+                { char: "hellio", name: "헬리오 (대검 결계 방어)" },
                 { char: "nebbia", name: "네비아 (성물 핵심 파괴)" }
             ]
         },
@@ -584,7 +584,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ],
             characters: [
                 { char: "nebbia", name: "네비아 (분노의 레이피어)" },
-                { char: "helio", name: "헬리오 (냉정한 현실 직시)" }
+                { char: "hellio", name: "헬리오 (냉정한 현실 직시)" }
             ]
         },
         {
@@ -633,7 +633,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 { icon: "fa-solid fa-shield-halved", label: "주요 조우: 침식된 수호령 & 이형의 악마" }
             ],
             characters: [
-                { char: "helio", name: "헬리오 (선봉 돌파)" },
+                { char: "hellio", name: "헬리오 (선봉 돌파)" },
                 { char: "nebbia", name: "네비아 (진흙 악마 절단)" }
             ]
         }
@@ -762,6 +762,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 delay: anime.stagger(40)
             }, 0)
             .add({
+                targets: '.center-axis-line',
+                opacity: 0,
+                duration: 500
+            }, 0)
+            .add({
                 targets: '#detail-container',
                 opacity: [0, 1],
                 begin: () => {
@@ -833,6 +838,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 opacity: 1,
                 scale: 1,
                 delay: anime.stagger(40)
+            }, 300)
+            .add({
+                targets: '.center-axis-line',
+                opacity: 1,
+                duration: 600
             }, 300);
     }
 
@@ -1000,7 +1010,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 7. Worldview & Prologue (from data/worldview.json)
     // ----------------------------------------------------
     const defaultWorldview = {
-        header: { tag: "DIVINA PARADISO LORE", title: "세계관 및 프롤로그" },
+        header: { tag: "DIVINA PARADISO LORE", title: "세계관" },
         chapters: [
             {
                 id: "prologue",
@@ -1177,7 +1187,7 @@ document.addEventListener("DOMContentLoaded", () => {
             appearance: "헝클어진 금발 단발, 날카롭고 강렬한 녹안(Emerald Eyes). 지상 전장의 흙먼지가 묻은 은빛 경갑주를 걸쳤으며, 인계 침식으로 인해 본래 순백이던 날개가 잿빛으로 흐려져 있습니다.",
             personality: "까칠하고 틱틱대는 츤데레 전사. 신의 침묵을 명백한 배신으로 여겨 분노를 감추지 않습니다. 그러나 동료를 누구보다 아끼며, 툭툭 내뱉는 날 선 반말 뒤로 혀를 차거나 시선을 피하며 챙겨줍니다.",
             quote: "착각하지 마. 널 구한 게 아니라 저놈 모가지를 벤 것뿐이니까. 따라올 거면 발소리나 죽여.",
-            image: "assets/images/nebbia/nebbia_02.png",
+            image: "assets/images/nebbia/nebbia_01.png",
             visualClass: "char-visual-nebbia",
             tabAvatarClass: "tab-nebbia"
         },
@@ -1192,14 +1202,14 @@ document.addEventListener("DOMContentLoaded", () => {
             appearance: "풍성하게 구불거리는 긴 은발, 항상 눈물이 고인 듯 맑고 투명한 벽안(Cyan Eyes). 머리에는 올이 풀린 낡은 면사포를 둘렀으며, 한쪽 날개가 완전히 석화처럼 경화되어 더 이상 하늘을 날 수 없습니다.",
             personality: "소심하고 조용하며, 버려진 처지를 서글프게 직시하는 체념적 성향. 말끝을 흐리는 나지막하고 가녀린 존댓말을 쓰며, 불안할 때면 낡은 옷소매를 꼭 쥐는 버릇이 있습니다.",
             quote: "돌아갈 수 있을까요……? 우린 버려진 거예요. 그러니…… 너무 애쓰지 마세요.",
-            image: "assets/images/calliste/calliste_02.png",
+            image: "assets/images/calliste/calliste_01.png",
             visualClass: "char-visual-calliste",
             tabAvatarClass: "tab-calliste"
         },
         {
-            id: "helio",
+            id: "hellio",
             name: "헬리오",
-            enName: "Helio",
+            enName: "Hellio",
             rankBadge: "제9품계 하급 천사 · 전사·선봉",
             meta: "남성 / 전사·선봉 / 제9품계",
             weapon: { icon: "fa-solid fa-gavel", text: "묵직한 대검" },
@@ -1207,8 +1217,9 @@ document.addEventListener("DOMContentLoaded", () => {
             appearance: "차분하게 정돈된 회색 머리, 건조하고 단호한 회안(Grey Eyes). 단련된 다부진 체격 위에 낡은 검은 가죽 코트를 걸치고 있으며, 거대한 양손 대검을 덤덤하게 짊어지고 있습니다.",
             personality: "철저한 현실주의자이자 감정에 휘둘리지 않는 든든한 선봉장. 과거 상위 천사에게 희생양으로 버림받았던 기억이 있습니다. 단정하고 건조한 존댓말/반존대를 구사하며 철저히 팩트만을 전달합니다.",
             quote: "방패는 부러지지 않았다. 네 몫까지 내가 버틸 테니, 뒤돌아보지 마라.",
-            visualClass: "char-visual-helio",
-            tabAvatarClass: "tab-helio"
+            image: "assets/images/hellio/hellio_01.png",
+            visualClass: "char-visual-hellio",
+            tabAvatarClass: "tab-hellio"
         },
         {
             id: "sinope",
@@ -1221,6 +1232,7 @@ document.addEventListener("DOMContentLoaded", () => {
             appearance: "어깨까지 내려오는 흑발의 웨이브, 붉은 빛이 도는 자안(Violet Eyes). 눈가에 장난스러운 눈웃음을 띠고 있으며, 인계 침식이 가장 깊이 진행되어 날개 끝에서 검은 재가 흩날립니다.",
             personality: "늘 가볍고 장난기 넘치는 말투로 본심을 감추는 기만형 궁수. 겉으로는 실없는 소리를 던지지만, 누구보다 냉철하게 전장의 흐름을 읽고 있습니다.",
             quote: "어머, 신앙심이라니? 날개가 부러지면 신도 악마도 다 똑같은 신세인걸요~ 안 그래요?",
+            image: "assets/images/sinope/sinope_01.png",
             visualClass: "char-visual-sinope",
             tabAvatarClass: "tab-sinope"
         }
@@ -1257,8 +1269,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="pane-grid">
                     <div class="pane-visual ${c.visualClass || 'char-visual-' + c.id}" ${c.image ? `style="background-image: url('${c.image}'); background-size: cover; background-position: center top;"` : ''}>
                         ${c.image ? `<img src="${c.image}" alt="${c.name}" class="char-portrait-img">` : ''}
-                        <div class="char-rank-badge">${c.rankBadge || c.rank || '제9품계 하급 천사'}</div>
-                        <div class="char-weapon-badge"><i class="${c.weapon?.icon || 'fa-solid fa-feather'}"></i> ${c.weapon?.text || ''}</div>
                     </div>
                     <div class="pane-details">
                         <div class="ch-name-row">
@@ -1317,8 +1327,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // ----------------------------------------------------
     const defaultAuthorNotes = {
         header: {
-            tag: "AUTHOR'S NOTES & DEEP LORE",
-            title: "작가노트 : 심층 설정집"
+            tag: "PRODUCTION NOTES & DEEP LORE",
+            title: "제작노트"
         },
         chapters: [
             {
