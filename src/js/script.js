@@ -1268,12 +1268,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
 
                         <div class="ch-section">
-                            <h4><i class="fa-solid fa-user"></i> 외모 및 신체 특징</h4>
+                            <h4><i class="fa-solid fa-user"></i> 외형</h4>
                             <p>${c.appearance || ''}</p>
                         </div>
 
                         <div class="ch-section">
-                            <h4><i class="fa-solid fa-comment-dots"></i> 성격 및 말투</h4>
+                            <h4><i class="fa-solid fa-comment-dots"></i> 성격</h4>
                             <p>${c.personality || ''}</p>
                         </div>
 
