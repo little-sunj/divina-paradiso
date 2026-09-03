@@ -664,8 +664,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
                 <div class="orbit-content">
-                    <span class="orbit-number"><i class="${f.icon || 'fa-solid fa-moon'}"></i> ${f.roman} · ${f.phase} (${f.phaseEn})</span>
-                    <h3 class="orbit-title">${f.title || `${f.floor}층: ${f.name}`}</h3>
+                    <span class="orbit-number"><i class="${f.icon || 'fa-solid fa-moon'}"></i> ${f.roman}층 · ${f.phase}</span>
                 </div>
             </div>
         `).join('');
@@ -675,31 +674,15 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="detail-card ${f.isBossCard ? 'special-boss-card' : ''}" id="detail-${f.floor}">
                 <div class="card-image ${f.imgClass || 'floor-img-' + f.floor}">
                     <div class="floor-badge ${f.isBossCard ? 'boss-badge' : ''}">${f.badge || `FLOOR 0${f.floor}`}</div>
-                    <div class="phase-symbol ${f.isBossCard ? 'eclipse-symbol' : ''}"><i class="${f.icon || 'fa-solid fa-moon'}"></i> ${f.phaseSymbol || f.phase}</div>
                 </div>
                 <div class="card-info">
-                    <span class="card-category ${f.isBossCard ? 'boss-category' : ''}">${f.category || `TOWER OF MOON'S SHADOW · ${f.floor}F`}</span>
-                    <h2 class="${f.isBossCard ? 'boss-title' : ''}">${f.name}</h2>
-                    <div class="card-divider ${f.isBossCard ? 'boss-divider' : ''}"></div>
-                    <p class="card-text">${f.description || ''}</p>
-                    ${f.stats && f.stats.length > 0 ? `
-                        <div class="floor-stats">
-                            ${f.stats.map(s => `<div class="stat-pill"><i class="${s.icon}"></i> ${s.label}</div>`).join('')}
-                        </div>
-                    ` : ''}
-                    ${f.characters && f.characters.length > 0 ? `
-                        <div class="characters-preview">
-                            <h4>${f.isBossCard ? '최후의 총력전' : '층내 주요 대응 천사'}</h4>
-                            <div class="char-list">
-                                ${f.characters.map(ch => `
-                                    <div class="char-item" data-char="${ch.char}">
-                                        <span class="char-avatar char-${ch.char}"></span>
-                                        <span class="char-name">${ch.name}</span>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    ` : ''}
+                    <div class="card-body-text">
+                        <span class="card-category ${f.isBossCard ? 'boss-category' : ''}">${f.category || `TOWER OF MOON'S SHADOW · ${f.floor}F`}</span>
+                        <h2 class="${f.isBossCard ? 'boss-title' : ''}">${f.name}</h2>
+                        <div class="card-divider ${f.isBossCard ? 'boss-divider' : ''}"></div>
+                        <p class="card-text">${f.description || ''}</p>
+                    </div>
+                    <div class="phase-symbol ${f.isBossCard ? 'eclipse-symbol' : ''}"><i class="${f.icon || 'fa-solid fa-moon'}"></i> ${f.phaseSymbol || f.phase}</div>
                 </div>
             </div>
         `).join('');
