@@ -83,18 +83,18 @@ body {
     font-weight: 500;
     letter-spacing: 0.45rem;
     text-indent: 0.45rem;
-    color: #fef08a;
-    opacity: 0.88;
+    color: #ffffff;
+    opacity: 0.92;
     margin-bottom: 1.1rem;
-    text-shadow: 0 0 12px rgba(254, 240, 138, 0.2);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
 }
 
 .intro-title {
     font-family: 'Noto Serif KR', serif;
     font-size: 3.2rem;
     font-weight: 400;
-    letter-spacing: 0.55rem;
-    text-indent: 0.55rem;
+    letter-spacing: 1.6rem;
+    text-indent: 1.6rem;
     color: #ffffff;
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 0 45px rgba(254, 249, 195, 0.15);
     margin-bottom: 1.5rem;
@@ -1411,16 +1411,16 @@ body {
 
 .slide-nav-btn {
     background: rgba(18, 18, 20, 0.85);
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     color: #e5e1d4;
-    padding: 8px 18px;
-    font-size: 0.84rem;
-    font-family: 'Noto Serif KR', serif;
+    width: 42px;
+    height: 42px;
+    font-size: 0.95rem;
     cursor: pointer;
     border-radius: 4px;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
     transition: all 0.25s ease;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
 }
@@ -1428,12 +1428,14 @@ body {
 .slide-nav-btn:hover:not(:disabled) {
     background: rgba(28, 28, 32, 0.95);
     color: #ffffff;
+    border-color: rgba(254, 249, 195, 0.25);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), 0 0 10px rgba(254, 249, 195, 0.12);
 }
 
 .slide-nav-btn:disabled {
-    opacity: 0.25;
+    opacity: 0.2;
     cursor: not-allowed;
+    border-color: transparent;
 }
 
 .slide-page-indicator {
@@ -2411,8 +2413,8 @@ body {
 
     .intro-title {
         font-size: 2.2rem;
-        letter-spacing: 0.4rem;
-        text-indent: 0.4rem;
+        letter-spacing: 1.0rem;
+        text-indent: 1.0rem;
         margin-bottom: 1.5rem;
     }
 
@@ -2668,8 +2670,10 @@ body {
     }
 
     .slide-nav-btn {
-        padding: 6px 12px;
-        font-size: 0.78rem;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        font-size: 0.85rem;
     }
 }
 

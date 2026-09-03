@@ -977,17 +977,14 @@ document.addEventListener("DOMContentLoaded", () => {
     function createSlideNavBarHtml(currentIndex, totalCount) {
         const prevDisabled = currentIndex === 0 ? 'disabled' : '';
         const nextDisabled = currentIndex === totalCount - 1 ? 'disabled' : '';
-        const currentPad = String(currentIndex + 1).padStart(2, '0');
-        const totalPad = String(totalCount).padStart(2, '0');
 
         return `
             <div class="slide-nav-bar">
-                <button class="slide-nav-btn btn-slide-prev" ${prevDisabled}>
-                    <i class="fa-solid fa-arrow-left"></i> 이전
+                <button class="slide-nav-btn btn-slide-prev" ${prevDisabled} title="이전" aria-label="이전">
+                    <i class="fa-solid fa-arrow-left"></i>
                 </button>
-                <span class="slide-page-indicator">${currentPad} / ${totalPad}</span>
-                <button class="slide-nav-btn btn-slide-next" ${nextDisabled}>
-                    다음 <i class="fa-solid fa-arrow-right"></i>
+                <button class="slide-nav-btn btn-slide-next" ${nextDisabled} title="다음" aria-label="다음">
+                    <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
         `;
