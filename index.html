@@ -135,6 +135,13 @@
     <!-- 5. Characters Dossier Modal - Fullscreen -->
     <div id="characters-modal" class="hidden modal-backdrop fullscreen-modal">
         <div class="modal-box characters-box">
+            <!-- Fullscreen Dynamic Character Wide Blurred Background (Dual-layer Crossfade) -->
+            <div class="char-backdrop-wrap" id="char-backdrop-wrap">
+                <div class="char-backdrop-img active" id="char-backdrop-a"></div>
+                <div class="char-backdrop-img" id="char-backdrop-b"></div>
+                <div class="char-backdrop-overlay"></div>
+            </div>
+
             <button class="modal-close-btn" id="btn-close-characters" title="닫기"><i class="fa-solid fa-times"></i></button>
             <div class="modal-header">
                 <span class="section-tag">CHARACTER DOSSIER</span>

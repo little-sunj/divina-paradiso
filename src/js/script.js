@@ -909,7 +909,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ----------------------------------------------------
     // Unified Tab / Slider Controller Engine
     // ----------------------------------------------------
-    function setupTabSlider(tabsContainer, panesContainer) {
+    function setupTabSlider(tabsContainer, panesContainer, onTabChange) {
         if (!tabsContainer || !panesContainer) return null;
 
         let currentIndex = 0;
@@ -955,6 +955,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (prev) prev.disabled = (index === 0);
                 if (next) next.disabled = (index === tabs.length - 1);
             });
+
+            if (typeof onTabChange === 'function') {
+                onTabChange(index);
+            }
         }
 
         function bindEvents() {
@@ -1188,6 +1192,7 @@ document.addEventListener("DOMContentLoaded", () => {
             personality: "까칠하고 틱틱대는 츤데레 전사. 신의 침묵을 명백한 배신으로 여겨 분노를 감추지 않습니다. 그러나 동료를 누구보다 아끼며, 툭툭 내뱉는 날 선 반말 뒤로 혀를 차거나 시선을 피하며 챙겨줍니다.",
             quote: "착각하지 마. 널 구한 게 아니라 저놈 모가지를 벤 것뿐이니까. 따라올 거면 발소리나 죽여.",
             image: "assets/images/nebbia/nebbia_01.png",
+            wideImage: "assets/images/nebbia/nebbia_wide.png",
             visualClass: "char-visual-nebbia",
             tabAvatarClass: "tab-nebbia"
         },
@@ -1203,6 +1208,7 @@ document.addEventListener("DOMContentLoaded", () => {
             personality: "소심하고 조용하며, 버려진 처지를 서글프게 직시하는 체념적 성향. 말끝을 흐리는 나지막하고 가녀린 존댓말을 쓰며, 불안할 때면 낡은 옷소매를 꼭 쥐는 버릇이 있습니다.",
             quote: "돌아갈 수 있을까요……? 우린 버려진 거예요. 그러니…… 너무 애쓰지 마세요.",
             image: "assets/images/calliste/calliste_01.png",
+            wideImage: "assets/images/calliste/calliste_wide.png",
             visualClass: "char-visual-calliste",
             tabAvatarClass: "tab-calliste"
         },
@@ -1218,6 +1224,7 @@ document.addEventListener("DOMContentLoaded", () => {
             personality: "철저한 현실주의자이자 감정에 휘둘리지 않는 든든한 선봉장. 과거 상위 천사에게 희생양으로 버림받았던 기억이 있습니다. 단정하고 건조한 존댓말/반존대를 구사하며 철저히 팩트만을 전달합니다.",
             quote: "방패는 부러지지 않았다. 네 몫까지 내가 버틸 테니, 뒤돌아보지 마라.",
             image: "assets/images/hellio/hellio_01.png",
+            wideImage: "assets/images/hellio/hellio_wide.png",
             visualClass: "char-visual-hellio",
             tabAvatarClass: "tab-hellio"
         },
@@ -1233,6 +1240,7 @@ document.addEventListener("DOMContentLoaded", () => {
             personality: "늘 가볍고 장난기 넘치는 말투로 본심을 감추는 기만형 궁수. 겉으로는 실없는 소리를 던지지만, 누구보다 냉철하게 전장의 흐름을 읽고 있습니다.",
             quote: "어머, 신앙심이라니? 날개가 부러지면 신도 악마도 다 똑같은 신세인걸요~ 안 그래요?",
             image: "assets/images/sinope/sinope_01.png",
+            wideImage: "assets/images/sinope/sinope_wide.png",
             visualClass: "char-visual-sinope",
             tabAvatarClass: "tab-sinope"
         }
@@ -1299,7 +1307,44 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `).join('');
 
-        charactersSlider = setupTabSlider(charTabsContainer, charPanesContainer);
+        let activeBackdropLayer = 'a';
+        function updateCharacterBackdrop(index) {
+            const char = characters[index];
+            if (!char) return;
+            const wideImg = char.wideImage || char.image;
+            if (!wideImg) return;
+
+            const layerA = document.getElementById("char-backdrop-a");
+            const layerB = document.getElementById("char-backdrop-b");
+            if (!layerA || !layerB) return;
+
+            if (activeBackdropLayer === 'a') {
+                layerB.style.backgroundImage = `url('${wideImg}')`;
+                layerB.classList.add("active");
+                layerA.classList.remove("active");
+                activeBackdropLayer = 'b';
+            } else {
+                layerA.style.backgroundImage = `url('${wideImg}')`;
+                layerA.classList.add("active");
+                layerB.classList.remove("active");
+                activeBackdropLayer = 'a';
+            }
+        }
+
+        charactersSlider = setupTabSlider(charTabsContainer, charPanesContainer, (index) => {
+            updateCharacterBackdrop(index);
+        });
+
+        // Set initial backdrop on Layer A
+        const initialLayerA = document.getElementById("char-backdrop-a");
+        const initialLayerB = document.getElementById("char-backdrop-b");
+        if (initialLayerA && characters[0]) {
+            const firstImg = characters[0].wideImage || characters[0].image;
+            if (firstImg) initialLayerA.style.backgroundImage = `url('${firstImg}')`;
+            initialLayerA.classList.add("active");
+            if (initialLayerB) initialLayerB.classList.remove("active");
+            activeBackdropLayer = 'a';
+        }
     }
 
     // Initialize character loading
@@ -1372,20 +1417,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 ],
                 tags: ["#천계봉쇄", "#사라진신탁", "#음모와의문", "#자유의지"],
                 quote: "어찌하여 문은 봉쇄되었고, 신은 침묵하는가에 대해서는 추후 시리즈로 다루길 고대하고 있습니다."
-            },
-            {
-                id: "erosion_lore",
-                tabName: "침식의 메커니즘",
-                tabIcon: "fa-solid fa-biohazard",
-                tag: "SYSTEM · CORRUPTION RULE",
-                title: "인계 침식(Mortal Erosion)과 영핵 붕괴",
-                paragraphs: [
-                    "순수한 천상 에테르가 탁기에 의해 점진적으로 부식되는 메커니즘을 상세히 정립했습니다.",
-                    "1단계 잿빛 날개 변색과 광륜 점멸, 2단계 깃털 석화 및 비행 능력 상실, 3단계 영핵 균열과 완전한 낙천사화로 이어지는 불가역적 변화를 다룹니다.",
-                    "지상의 탁기에 물들면서도 인간들의 고통과 온기에 공감할 때, 역설적으로 천사들의 영핵은 광기를 피해 균형을 유지할 수 있습니다."
-                ],
-                tags: ["#3단계변이", "#영핵오염", "#낙천사의낙인", "#인간성획득"],
-                quote: "순백의 깃털이 잿빛으로 굳어갈지라도, 존재의 존엄마저 탁기에 바치진 않는다."
             },
             {
                 id: "tower_lore",
