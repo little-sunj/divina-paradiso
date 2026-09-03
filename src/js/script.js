@@ -296,8 +296,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleResize() {
         const isMobile = window.innerWidth <= 900;
+        const isShortScreen = window.innerHeight <= 700;
 
-        const moonSize = isMobile ? 140 : 220;
+        const moonSize = isMobile ? (isShortScreen ? 110 : 125) : 220;
         const earthSize = isMobile ? 1000 : 1800;
 
         // Update Moon
@@ -445,12 +446,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const detailCardsContainer = document.getElementById("detail-cards-container");
     const worldviewModal = document.getElementById("worldview-modal");
     const charactersModal = document.getElementById("characters-modal");
+    const authorNotesModal = document.getElementById("author-notes-modal");
     const btnOpenWorldview = document.getElementById("btn-open-worldview");
     const btnCloseWorldview = document.getElementById("btn-close-worldview");
     const btnOpenCharacters = document.getElementById("btn-open-characters");
     const btnCloseCharacters = document.getElementById("btn-close-characters");
+    const btnOpenAuthorNotes = document.getElementById("btn-open-author-notes");
+    const btnCloseAuthorNotes = document.getElementById("btn-close-author-notes");
+    const worldviewTabsContainer = document.getElementById("worldview-tabs-container");
+    const worldviewPanesContainer = document.getElementById("worldview-panes-container");
     const charTabsContainer = document.getElementById("char-tabs-container");
     const charPanesContainer = document.getElementById("char-panes-container");
+    const authorNotesTabsContainer = document.getElementById("author-notes-tabs-container");
+    const authorNotesPanesContainer = document.getElementById("author-notes-panes-container");
 
     let floorsList = [];
 
@@ -828,18 +836,22 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 300);
     }
 
-    closeBtn.addEventListener("click", closeDetailView);
+    if (closeBtn) closeBtn.addEventListener("click", closeDetailView);
 
-    // Click outside detail card to close
-    detailContainer.addEventListener("click", (e) => {
-        if (e.target === detailContainer) {
-            closeDetailView();
-        }
-    });
+    if (detailContainer) {
+        detailContainer.addEventListener("click", (e) => {
+            if (e.target === detailContainer) {
+                closeDetailView();
+            }
+        });
+    }
 
-    // Helper functions for Custom Modals (Worldview, Characters)
+    // Helper functions for Custom Modals (Worldview, Characters, Author Notes)
     function openCustomModal(modalElement) {
+        if (!modalElement) return;
         modalElement.classList.remove("hidden");
+        const isFullscreen = modalElement.classList.contains("fullscreen-modal");
+
         anime({
             targets: modalElement,
             opacity: [0, 1],
@@ -850,8 +862,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (box) {
             anime({
                 targets: box,
-                scale: [0.92, 1],
-                translateY: [30, 0],
+                scale: isFullscreen ? [1, 1] : [0.92, 1],
+                translateY: isFullscreen ? [20, 0] : [30, 0],
                 opacity: [0, 1],
                 duration: 500,
                 easing: 'easeOutQuint'
@@ -861,12 +873,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function closeCustomModal(modalElement) {
         if (!modalElement || modalElement.classList.contains("hidden")) return;
+        const isFullscreen = modalElement.classList.contains("fullscreen-modal");
         const box = modalElement.querySelector(".modal-box");
         if (box) {
             anime({
                 targets: box,
-                scale: 0.94,
-                translateY: 20,
+                scale: isFullscreen ? 1 : 0.94,
+                translateY: isFullscreen ? 15 : 20,
                 opacity: 0,
                 duration: 300,
                 easing: 'easeInQuad'
@@ -883,9 +896,257 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Worldview Modal
+    // ----------------------------------------------------
+    // Unified Tab / Slider Controller Engine
+    // ----------------------------------------------------
+    function setupTabSlider(tabsContainer, panesContainer) {
+        if (!tabsContainer || !panesContainer) return null;
+
+        let currentIndex = 0;
+
+        function getTabs() {
+            return tabsContainer.querySelectorAll(".tab-slider-btn, .tab-btn");
+        }
+
+        function getPanes() {
+            return panesContainer.querySelectorAll(".tab-slider-pane, .char-pane");
+        }
+
+        function goTo(index) {
+            const tabs = getTabs();
+            const panes = getPanes();
+            if (!tabs.length || !panes.length) return;
+
+            if (index < 0) index = 0;
+            if (index >= tabs.length) index = tabs.length - 1;
+            currentIndex = index;
+
+            tabs.forEach((tab, i) => {
+                if (i === index) {
+                    tab.classList.add("active");
+                    tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                } else {
+                    tab.classList.remove("active");
+                }
+            });
+
+            panes.forEach((pane, i) => {
+                if (i === index) {
+                    pane.classList.add("active");
+                    panesContainer.scrollTop = 0;
+                } else {
+                    pane.classList.remove("active");
+                }
+            });
+
+            panes.forEach((pane) => {
+                const prev = pane.querySelector(".btn-slide-prev");
+                const next = pane.querySelector(".btn-slide-next");
+                if (prev) prev.disabled = (index === 0);
+                if (next) next.disabled = (index === tabs.length - 1);
+            });
+        }
+
+        function bindEvents() {
+            const tabs = getTabs();
+            tabs.forEach((tab, i) => {
+                tab.addEventListener("click", () => goTo(i));
+            });
+
+            const panes = getPanes();
+            panes.forEach((pane) => {
+                const prev = pane.querySelector(".btn-slide-prev");
+                const next = pane.querySelector(".btn-slide-next");
+                if (prev) prev.addEventListener("click", () => goTo(currentIndex - 1));
+                if (next) next.addEventListener("click", () => goTo(currentIndex + 1));
+            });
+        }
+
+        bindEvents();
+
+        return {
+            goTo,
+            next: () => goTo(currentIndex + 1),
+            prev: () => goTo(currentIndex - 1),
+            getIndex: () => currentIndex
+        };
+    }
+
+    let worldviewSlider = null;
+    let charactersSlider = null;
+    let authorNotesSlider = null;
+
+    // Helper for Slide Navigation Footer
+    function createSlideNavBarHtml(currentIndex, totalCount) {
+        const prevDisabled = currentIndex === 0 ? 'disabled' : '';
+        const nextDisabled = currentIndex === totalCount - 1 ? 'disabled' : '';
+        const currentPad = String(currentIndex + 1).padStart(2, '0');
+        const totalPad = String(totalCount).padStart(2, '0');
+
+        return `
+            <div class="slide-nav-bar">
+                <button class="slide-nav-btn btn-slide-prev" ${prevDisabled}>
+                    <i class="fa-solid fa-arrow-left"></i> 이전
+                </button>
+                <span class="slide-page-indicator">${currentPad} / ${totalPad}</span>
+                <button class="slide-nav-btn btn-slide-next" ${nextDisabled}>
+                    다음 <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        `;
+    }
+
+    // ----------------------------------------------------
+    // 7. Worldview & Prologue (from data/worldview.json)
+    // ----------------------------------------------------
+    const defaultWorldview = {
+        header: { tag: "DIVINA PARADISO LORE", title: "세계관 및 프롤로그" },
+        chapters: [
+            {
+                id: "prologue",
+                tabName: "프롤로그",
+                tabIcon: "fa-solid fa-scroll",
+                tag: "PROLOGUE · THE SILENCE OF HEAVEN",
+                title: "닫혀버린 하늘, 지상에 고립된 낙천사들의 순례",
+                paragraphs: [
+                    "천사들과 악마들의 오랜 전쟁 속에서 천계 최하층 '월구(달)'의 문이 안쪽에서 일방적으로 봉쇄되었습니다.",
+                    "미처 천상으로 귀환하지 못한 채 인간계 전장에 남겨진 제9품계 하급 천사들은 점차 지상의 탁기에 노출되어 '인계 침식'의 고통에 젖어갑니다. 순백이던 날개는 잿빛으로 굳어가고, 성스러운 광륜은 빛을 잃어갑니다.",
+                    "신은 침묵하고 구원의 손길은 사라진 절망의 대지. 서로 다른 상처와 고뇌를 품은 4인의 천사가 하늘로 돌아갈 유일한 길은, 지상에서 월구로 이어지는 거대한 에테르 나선 '달의 그림자 탑'을 오르는 것뿐입니다."
+                ],
+                tags: ["#대봉쇄", "#신의침묵", "#제9품계", "#인계침식", "#달의그림자탑"],
+                quote: "하늘이 우리를 버렸을지라도, 우리가 서로를 놓지 않는 한 이곳은 지옥이 아니다."
+            },
+            {
+                id: "dante",
+                tabName: "단테 《신곡》 모티프",
+                tabIcon: "fa-solid fa-book-bible",
+                tag: "LITERARY MOTIF · PRIMO CIELO",
+                title: "불완전한 영혼들이 머무는 제1천 '월구(Sphere of the Moon)'",
+                paragraphs: [
+                    "단테 알리기에리의 《신곡》 천국편에서 가장 낮은 하늘인 '월구(Primo Cielo)'는 외압에 의해 서원을 온전히 지키지 못했던 불완전한 영혼들이 배치되는 곳입니다.",
+                    "《달의 그림자 탑》은 이 고전적 모티프를 현대적 다크 판타지로 재해석했습니다. 완전무결함을 강요받는 상위 품계와 달리, 제9품계 천사들은 상처받고 흔들리며 서로에게 의지하는 가장 인간적인 존재들입니다.",
+                    "달의 위상이 차오르고 기울듯 불완전하기에 흔들리는 그들의 서사는, 맹목적인 복종이 아닌 '자신의 의지와 동료를 향한 유대'로 신성한 구원을 쟁취하는 여정을 보여줍니다."
+                ],
+                tags: ["#단테신곡", "#천국편제1천", "#월구모티프", "#불완전함의미학"],
+                quote: "완벽하지 않기에 흔들리고, 흔들리기에 서로의 온기를 온전히 갈망한다."
+            },
+            {
+                id: "silence",
+                tabName: "신의 침묵",
+                tabIcon: "fa-solid fa-cross",
+                tag: "CRISIS · DEUS SILENS",
+                title: "100년 성전 속 돌연 시작된 신의 절대적 침묵",
+                paragraphs: [
+                    "천계와 마계의 치열한 전쟁이 100년에 이르던 무렵, 천상계의 모든 신탁과 기도의 응답이 일순간에 소멸했습니다.",
+                    "사전 경고도 사후 해명도 없이 월구의 대문은 굳게 닫혔고, 최전선에서 싸우던 제9품계 병사들은 차가운 지상에 버려졌습니다. 이것이 상급 천사들의 배신인지, 아니면 신의 또 다른 안배인지는 베일에 싸여 있습니다.",
+                    "침묵하는 신을 향한 분노와 배신감, 그리고 체념 속에서도 그들은 결코 무릎 꿇지 않고 탑의 정상에서 진실을 확인하고자 합니다."
+                ],
+                tags: ["#월구대문봉쇄", "#절대침묵", "#사라진계시", "#천상계의의문"],
+                quote: "어찌하여 문은 봉쇄되었고, 신은 침묵하는가에 대해서는 추후 시리즈로 다루길 고대하고 있습니다."
+            },
+            {
+                id: "erosion",
+                tabName: "인계 침식",
+                tabIcon: "fa-solid fa-feather",
+                tag: "CORRUPTION · MORTAL EROSION",
+                title: "천사성의 상실, 3단계 인계 침식(Mortal Erosion)",
+                paragraphs: [
+                    "순수한 천상 에테르로 지탱되던 천사의 신체는 탁기와 유한성으로 가득한 지상에 머물수록 점진적으로 부식되어 갑니다.",
+                    "1단계에서 순백의 날개가 잿빛으로 퇴색되고 광륜이 점멸하며, 2단계에선 깃털이 석화처럼 굳어져 하늘을 날 수 없게 됩니다. 마지막 3단계에 이르면 영핵(Core)마저 붕괴되어 천사성을 영영 잃고 낙천사로 전락합니다.",
+                    "시간이 지날수록 침식은 깊어지지만, 그들은 인간들의 고통과 온기에 공감하며 역설적으로 광기를 이겨내고 스스로의 존재 가치를 증명해 나갑니다."
+                ],
+                tags: ["#인계침식", "#날개변색", "#깃털석화", "#영핵붕괴"],
+                quote: "순백의 깃털이 잿빛으로 굳어갈지라도, 존재의 존엄마저 탁기에 바치진 않는다."
+            },
+            {
+                id: "tower",
+                tabName: "달의 그림자 탑",
+                tabIcon: "fa-solid fa-tower-observation",
+                tag: "ASCENT · 7 LUNAR PHASES",
+                title: "연금술적 시련의 공간, 7대 달의 위상과 정화의 나선",
+                paragraphs: [
+                    "달의 그림자 탑은 물리적인 석탑이 아닌, 달의 인력과 위상 변화가 지상에 투영되어 형성된 거대한 에테르 나선 축선입니다.",
+                    "탑은 1층 삭(망각)에서부터 상현, 만월(각성), 그리고 7층 월식(붉은 문)에 이르는 7개의 위상으로 이루어져 있습니다. 층을 오르는 행위는 침식된 자아와 각자의 내면적 상처(분노, 체념, 침묵, 기만)를 직면하는 연금술적 시련입니다.",
+                    "네 천사가 서로의 영혼을 믿고 온전히 하나로 맞물릴 때, 비로소 최상층 월식의 문이 열리고 닫혀버린 월구로의 귀환로가 드러나게 됩니다."
+                ],
+                tags: ["#달의그림자탑", "#7대위상", "#만월의각성", "#월식의문"],
+                quote: "일곱 번의 어둠과 시험을 통과한 자만이 비로소 붉은 문 너머의 새벽을 마주하리라."
+            }
+        ]
+    };
+
+    async function loadAndRenderWorldview() {
+        let wvData = defaultWorldview;
+        try {
+            const res = await fetch('data/worldview.json');
+            if (res.ok) wvData = await res.json();
+        } catch (err) {
+            console.warn("Could not load data/worldview.json, using fallback:", err);
+        }
+        renderWorldviewCodex(wvData);
+    }
+
+    function renderWorldviewCodex(data) {
+        if (!worldviewTabsContainer || !worldviewPanesContainer) return;
+
+        const headerTag = document.getElementById("worldview-tag");
+        const headerTitle = document.getElementById("worldview-title");
+        if (headerTag && data.header?.tag) headerTag.textContent = data.header.tag;
+        if (headerTitle && data.header?.title) headerTitle.textContent = data.header.title;
+
+        const chapters = data.chapters || [];
+        const total = chapters.length;
+
+        worldviewTabsContainer.innerHTML = chapters.map((ch, i) => `
+            <button class="tab-slider-btn ${i === 0 ? 'active' : ''}" data-index="${i}">
+                <i class="${ch.tabIcon || 'fa-solid fa-scroll'}"></i>
+                <span>${ch.tabName}</span>
+            </button>
+        `).join('');
+
+        worldviewPanesContainer.innerHTML = chapters.map((ch, i) => {
+            const paragraphs = ch.paragraphs || (ch.summary ? [ch.summary] : (ch.lead ? [ch.lead] : []));
+            const paragraphsHtml = paragraphs.map(p => `<p>${p}</p>`).join('');
+            const tagsHtml = (ch.tags && ch.tags.length) ? `
+                <div class="single-card-tags">
+                    ${ch.tags.map(t => `<span class="keyword-chip">${t}</span>`).join('')}
+                </div>
+            ` : '';
+
+            const footerQuoteHtml = ch.quote ? `
+                <div class="single-card-footer">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <p>"${ch.quote}"</p>
+                </div>
+            ` : '';
+
+            return `
+                <div class="tab-slider-pane ${i === 0 ? 'active' : ''}" id="wv-pane-${ch.id}">
+                    <div class="single-codex-card">
+                        <div class="single-card-header">
+                            <span class="single-card-tag">${ch.tag}</span>
+                            <h3 class="single-card-title">${ch.title}</h3>
+                        </div>
+                        <div class="single-card-body">
+                            ${paragraphsHtml}
+                            ${tagsHtml}
+                        </div>
+                        ${footerQuoteHtml}
+                    </div>
+                    ${createSlideNavBarHtml(i, total)}
+                </div>
+            `;
+        }).join('');
+
+        worldviewSlider = setupTabSlider(worldviewTabsContainer, worldviewPanesContainer);
+    }
+
+    // Worldview Modal triggers
     if (btnOpenWorldview) {
-        btnOpenWorldview.addEventListener("click", () => openCustomModal(worldviewModal));
+        btnOpenWorldview.addEventListener("click", () => {
+            if (worldviewSlider) worldviewSlider.goTo(0);
+            openCustomModal(worldviewModal);
+        });
     }
     if (btnCloseWorldview) {
         btnCloseWorldview.addEventListener("click", () => closeCustomModal(worldviewModal));
@@ -896,12 +1157,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Initialize worldview loading
+    loadAndRenderWorldview();
+
     // ----------------------------------------------------
-    // 7. Dynamic Characters Data Loader (from data/characters.json)
+    // 8. Dynamic Characters Data Loader (from data/characters.json)
     // ----------------------------------------------------
     let characterList = [];
 
-    // Fallback data for robust offline / local preview support
     const defaultCharacters = [
         {
             id: "nebbia",
@@ -914,6 +1177,7 @@ document.addEventListener("DOMContentLoaded", () => {
             appearance: "헝클어진 금발 단발, 날카롭고 강렬한 녹안(Emerald Eyes). 지상 전장의 흙먼지가 묻은 은빛 경갑주를 걸쳤으며, 인계 침식으로 인해 본래 순백이던 날개가 잿빛으로 흐려져 있습니다.",
             personality: "까칠하고 틱틱대는 츤데레 전사. 신의 침묵을 명백한 배신으로 여겨 분노를 감추지 않습니다. 그러나 동료를 누구보다 아끼며, 툭툭 내뱉는 날 선 반말 뒤로 혀를 차거나 시선을 피하며 챙겨줍니다.",
             quote: "착각하지 마. 널 구한 게 아니라 저놈 모가지를 벤 것뿐이니까. 따라올 거면 발소리나 죽여.",
+            image: "assets/images/nebbia/nebbia_02.png",
             visualClass: "char-visual-nebbia",
             tabAvatarClass: "tab-nebbia"
         },
@@ -928,6 +1192,7 @@ document.addEventListener("DOMContentLoaded", () => {
             appearance: "풍성하게 구불거리는 긴 은발, 항상 눈물이 고인 듯 맑고 투명한 벽안(Cyan Eyes). 머리에는 올이 풀린 낡은 면사포를 둘렀으며, 한쪽 날개가 완전히 석화처럼 경화되어 더 이상 하늘을 날 수 없습니다.",
             personality: "소심하고 조용하며, 버려진 처지를 서글프게 직시하는 체념적 성향. 말끝을 흐리는 나지막하고 가녀린 존댓말을 쓰며, 불안할 때면 낡은 옷소매를 꼭 쥐는 버릇이 있습니다.",
             quote: "돌아갈 수 있을까요……? 우린 버려진 거예요. 그러니…… 너무 애쓰지 마세요.",
+            image: "assets/images/calliste/calliste_02.png",
             visualClass: "char-visual-calliste",
             tabAvatarClass: "tab-calliste"
         },
@@ -941,7 +1206,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tags: ["#철저한현실주의", "#감정절제", "#과거배신경험", "#듬직한탱커"],
             appearance: "차분하게 정돈된 회색 머리, 건조하고 단호한 회안(Grey Eyes). 단련된 다부진 체격 위에 낡은 검은 가죽 코트를 걸치고 있으며, 거대한 양손 대검을 덤덤하게 짊어지고 있습니다.",
             personality: "철저한 현실주의자이자 감정에 휘둘리지 않는 든든한 선봉장. 과거 상위 천사에게 희생양으로 버림받았던 기억이 있습니다. 단정하고 건조한 존댓말/반존대를 구사하며 철저히 팩트만을 전달합니다.",
-            quote: "신이 우릴 버렸다는 걸 인정하면 편해집니다. 멍청하게 서 있지 말고 내 뒤로 붙으세요.",
+            quote: "방패는 부러지지 않았다. 네 몫까지 내가 버틸 테니, 뒤돌아보지 마라.",
             visualClass: "char-visual-helio",
             tabAvatarClass: "tab-helio"
         },
@@ -949,13 +1214,13 @@ document.addEventListener("DOMContentLoaded", () => {
             id: "sinope",
             name: "시노페",
             enName: "Sinope",
-            rankBadge: "제9품계 하급 천사 · 전사·유격",
-            meta: "남성 / 전사·유격 / 제9품계",
-            weapon: { icon: "fa-solid fa-khanda", text: "흑은의 쌍단검" },
-            tags: ["#능글맞은장난꾼", "#희생을숨김", "#신체침식진행", "#유쾌한반말"],
-            appearance: "느슨하게 반묶음한 은발, 장난기 가득한 붉은 적안(Ruby Eyes). 헐렁한 제복 셔츠를 입고 있으며, 과거 지상에서 동료들을 보호하려다 인계 침식이 신체 일부로 번져 검게 물들어 있습니다.",
-            personality: "항상 싱글벙글 웃는 유쾌한 트릭스터. 자신의 고통과 침식의 상처를 농담 뒤로 철저히 숨깁니다. 나른하고 리듬감 있는 가벼운 반말을 쓰며 언제든 동료를 위해 미끼가 될 각오를 품고 있습니다.",
-            quote: "대충 해, 대충. 어차피 죽기밖에 더하겠어? 정 안 되면 내가 미끼가 돼 줄 테니까 넌 뛰어.",
+            rankBadge: "제9품계 하급 천사 · 궁수·정찰",
+            meta: "여성 / 궁수·정찰 / 제9품계",
+            weapon: { icon: "fa-solid fa-bow-arrow", text: "칠흑의 곡궁" },
+            tags: ["#능글맞은장난기", "#가면뒤의어둠", "#가장깊은침식", "#유쾌한독설"],
+            appearance: "어깨까지 내려오는 흑발의 웨이브, 붉은 빛이 도는 자안(Violet Eyes). 눈가에 장난스러운 눈웃음을 띠고 있으며, 인계 침식이 가장 깊이 진행되어 날개 끝에서 검은 재가 흩날립니다.",
+            personality: "늘 가볍고 장난기 넘치는 말투로 본심을 감추는 기만형 궁수. 겉으로는 실없는 소리를 던지지만, 누구보다 냉철하게 전장의 흐름을 읽고 있습니다.",
+            quote: "어머, 신앙심이라니? 날개가 부러지면 신도 악마도 다 똑같은 신세인걸요~ 안 그래요?",
             visualClass: "char-visual-sinope",
             tabAvatarClass: "tab-sinope"
         }
@@ -963,11 +1228,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function loadAndRenderCharacters() {
         try {
-            const res = await fetch('data/characters.json');
-            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-            characterList = await res.json();
-        } catch (err) {
-            console.warn("Could not load data/characters.json, using fallback character list:", err);
+            const response = await fetch('data/characters.json');
+            if (response.ok) {
+                characterList = await response.json();
+            } else {
+                characterList = defaultCharacters;
+            }
+        } catch (e) {
+            console.warn("Could not load data/characters.json, using fallback character list:", e);
             characterList = defaultCharacters;
         }
         renderCharacterDossier(characterList);
@@ -975,18 +1243,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderCharacterDossier(characters) {
         if (!charTabsContainer || !charPanesContainer) return;
+        const total = characters.length;
 
         charTabsContainer.innerHTML = characters.map((c, i) => `
-            <button class="tab-btn ${i === 0 ? 'active' : ''}" data-target="char-${c.id}">
-                <span class="tab-avatar ${c.tabAvatarClass || 'tab-' + c.id}"></span>
+            <button class="tab-slider-btn tab-btn ${i === 0 ? 'active' : ''}" data-target="char-${c.id}">
+                <span class="tab-avatar ${c.tabAvatarClass || 'tab-' + c.id}" ${c.image ? `style="background-image: url('${c.image}'); background-size: cover; background-position: center;"` : ''}></span>
                 <span class="tab-name">${c.name}</span>
             </button>
         `).join('');
 
         charPanesContainer.innerHTML = characters.map((c, i) => `
-            <div class="char-pane ${i === 0 ? 'active' : ''}" id="char-${c.id}">
+            <div class="tab-slider-pane char-pane ${i === 0 ? 'active' : ''}" id="char-${c.id}">
                 <div class="pane-grid">
-                    <div class="pane-visual ${c.visualClass || 'char-visual-' + c.id}">
+                    <div class="pane-visual ${c.visualClass || 'char-visual-' + c.id}" ${c.image ? `style="background-image: url('${c.image}'); background-size: cover; background-position: center top;"` : ''}>
+                        ${c.image ? `<img src="${c.image}" alt="${c.name}" class="char-portrait-img">` : ''}
                         <div class="char-rank-badge">${c.rankBadge || c.rank || '제9품계 하급 천사'}</div>
                         <div class="char-weapon-badge"><i class="${c.weapon?.icon || 'fa-solid fa-feather'}"></i> ${c.weapon?.text || ''}</div>
                     </div>
@@ -1015,38 +1285,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                     </div>
                 </div>
+                ${createSlideNavBarHtml(i, total)}
             </div>
         `).join('');
 
-        // Attach click listeners to dynamically created tab buttons
-        const tabs = charTabsContainer.querySelectorAll(".tab-btn");
-        tabs.forEach(tab => {
-            tab.addEventListener("click", () => {
-                const targetId = tab.getAttribute("data-target");
-                selectCharacterTab(targetId);
-            });
-        });
-    }
-
-    function selectCharacterTab(charId) {
-        const tabs = document.querySelectorAll(".char-tabs .tab-btn");
-        const panes = document.querySelectorAll(".char-panes .char-pane");
-
-        tabs.forEach(tab => {
-            if (tab.getAttribute("data-target") === charId) {
-                tab.classList.add("active");
-            } else {
-                tab.classList.remove("active");
-            }
-        });
-
-        panes.forEach(pane => {
-            if (pane.id === charId) {
-                pane.classList.add("active");
-            } else {
-                pane.classList.remove("active");
-            }
-        });
+        charactersSlider = setupTabSlider(charTabsContainer, charPanesContainer);
     }
 
     // Initialize character loading
@@ -1054,7 +1297,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnOpenCharacters) {
         btnOpenCharacters.addEventListener("click", () => {
-            selectCharacterTab("char-nebbia");
+            if (charactersSlider) charactersSlider.goTo(0);
             openCustomModal(charactersModal);
         });
     }
@@ -1070,6 +1313,173 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ----------------------------------------------------
+    // 9. Author's Notes (Deep Lore) (from data/author_notes.json)
+    // ----------------------------------------------------
+    const defaultAuthorNotes = {
+        header: {
+            tag: "AUTHOR'S NOTES & DEEP LORE",
+            title: "작가노트 : 심층 설정집"
+        },
+        chapters: [
+            {
+                id: "vision",
+                tabName: "기획 의도",
+                tabIcon: "fa-solid fa-pen-nib",
+                tag: "CREATOR'S VISION · PILGRIMAGE",
+                title: "불완전한 존재들의 실존적 순례에 관하여",
+                paragraphs: [
+                    "《달의 그림자 탑》은 완전무결한 영웅의 승리가 아닌, 신에게 버림받고도 서로의 체온에 기대어 가장 어두운 밤을 뚫고 빛을 찾아 나서는 존재들의 이야기입니다.",
+                    "하늘로부터 버림받은 하급 천사들은 더 이상 명령이나 사명에 의해 움직이지 않습니다. 오직 '동료와의 유대'와 '자기 자신의 의지'로써 하늘을 향해 발을 내딛습니다.",
+                    "달의 그림자 탑을 오르는 것은 물리적인 이동이 아닌, 각 층마다 마주하는 자신의 내면적 상처와 타락의 공포를 극복하는 정화(Catharsis)의 과정입니다."
+                ],
+                tags: ["#실존주의", "#버려진천사", "#유대와선택", "#정화의나선", "#내면의치유"],
+                quote: "하늘이 우리를 버렸을지라도, 우리가 서로를 놓지 않는 한 이곳은 지옥이 아니다."
+            },
+            {
+                id: "dante_lore",
+                tabName: "월구와 제9품계",
+                tabIcon: "fa-solid fa-moon",
+                tag: "DEEP LORE · THE 9TH CHOIR",
+                title: "단테 《신곡》과 월구(Primo Cielo)의 철학",
+                paragraphs: [
+                    "단테의 《천국편》에서 월구는 맹세를 온전히 완수하지 못한 불완전한 영혼들이 머무는 곳입니다.",
+                    "치천사(세라핌)부터 최말단 천사(엔젤)에 이르는 9품계 중, 제9품계는 신의 옥좌와 가장 멀리 떨어진 전선의 병사들로 가장 인간에 가까운 감정을 지니고 있습니다.",
+                    "완벽하지 않기에 흔들리고, 흔들리기에 서로를 갈망하는 불완전한 서원의 존재들이 만들어내는 비장하고도 따뜻한 드라마를 그리고자 했습니다."
+                ],
+                tags: ["#제9품계", "#말단천사", "#인간적감정", "#불완전함의미학", "#서원과갈등"],
+                quote: "완벽하지 않기에 흔들리고, 흔들리기에 서로의 온기를 온전히 갈망한다."
+            },
+            {
+                id: "silence_lore",
+                tabName: "신의 침묵과 봉쇄",
+                tabIcon: "fa-solid fa-key",
+                tag: "MYSTERY · DEUS SILENS",
+                title: "전쟁 97년 차 월구 대문 봉쇄 사건",
+                paragraphs: [
+                    "천상으로 통하는 유일한 나선 통로였던 월구의 대문이 안쪽에서 일방적으로 봉쇄되며 절대 침묵이 시작되었습니다.",
+                    "사전 경고도 사후 해명도 없이 기도의 응답은 끊겼으며, 상급 천사들의 배신 의혹과 지상 방치에 대한 의문은 작품 전반을 관통하는 거대한 미스터리입니다.",
+                    "지상에 버려진 제9품계 천사들은 상급 계층의 사슬에서 벗어나 비로소 자신만의 의지로 운명을 개척해 나갑니다."
+                ],
+                tags: ["#천계봉쇄", "#사라진신탁", "#음모와의문", "#자유의지"],
+                quote: "어찌하여 문은 봉쇄되었고, 신은 침묵하는가에 대해서는 추후 시리즈로 다루길 고대하고 있습니다."
+            },
+            {
+                id: "erosion_lore",
+                tabName: "침식의 메커니즘",
+                tabIcon: "fa-solid fa-biohazard",
+                tag: "SYSTEM · CORRUPTION RULE",
+                title: "인계 침식(Mortal Erosion)과 영핵 붕괴",
+                paragraphs: [
+                    "순수한 천상 에테르가 탁기에 의해 점진적으로 부식되는 메커니즘을 상세히 정립했습니다.",
+                    "1단계 잿빛 날개 변색과 광륜 점멸, 2단계 깃털 석화 및 비행 능력 상실, 3단계 영핵 균열과 완전한 낙천사화로 이어지는 불가역적 변화를 다룹니다.",
+                    "지상의 탁기에 물들면서도 인간들의 고통과 온기에 공감할 때, 역설적으로 천사들의 영핵은 광기를 피해 균형을 유지할 수 있습니다."
+                ],
+                tags: ["#3단계변이", "#영핵오염", "#낙천사의낙인", "#인간성획득"],
+                quote: "순백의 깃털이 잿빛으로 굳어갈지라도, 존재의 존엄마저 탁기에 바치진 않는다."
+            },
+            {
+                id: "tower_lore",
+                tabName: "달의 위상 연금술",
+                tabIcon: "fa-solid fa-flask",
+                tag: "ALCHEMICAL ASCENT · 7 PHASES",
+                title: "7대 위상과 정화의 나선 구조",
+                paragraphs: [
+                    "달의 그림자 탑은 단순한 건물이 아니라, 달의 위상 변화가 지상에 투영된 거대한 연금술적 시련의 공간입니다.",
+                    "삭(망각)에서 월식(붉은 관문)에 이르는 7개 층은 4명의 천사가 각자 품고 있는 내면의 균열(분노, 체념, 방관, 기만)을 강제로 직면하게 만듭니다.",
+                    "붉게 물든 최상층 월식의 문 앞에는 탑의 수호자가 기다리고 있으며, 4인의 천사가 서로의 영혼을 믿고 합일할 때 비로소 문이 열리게 됩니다."
+                ],
+                tags: ["#7개위상", "#내면의시련", "#심리적관문", "#월식의문"],
+                quote: "일곱 번의 어둠과 시험을 통과한 자만이 비로소 붉은 문 너머의 새벽을 마주하리라."
+            }
+        ]
+    };
+
+    async function loadAndRenderAuthorNotes() {
+        let notesData = defaultAuthorNotes;
+        try {
+            const res = await fetch('data/author_notes.json');
+            if (res.ok) notesData = await res.json();
+        } catch (err) {
+            console.warn("Could not load data/author_notes.json, using fallback:", err);
+        }
+        renderAuthorNotesCodex(notesData);
+    }
+
+    function renderAuthorNotesCodex(data) {
+        if (!authorNotesTabsContainer || !authorNotesPanesContainer) return;
+
+        const headerTag = document.getElementById("author-notes-tag");
+        const headerTitle = document.getElementById("author-notes-title");
+        if (headerTag && data.header?.tag) headerTag.textContent = data.header.tag;
+        if (headerTitle && data.header?.title) headerTitle.textContent = data.header.title;
+
+        const chapters = data.chapters || [];
+        const total = chapters.length;
+
+        authorNotesTabsContainer.innerHTML = chapters.map((ch, i) => `
+            <button class="tab-slider-btn ${i === 0 ? 'active' : ''}" data-index="${i}">
+                <i class="${ch.tabIcon || 'fa-solid fa-pen-nib'}"></i>
+                <span>${ch.tabName}</span>
+            </button>
+        `).join('');
+
+        authorNotesPanesContainer.innerHTML = chapters.map((ch, i) => {
+            const paragraphs = ch.paragraphs || (ch.lead ? [ch.lead] : []);
+            const paragraphsHtml = paragraphs.map(p => `<p>${p}</p>`).join('');
+            const tagsHtml = (ch.tags && ch.tags.length) ? `
+                <div class="single-card-tags">
+                    ${ch.tags.map(t => `<span class="keyword-chip">${t}</span>`).join('')}
+                </div>
+            ` : '';
+
+            const footerQuoteHtml = ch.quote ? `
+                <div class="single-card-footer">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <p>"${ch.quote}"</p>
+                </div>
+            ` : '';
+
+            return `
+                <div class="tab-slider-pane ${i === 0 ? 'active' : ''}" id="an-pane-${ch.id}">
+                    <div class="single-codex-card">
+                        <div class="single-card-header">
+                            <span class="single-card-tag">${ch.tag}</span>
+                            <h3 class="single-card-title">${ch.title}</h3>
+                        </div>
+                        <div class="single-card-body">
+                            ${paragraphsHtml}
+                            ${tagsHtml}
+                        </div>
+                        ${footerQuoteHtml}
+                    </div>
+                    ${createSlideNavBarHtml(i, total)}
+                </div>
+            `;
+        }).join('');
+
+        authorNotesSlider = setupTabSlider(authorNotesTabsContainer, authorNotesPanesContainer);
+    }
+
+    // Author's Notes Modal triggers
+    if (btnOpenAuthorNotes) {
+        btnOpenAuthorNotes.addEventListener("click", () => {
+            if (authorNotesSlider) authorNotesSlider.goTo(0);
+            openCustomModal(authorNotesModal);
+        });
+    }
+    if (btnCloseAuthorNotes) {
+        btnCloseAuthorNotes.addEventListener("click", () => closeCustomModal(authorNotesModal));
+    }
+    if (authorNotesModal) {
+        authorNotesModal.addEventListener("click", (e) => {
+            if (e.target === authorNotesModal) closeCustomModal(authorNotesModal);
+        });
+    }
+
+    // Initialize author notes loading
+    loadAndRenderAuthorNotes();
+
+    // ----------------------------------------------------
     // 9. Background Music (BGM) Player Controller
     // ----------------------------------------------------
     const bgmAudio = document.getElementById("bgm-audio");
@@ -1080,10 +1490,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const volumeIcon = document.getElementById("volume-icon");
 
     let isAudioPlaying = false;
-    let lastVolume = 0.5;
+    let lastVolume = 1.0;
 
     if (bgmAudio) {
-        bgmAudio.volume = 0.5;
+        bgmAudio.volume = 1.0;
 
         // Auto start helper
         window.tryStartBgm = function() {
@@ -1145,7 +1555,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (bgmVolume) bgmVolume.value = 0;
                     updateVolumeIcon(0);
                 } else {
-                    const restoredVol = lastVolume > 0 ? lastVolume : 0.5;
+                    const restoredVol = lastVolume > 0 ? lastVolume : 1.0;
                     bgmAudio.volume = restoredVol;
                     if (bgmVolume) bgmVolume.value = restoredVol;
                     updateVolumeIcon(restoredVol);
@@ -1170,9 +1580,76 @@ document.addEventListener("DOMContentLoaded", () => {
         window.tryStartBgm = function() {};
     }
 
-    // Keyboard Escape Key to close any active modal/detail
+    // ----------------------------------------------------
+    // 10. Mobile Hamburger Menu Controller
+    // ----------------------------------------------------
+    const navHamburger = document.getElementById("nav-hamburger");
+    const navHamburgerIcon = document.getElementById("nav-hamburger-icon");
+    const navLinks = document.getElementById("nav-links");
+
+    function closeMobileMenu() {
+        if (navLinks && navLinks.classList.contains("open")) {
+            navLinks.classList.remove("open");
+            if (navHamburger) {
+                navHamburger.classList.remove("active");
+                navHamburger.setAttribute("aria-expanded", "false");
+            }
+            if (navHamburgerIcon) {
+                navHamburgerIcon.className = "fa-solid fa-bars";
+            }
+        }
+    }
+
+    function toggleMobileMenu() {
+        if (!navLinks) return;
+        const isOpen = navLinks.classList.toggle("open");
+        if (navHamburger) {
+            navHamburger.classList.toggle("active", isOpen);
+            navHamburger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        }
+        if (navHamburgerIcon) {
+            navHamburgerIcon.className = isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+        }
+    }
+
+    if (navHamburger) {
+        navHamburger.addEventListener("click", (e) => {
+            e.stopPropagation();
+            toggleMobileMenu();
+        });
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener("click", (e) => {
+        if (navLinks && navLinks.classList.contains("open")) {
+            if (!navLinks.contains(e.target) && (!navHamburger || !navHamburger.contains(e.target))) {
+                closeMobileMenu();
+            }
+        }
+    });
+
+    // Close mobile menu when a nav button is clicked
+    if (btnOpenWorldview) {
+        btnOpenWorldview.addEventListener("click", closeMobileMenu);
+    }
+    if (btnOpenCharacters) {
+        btnOpenCharacters.addEventListener("click", closeMobileMenu);
+    }
+    if (btnOpenAuthorNotes) {
+        btnOpenAuthorNotes.addEventListener("click", closeMobileMenu);
+    }
+
+    // Reset when resizing back to desktop
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 900) {
+            closeMobileMenu();
+        }
+    });
+
+    // Keyboard Navigation (Escape to close, ArrowLeft / ArrowRight to slide tabs)
     window.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
+            closeMobileMenu();
             if (!detailContainer.classList.contains("hidden")) {
                 closeDetailView();
             }
@@ -1181,6 +1658,25 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             if (!charactersModal.classList.contains("hidden")) {
                 closeCustomModal(charactersModal);
+            }
+            if (!authorNotesModal.classList.contains("hidden")) {
+                closeCustomModal(authorNotesModal);
+            }
+        } else if (e.key === "ArrowRight") {
+            if (!worldviewModal.classList.contains("hidden")) {
+                worldviewSlider?.next();
+            } else if (!charactersModal.classList.contains("hidden")) {
+                charactersSlider?.next();
+            } else if (!authorNotesModal.classList.contains("hidden")) {
+                authorNotesSlider?.next();
+            }
+        } else if (e.key === "ArrowLeft") {
+            if (!worldviewModal.classList.contains("hidden")) {
+                worldviewSlider?.prev();
+            } else if (!charactersModal.classList.contains("hidden")) {
+                charactersSlider?.prev();
+            } else if (!authorNotesModal.classList.contains("hidden")) {
+                authorNotesSlider?.prev();
             }
         }
     });
