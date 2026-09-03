@@ -101,11 +101,11 @@ body {
 }
 
 .intro-quote {
-    font-size: 1.05rem;
+    font-size: 0.92rem;
     font-weight: 300;
     color: #e5e0d3;
     letter-spacing: 0.1rem;
-    line-height: 1.85;
+    line-height: 1.9;
     margin-bottom: 3.5rem;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
@@ -2419,7 +2419,7 @@ body {
     }
 
     .intro-quote {
-        font-size: 0.88rem;
+        font-size: 0.8rem;
         margin-bottom: 2.5rem;
     }
 
