@@ -136,6 +136,13 @@
     <!-- 4. Worldview & Prologue Modal - Fullscreen -->
     <div id="worldview-modal" class="hidden modal-backdrop fullscreen-modal">
         <div class="modal-box worldview-box">
+            <!-- Fullscreen Dynamic Worldview Floor Blurred Background (Dual-layer Crossfade) -->
+            <div class="worldview-backdrop-wrap" id="worldview-backdrop-wrap">
+                <div class="worldview-backdrop-img active" id="worldview-backdrop-a"></div>
+                <div class="worldview-backdrop-img" id="worldview-backdrop-b"></div>
+                <div class="worldview-backdrop-overlay"></div>
+            </div>
+
             <button class="modal-close-btn" id="btn-close-worldview" title="닫기"><span class="material-symbols-outlined">close</span></button>
             <div class="modal-header">
                 <span class="section-tag" id="worldview-tag">DIVINA LUNA LORE</span>

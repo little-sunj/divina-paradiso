@@ -2,7 +2,7 @@
   {
     "id": "nebbia",
     "name": "네비아",
-    "enName": "Nebbia",
+    "enName": "NEBBIA",
     "gender": "여성",
     "role": "전사",
     "rank": "제9품계 하급 천사",
@@ -16,8 +16,8 @@
       "#까칠",
       "#분노"
     ],
-    "appearance": "헝클어진 금발 단발, 날카롭고 강렬한 녹안(Emerald Eyes). 지상 전장의 흙먼지가 묻은 은빛 경갑주를 걸쳤으며, 인계 침식으로 인해 본래 순백이던 날개가 잿빛으로 흐려져 있습니다.",
-    "personality": "까칠하고 틱틱대는 츤데레 전사. 신의 침묵을 명백한 배신으로 여겨 분노를 감추지 않습니다. 그러나 동료를 누구보다 아끼며, 툭툭 내뱉는 날 선 반말 뒤로 혀를 차거나 시선을 피하며 챙겨줍니다.",
+    "appearance": "금발 단발 / 녹안(Emerald Eyes).",
+    "personality": "까칠하고 틱틱대는 츤데레 전사.<br>신의 침묵을 명백한 배신으로 여기고 있다.",
     "quote": "착각하지 마. 널 구한 게 아니라 저놈 모가지를 벤 것뿐이니까.",
     "image": "assets/images/nebbia/nebbia_01.png",
     "wideImage": "assets/images/nebbia/nebbia_wide.png",
@@ -29,10 +29,10 @@
     "name": "칼리스테",
     "enName": "Calliste",
     "gender": "여성",
-    "role": "관조·기록",
+    "role": "서약",
     "rank": "제9품계 하급 천사",
-    "rankBadge": "제9품계 하급 천사 · 관조·기록",
-    "meta": "여성 / 관조·기록 / 제9품계",
+    "rankBadge": "제9품계 하급 천사 · 서약",
+    "meta": "여성 / 서약 / 제9품계",
     "weapon": {
       "icon": "menu_book",
       "text": "낡은 면사포 & 경화된 날개"

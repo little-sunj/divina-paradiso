@@ -1118,13 +1118,74 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
         }).join('');
 
-        worldviewSlider = setupTabSlider(worldviewTabsContainer, worldviewPanesContainer);
+        const floorBackdropImages = [
+            'assets/images/floors/floor_01.png',
+            'assets/images/floors/floor_02.png',
+            'assets/images/floors/floor_03.png',
+            'assets/images/floors/floor_04.png',
+            'assets/images/floors/floor_05.png',
+            'assets/images/floors/floor_06.png',
+            'assets/images/floors/floor_07.png'
+        ];
+        let activeWvBackdropLayer = 'a';
+        let lastWvImageIndex = -1;
+
+        function getRandomFloorImage() {
+            if (!floorBackdropImages.length) return '';
+            if (floorBackdropImages.length === 1) return floorBackdropImages[0];
+            let nextIndex;
+            do {
+                nextIndex = Math.floor(Math.random() * floorBackdropImages.length);
+            } while (nextIndex === lastWvImageIndex);
+            lastWvImageIndex = nextIndex;
+            return floorBackdropImages[nextIndex];
+        }
+
+        function updateWorldviewBackdrop() {
+            const layerA = document.getElementById("worldview-backdrop-a");
+            const layerB = document.getElementById("worldview-backdrop-b");
+            if (!layerA || !layerB) return;
+
+            const imgUrl = getRandomFloorImage();
+            if (!imgUrl) return;
+
+            if (activeWvBackdropLayer === 'a') {
+                layerB.style.backgroundImage = `url('${imgUrl}')`;
+                layerB.classList.add("active");
+                layerA.classList.remove("active");
+                activeWvBackdropLayer = 'b';
+            } else {
+                layerA.style.backgroundImage = `url('${imgUrl}')`;
+                layerA.classList.add("active");
+                layerB.classList.remove("active");
+                activeWvBackdropLayer = 'a';
+            }
+        }
+
+        worldviewSlider = setupTabSlider(worldviewTabsContainer, worldviewPanesContainer, (index) => {
+            updateWorldviewBackdrop();
+        });
+
+        // Set initial backdrop on Layer A
+        const initialWvLayerA = document.getElementById("worldview-backdrop-a");
+        const initialWvLayerB = document.getElementById("worldview-backdrop-b");
+        if (initialWvLayerA) {
+            const firstImg = getRandomFloorImage();
+            if (firstImg) initialWvLayerA.style.backgroundImage = `url('${firstImg}')`;
+            initialWvLayerA.classList.add("active");
+            if (initialWvLayerB) initialWvLayerB.classList.remove("active");
+            activeWvBackdropLayer = 'a';
+        }
     }
 
     // Worldview Modal triggers
     if (btnOpenWorldview) {
         btnOpenWorldview.addEventListener("click", () => {
-            if (worldviewSlider) worldviewSlider.goTo(0);
+            if (worldviewSlider) {
+                worldviewSlider.goTo(0);
+            } else {
+                updateWorldviewBackdrop();
+            }
             openCustomModal(worldviewModal);
         });
     }
