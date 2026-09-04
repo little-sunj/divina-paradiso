@@ -183,6 +183,13 @@
     <!-- 6. Author's Notes (Deep Lore) Fullscreen Modal -->
     <div id="author-notes-modal" class="hidden modal-backdrop fullscreen-modal">
         <div class="modal-box author-notes-box">
+            <!-- Fullscreen Dynamic Author Notes Floor Blurred Background (Dual-layer Crossfade) -->
+            <div class="author-notes-backdrop-wrap" id="author-notes-backdrop-wrap">
+                <div class="author-notes-backdrop-img active" id="author-notes-backdrop-a"></div>
+                <div class="author-notes-backdrop-img" id="author-notes-backdrop-b"></div>
+                <div class="author-notes-backdrop-overlay"></div>
+            </div>
+
             <button class="modal-close-btn" id="btn-close-author-notes" title="닫기"><span class="material-symbols-outlined">close</span></button>
             <div class="modal-header">
                 <span class="section-tag" id="author-notes-tag">PRODUCTION NOTES & DEEP LORE</span>

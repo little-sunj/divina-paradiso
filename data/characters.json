@@ -46,7 +46,10 @@
     ],
     "appearance": "긴 웨이브 은발 / 벽안(Cyan Eyes).",
     "personality": "소심하고 조용함. 체념적 성향.<br>마음이 여리다.",
-    "quote": "돌아갈 수 있을까요……? 우린 버려진 거예요. 그러니…… 너무 애쓰지 마세요.",
+    "quote": [
+      "돌아갈 수 있을까요...? 우린 버려진 거에요. 그러니...너무 애쓰지 마세요.",
+      "아무도...다치지 않았으면 좋겠어요."
+    ],
     "image": "assets/images/calliste/calliste_01.png",
     "wideImage": "assets/images/calliste/calliste_wide.png",
     "visualClass": "char-visual-calliste",
@@ -72,7 +75,7 @@
     "appearance": "회색 머리 / 회안(Grey Eyes).",
     "personality": "지독한 현실주의자.<br>까칠하고 건조하게 철저히 팩트만을 전달한다.",
     "quote": [
-      "신이 우릴 버렸다는 걸 인정하면 편해집니다. 멍청하게 서 있지 말고 내 뒤로 붙으세요.",
+      "멍청하게 서 있지 말고 내 뒤로 붙으세요.",
       "앞에 문의 이미 닫혔는데...굳이 가야하나?"
     ],
     "image": "assets/images/hellio/hellio_01.png",
@@ -98,8 +101,11 @@
       "#희생"
     ],
     "appearance": "은발 / 적안(Ruby Eyes).",
-    "personality": "매사 능글맞고 여유로운 태도.<br>나른하고 귀찮아 하면서도 동료를 위한다.",
-    "quote": "대충 하자, 대충.",
+    "personality": "매사 여유로운 태도.<br>나른하고 귀찮아 하면서도 동료를 위한다.",
+    "quote": [
+      "대충 해. 대충.",
+      "하하, 그렇게 쉽게 속으면 어떡해?"
+    ],
     "image": "assets/images/sinope/sinope_01.png",
     "wideImage": "assets/images/sinope/sinope_wide.png",
     "visualClass": "char-visual-sinope",

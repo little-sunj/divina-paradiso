@@ -950,6 +950,69 @@ document.addEventListener("DOMContentLoaded", () => {
     let worldviewSlider = null;
     let charactersSlider = null;
     let authorNotesSlider = null;
+    let wvBackdropManager = null;
+    let anBackdropManager = null;
+
+    const floorBackdropImages = [
+        'assets/images/floors/floor_01.png',
+        'assets/images/floors/floor_02.png',
+        'assets/images/floors/floor_03.png',
+        'assets/images/floors/floor_04.png',
+        'assets/images/floors/floor_05.png',
+        'assets/images/floors/floor_06.png',
+        'assets/images/floors/floor_07.png'
+    ];
+
+    function createFloorBackdropManager(layerAId, layerBId) {
+        let activeLayer = 'a';
+        let lastImageIndex = -1;
+
+        function getRandomImage() {
+            if (!floorBackdropImages.length) return '';
+            if (floorBackdropImages.length === 1) return floorBackdropImages[0];
+            let nextIndex;
+            do {
+                nextIndex = Math.floor(Math.random() * floorBackdropImages.length);
+            } while (nextIndex === lastImageIndex);
+            lastImageIndex = nextIndex;
+            return floorBackdropImages[nextIndex];
+        }
+
+        function update() {
+            const layerA = document.getElementById(layerAId);
+            const layerB = document.getElementById(layerBId);
+            if (!layerA || !layerB) return;
+
+            const imgUrl = getRandomImage();
+            if (!imgUrl) return;
+
+            if (activeLayer === 'a') {
+                layerB.style.backgroundImage = `url('${imgUrl}')`;
+                layerB.classList.add("active");
+                layerA.classList.remove("active");
+                activeLayer = 'b';
+            } else {
+                layerA.style.backgroundImage = `url('${imgUrl}')`;
+                layerA.classList.add("active");
+                layerB.classList.remove("active");
+                activeLayer = 'a';
+            }
+        }
+
+        function setInitial() {
+            const layerA = document.getElementById(layerAId);
+            const layerB = document.getElementById(layerBId);
+            if (layerA) {
+                const firstImg = getRandomImage();
+                if (firstImg) layerA.style.backgroundImage = `url('${firstImg}')`;
+                layerA.classList.add("active");
+                if (layerB) layerB.classList.remove("active");
+                activeLayer = 'a';
+            }
+        }
+
+        return { update, setInitial };
+    }
 
     // ----------------------------------------------------
     // 7. Worldview & Prologue (from data/worldview.json)
@@ -969,19 +1032,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     "신은 침묵하고 구원의 손길은 사라진 절망의 대지. 서로 다른 상처와 고뇌를 품은 4인의 천사가 하늘로 돌아갈 유일한 길은, 지상에서 월구로 이어지는 거대한 에테르 나선 '달의 그림자 탑'을 오르는 것뿐입니다."
                 ],
                 quote: "하늘이 우리를 버렸을지라도, 우리가 서로를 놓지 않는 한 이곳은 지옥이 아닙니다."
-            },
-            {
-                id: "dante",
-                tabName: "단테 《신곡》 모티프",
-                tabIcon: "menu_book",
-                tag: "LITERARY MOTIF · PRIMO CIELO",
-                title: "불완전한 영혼들이 머무는 제1천 '월구(Sphere of the Moon)'",
-                paragraphs: [
-                    "단테 알리기에리의 《신곡》 천국편에서 가장 낮은 하늘인 '월구(Primo Cielo)'는 외압에 의해 서원을 온전히 지키지 못했던 불완전한 영혼들이 배치되는 곳입니다.",
-                    "《달의 그림자 탑》은 이 고전적 모티프를 현대적 다크 판타지로 재해석했습니다. 완전무결함을 강요받는 상위 품계와 달리, 제9품계 천사들은 상처받고 흔들리며 서로에게 의지하는 가장 인간적인 존재들입니다.",
-                    "달의 위상이 차오르고 기울듯 불완전하기에 흔들리는 그들의 서사는, 맹목적인 복종이 아닌 '자신의 의지와 동료를 향한 유대'로 신성한 구원을 쟁취하는 여정을 보여줍니다."
-                ],
-                quote: "완벽하지 않기에 흔들리고, 흔들리기에 서로의 온기를 온전히 갈망한다."
             },
             {
                 id: "silence",
@@ -1090,64 +1140,12 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
         }).join('');
 
-        const floorBackdropImages = [
-            'assets/images/floors/floor_01.png',
-            'assets/images/floors/floor_02.png',
-            'assets/images/floors/floor_03.png',
-            'assets/images/floors/floor_04.png',
-            'assets/images/floors/floor_05.png',
-            'assets/images/floors/floor_06.png',
-            'assets/images/floors/floor_07.png'
-        ];
-        let activeWvBackdropLayer = 'a';
-        let lastWvImageIndex = -1;
-
-        function getRandomFloorImage() {
-            if (!floorBackdropImages.length) return '';
-            if (floorBackdropImages.length === 1) return floorBackdropImages[0];
-            let nextIndex;
-            do {
-                nextIndex = Math.floor(Math.random() * floorBackdropImages.length);
-            } while (nextIndex === lastWvImageIndex);
-            lastWvImageIndex = nextIndex;
-            return floorBackdropImages[nextIndex];
-        }
-
-        function updateWorldviewBackdrop() {
-            const layerA = document.getElementById("worldview-backdrop-a");
-            const layerB = document.getElementById("worldview-backdrop-b");
-            if (!layerA || !layerB) return;
-
-            const imgUrl = getRandomFloorImage();
-            if (!imgUrl) return;
-
-            if (activeWvBackdropLayer === 'a') {
-                layerB.style.backgroundImage = `url('${imgUrl}')`;
-                layerB.classList.add("active");
-                layerA.classList.remove("active");
-                activeWvBackdropLayer = 'b';
-            } else {
-                layerA.style.backgroundImage = `url('${imgUrl}')`;
-                layerA.classList.add("active");
-                layerB.classList.remove("active");
-                activeWvBackdropLayer = 'a';
-            }
-        }
+        wvBackdropManager = createFloorBackdropManager("worldview-backdrop-a", "worldview-backdrop-b");
+        wvBackdropManager.setInitial();
 
         worldviewSlider = setupTabSlider(worldviewTabsContainer, worldviewPanesContainer, (index) => {
-            updateWorldviewBackdrop();
+            if (wvBackdropManager) wvBackdropManager.update();
         });
-
-        // Set initial backdrop on Layer A
-        const initialWvLayerA = document.getElementById("worldview-backdrop-a");
-        const initialWvLayerB = document.getElementById("worldview-backdrop-b");
-        if (initialWvLayerA) {
-            const firstImg = getRandomFloorImage();
-            if (firstImg) initialWvLayerA.style.backgroundImage = `url('${firstImg}')`;
-            initialWvLayerA.classList.add("active");
-            if (initialWvLayerB) initialWvLayerB.classList.remove("active");
-            activeWvBackdropLayer = 'a';
-        }
     }
 
     // Worldview Modal triggers
@@ -1155,8 +1153,9 @@ document.addEventListener("DOMContentLoaded", () => {
         btnOpenWorldview.addEventListener("click", () => {
             if (worldviewSlider) {
                 worldviewSlider.goTo(0);
-            } else {
-                updateWorldviewBackdrop();
+            }
+            if (wvBackdropManager) {
+                wvBackdropManager.update();
             }
             openCustomModal(worldviewModal);
         });
@@ -1404,6 +1403,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 quote: "하늘이 우리를 버렸을지라도, 우리가 서로를 놓지 않는 한 이곳은 지옥이 아니다."
             },
             {
+                id: "motif",
+                tabName: "모티프",
+                tabIcon: "menu_book",
+                tag: "LITERARY MOTIF · PRIMO CIELO",
+                title: "단테 《신곡》천계편 불완전한 영혼들의 제1천 '월구(Sphere of the Moon)'",
+                paragraphs: [
+                    "단테 알리기에리의 《신곡》 천국편에서 가장 낮은 하늘인 '월구(Primo Cielo)'는 불완전한 영혼들이 배치되는 곳입니다.",
+                    "《월구 - 낙천사영역》은 이 고전적 모티프를 다크 판타지로 재해석했습니다. 완전무결함을 강요받는 상위 품계와 달리, 월구 출신의 제9품계 천사들은 상처받고 흔들리며 서로에게 의지하는 가장 인간적인 존재들입니다.",
+                    "달의 위상이 차오르고 기우는 그림자에조차 불완전하게 흔들리는 그들의 서사는, 맹목적인 복종이 아닌 '자신의 생존 의지와 동료를 향한 유대'로써 스스로 신성한 구원을 쟁취하는 여정을 보여줍니다."
+                ],
+                quote: "하늘이 우리를 버렸을지라도, 우리가 서로를 놓지 않는 한 이곳은 지옥이 아니다."
+            },
+            {
                 id: "dante_lore",
                 tabName: "월구와 제9품계",
                 tabIcon: "dark_mode",
@@ -1510,13 +1522,19 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
         }).join('');
 
-        authorNotesSlider = setupTabSlider(authorNotesTabsContainer, authorNotesPanesContainer);
+        anBackdropManager = createFloorBackdropManager("author-notes-backdrop-a", "author-notes-backdrop-b");
+        anBackdropManager.setInitial();
+
+        authorNotesSlider = setupTabSlider(authorNotesTabsContainer, authorNotesPanesContainer, (index) => {
+            if (anBackdropManager) anBackdropManager.update();
+        });
     }
 
     // Author's Notes Modal triggers
     if (btnOpenAuthorNotes) {
         btnOpenAuthorNotes.addEventListener("click", () => {
             if (authorNotesSlider) authorNotesSlider.goTo(0);
+            if (anBackdropManager) anBackdropManager.update();
             openCustomModal(authorNotesModal);
         });
     }
