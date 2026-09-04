@@ -22,8 +22,8 @@
     <meta name="twitter:description" content="신께서 더 이상 응답하지 아니하시니, 너희들은 직접 무기를 들라.">
     <meta name="twitter:image" content="https://little-sunj.github.io/divina-paradiso/assets/images/og-thumb.png">
 
-    <!-- Google Fonts: Noto Serif for elegant Latin, Noto Serif KR for Korean, Material Symbols Outlined for Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Noto+Serif+KR:wght@200..900&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Noto Sans / Noto Sans KR for body readability, Noto Serif / Noto Serif KR for headings, Material Symbols Outlined for Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Sans+KR:wght@100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Noto+Serif+KR:wght@200..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="src/css/style.css">
@@ -44,9 +44,7 @@
         </div>
         <!-- Hidden Image preloaders to bypass file:// local WebGL CORS blocks -->
         <div style="display: none;">
-            <img id="img-og-thumb" src="assets/images/og-thumb.png" alt="DIVINA LUNA - 월구 - 낙천사영역">
             <img id="img-moon" src="assets/images/moon.jpg">
-            <img id="img-earth" src="assets/images/earth.jpg">
             <img id="img-earth-night" src="assets/images/earth_night.jpg">
         </div>
     </div>
@@ -147,7 +145,7 @@
             <div class="modal-header">
                 <span class="section-tag" id="worldview-tag">DIVINA LUNA LORE</span>
                 <h2 id="worldview-title">세계관</h2>
-                <div class="gold-line"></div>
+                <p class="modal-semi-title" id="worldview-semi-title" style="display: none;"></p>
             </div>
             
             <!-- Chapter Tabs Navigation (Loaded dynamically from data/worldview.json) -->
@@ -172,7 +170,6 @@
             <div class="modal-header">
                 <span class="section-tag">CHARACTER DOSSIER</span>
                 <h2>등장인물</h2>
-                <div class="gold-line"></div>
             </div>
 
             <!-- Character Tabs Navigation (Loaded dynamically from data/characters.json) -->
@@ -190,7 +187,7 @@
             <div class="modal-header">
                 <span class="section-tag" id="author-notes-tag">PRODUCTION NOTES & DEEP LORE</span>
                 <h2 id="author-notes-title">제작노트</h2>
-                <div class="gold-line"></div>
+                <p class="modal-semi-title" id="author-notes-semi-title" style="display: none;"></p>
             </div>
 
             <!-- Author Notes Tabs Navigation (Loaded dynamically from data/author_notes.json) -->

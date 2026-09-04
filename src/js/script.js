@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const introScreen = document.getElementById("intro-screen");
     const introContent = document.getElementById("intro-content");
-    const stardustContainer = document.getElementById("stardust-container") || document.getElementById("feather-container");
     const mainContainer = document.getElementById("main-container");
     const detailContainer = document.getElementById("detail-container");
     const closeBtn = document.querySelector(".close-btn");
@@ -705,22 +704,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 openDetailView(layerNum);
             });
         });
-
-        // 4. Attach Quick Character Jump from Floor Detail cards
-        detailCardsContainer.querySelectorAll(".char-item").forEach(item => {
-            item.addEventListener("click", (e) => {
-                e.stopPropagation();
-                const charKey = item.getAttribute("data-char");
-                if (charKey) {
-                    const targetCharId = `char-${charKey}`;
-                    selectCharacterTab(targetCharId);
-                    closeDetailView();
-                    setTimeout(() => {
-                        openCustomModal(charactersModal);
-                    }, 350);
-                }
-            });
-        });
     }
 
     // Initialize floors loading
@@ -942,13 +925,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            panes.forEach((pane) => {
-                const prev = pane.querySelector(".btn-slide-prev");
-                const next = pane.querySelector(".btn-slide-next");
-                if (prev) prev.disabled = (index === 0);
-                if (next) next.disabled = (index === tabs.length - 1);
-            });
-
             if (typeof onTabChange === 'function') {
                 onTabChange(index);
             }
@@ -958,14 +934,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const tabs = getTabs();
             tabs.forEach((tab, i) => {
                 tab.addEventListener("click", () => goTo(i));
-            });
-
-            const panes = getPanes();
-            panes.forEach((pane) => {
-                const prev = pane.querySelector(".btn-slide-prev");
-                const next = pane.querySelector(".btn-slide-next");
-                if (prev) prev.addEventListener("click", () => goTo(currentIndex - 1));
-                if (next) next.addEventListener("click", () => goTo(currentIndex + 1));
             });
         }
 
@@ -982,11 +950,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let worldviewSlider = null;
     let charactersSlider = null;
     let authorNotesSlider = null;
-
-    // Helper for Slide Navigation Footer (Removed as requested)
-    function createSlideNavBarHtml() {
-        return '';
-    }
 
     // ----------------------------------------------------
     // 7. Worldview & Prologue (from data/worldview.json)
@@ -1078,11 +1041,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const headerTag = document.getElementById("worldview-tag");
         const headerTitle = document.getElementById("worldview-title");
+        const headerSemiTitle = document.getElementById("worldview-semi-title");
         if (headerTag && data.header?.tag) headerTag.textContent = data.header.tag;
         if (headerTitle && data.header?.title) headerTitle.textContent = data.header.title;
+        if (headerSemiTitle) {
+            const semiText = data.header?.semi_title || data.header?.semiTitle || "";
+            if (semiText) {
+                headerSemiTitle.textContent = semiText;
+                headerSemiTitle.style.display = "";
+            } else {
+                headerSemiTitle.style.display = "none";
+            }
+        }
 
         const chapters = data.chapters || [];
-        const total = chapters.length;
 
         worldviewTabsContainer.innerHTML = chapters.map((ch, i) => `
             <button class="tab-slider-btn ${i === 0 ? 'active' : ''}" data-index="${i}">
@@ -1290,7 +1262,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderCharacterDossier(characters) {
         if (!charTabsContainer || !charPanesContainer) return;
-        const total = characters.length;
 
         charTabsContainer.innerHTML = characters.map((c, i) => `
             <button class="tab-slider-btn tab-btn ${i === 0 ? 'active' : ''}" data-target="char-${c.id}">
@@ -1299,39 +1270,55 @@ document.addEventListener("DOMContentLoaded", () => {
             </button>
         `).join('');
 
-        charPanesContainer.innerHTML = characters.map((c, i) => `
-            <div class="tab-slider-pane char-pane ${i === 0 ? 'active' : ''}" id="char-${c.id}">
-                <div class="pane-grid">
-                    <div class="pane-visual ${c.visualClass || 'char-visual-' + c.id}" ${c.image ? `style="background-image: url('${c.image}'); background-size: cover; background-position: center top;"` : ''}>
-                        ${c.image ? `<img src="${c.image}" alt="${c.name}" class="char-portrait-img">` : ''}
-                    </div>
-                    <div class="pane-details">
-                        <div class="ch-name-row">
-                            <h3>${c.name} <span class="ch-en">${c.enName || ''}</span></h3>
-                            <span class="ch-meta">${c.meta || ''}</span>
-                        </div>
-                        <div class="ch-tags">
-                            ${(c.tags || []).map(t => `<span class="tag">${t}</span>`).join('')}
-                        </div>
+        charPanesContainer.innerHTML = characters.map((c, i) => {
+            const quotesList = Array.isArray(c.quotes) 
+                ? c.quotes 
+                : (Array.isArray(c.quote) 
+                    ? c.quote 
+                    : (c.quote ? [c.quote] : []));
 
-                        <div class="ch-section">
-                            <h4><span class="material-symbols-outlined">person</span> 외형</h4>
-                            <p>${c.appearance || ''}</p>
-                        </div>
+            const quotesHtml = quotesList.length > 0 
+                ? quotesList.map(q => `<p class="quote-text">"${q}"</p>`).join('')
+                : (c.quote ? `<p class="quote-text">"${c.quote}"</p>` : '');
 
-                        <div class="ch-section">
-                            <h4><span class="material-symbols-outlined">chat_bubble</span> 성격</h4>
-                            <p>${c.personality || ''}</p>
-                        </div>
+            const quoteBoxHtml = quotesHtml ? `
+                <div class="ch-quote-box">
+                    <div class="quote-tag"><span class="material-symbols-outlined">format_quote</span> 대표 대사</div>
+                    ${quotesHtml}
+                </div>
+            ` : '';
 
-                        <div class="ch-quote-box">
-                            <div class="quote-tag"><span class="material-symbols-outlined">format_quote</span> 대표 대사</div>
-                            <p class="quote-text">"${c.quote || ''}"</p>
+            return `
+                <div class="tab-slider-pane char-pane ${i === 0 ? 'active' : ''}" id="char-${c.id}">
+                    <div class="pane-grid">
+                        <div class="pane-visual ${c.visualClass || 'char-visual-' + c.id}" ${c.image ? `style="background-image: url('${c.image}'); background-size: cover; background-position: center top;"` : ''}>
+                            ${c.image ? `<img src="${c.image}" alt="${c.name}" class="char-portrait-img">` : ''}
+                        </div>
+                        <div class="pane-details">
+                            <div class="ch-name-row">
+                                <h3>${c.name} <span class="ch-en">${c.enName || ''}</span></h3>
+                                <span class="ch-meta">${c.meta || ''}</span>
+                            </div>
+                            <div class="ch-tags">
+                                ${(c.tags || []).map(t => `<span class="tag">${t}</span>`).join('')}
+                            </div>
+
+                            <div class="ch-section">
+                                <h4><span class="material-symbols-outlined">person</span> 외형</h4>
+                                <p>${c.appearance || ''}</p>
+                            </div>
+
+                            <div class="ch-section">
+                                <h4><span class="material-symbols-outlined">chat_bubble</span> 성격</h4>
+                                <p>${c.personality || ''}</p>
+                            </div>
+
+                            ${quoteBoxHtml}
                         </div>
                     </div>
                 </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
 
         let activeBackdropLayer = 'a';
         function updateCharacterBackdrop(index) {
@@ -1398,8 +1385,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // ----------------------------------------------------
     const defaultAuthorNotes = {
         header: {
-            tag: "PRODUCTION NOTES & DEEP LORE",
-            title: "제작노트"
+            tag: "DEEP LORE",
+            title: "제작노트",
+            semi_title: "이 내용들은 기획 의도와 상세설정을 다루고 있으며, 유저가 몰라도 플레이 하시는데 전혀 문제가 없는 부분입니다."
         },
         chapters: [
             {
@@ -1473,11 +1461,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const headerTag = document.getElementById("author-notes-tag");
         const headerTitle = document.getElementById("author-notes-title");
+        const headerSemiTitle = document.getElementById("author-notes-semi-title");
         if (headerTag && data.header?.tag) headerTag.textContent = data.header.tag;
         if (headerTitle && data.header?.title) headerTitle.textContent = data.header.title;
+        if (headerSemiTitle) {
+            const semiText = data.header?.semi_title || data.header?.semiTitle || "";
+            if (semiText) {
+                headerSemiTitle.textContent = semiText;
+                headerSemiTitle.style.display = "";
+            } else {
+                headerSemiTitle.style.display = "none";
+            }
+        }
 
         const chapters = data.chapters || [];
-        const total = chapters.length;
 
         authorNotesTabsContainer.innerHTML = chapters.map((ch, i) => `
             <button class="tab-slider-btn ${i === 0 ? 'active' : ''}" data-index="${i}">

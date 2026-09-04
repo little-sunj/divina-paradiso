@@ -18,7 +18,10 @@
     ],
     "appearance": "금발 단발 / 녹안(Emerald Eyes).",
     "personality": "까칠하고 틱틱대는 츤데레 전사.<br>신의 침묵을 명백한 배신으로 여기고 있다.",
-    "quote": "착각하지 마. 널 구한 게 아니라 저놈 모가지를 벤 것뿐이니까.",
+    "quote": [
+    "착각하지 마. 널 구한 게 아니라 저놈 모가지를 벤 것뿐이니까.",
+    "이 마음은, 이 분노는 대체 어디로 향해야 하는거야?"
+    ],
     "image": "assets/images/nebbia/nebbia_01.png",
     "wideImage": "assets/images/nebbia/nebbia_wide.png",
     "visualClass": "char-visual-nebbia",
@@ -27,12 +30,12 @@
   {
     "id": "calliste",
     "name": "칼리스테",
-    "enName": "Calliste",
+    "enName": "CALLISTE",
     "gender": "여성",
-    "role": "서약",
+    "role": "기도사",
     "rank": "제9품계 하급 천사",
-    "rankBadge": "제9품계 하급 천사 · 서약",
-    "meta": "여성 / 서약 / 제9품계",
+    "rankBadge": "제9품계 하급 천사 · 기도사",
+    "meta": "여성 / 기도사 / 제9품계",
     "weapon": {
       "icon": "menu_book",
       "text": "낡은 면사포 & 경화된 날개"
@@ -41,8 +44,8 @@
       "#소심",
       "#체념"
     ],
-    "appearance": "풍성하게 구불거리는 긴 은발, 항상 눈물이 고인 듯 맑고 투명한 벽안(Cyan Eyes). 머리에는 올이 풀린 낡은 면사포를 둘렀으며, 한쪽 날개가 완전히 석화처럼 경화되어 더 이상 하늘을 날 수 없습니다.",
-    "personality": "소심하고 조용하며, 버려진 처지를 서글프게 직시하는 체념적 성향. 말끝을 흐리는 나지막하고 가녀린 존댓말을 쓰며, 불안할 때면 낡은 옷소매를 꼭 쥐는 버릇이 있습니다.",
+    "appearance": "긴 웨이브 은발 / 벽안(Cyan Eyes).",
+    "personality": "소심하고 조용함. 체념적 성향.<br>마음이 여리다.",
     "quote": "돌아갈 수 있을까요……? 우린 버려진 거예요. 그러니…… 너무 애쓰지 마세요.",
     "image": "assets/images/calliste/calliste_01.png",
     "wideImage": "assets/images/calliste/calliste_wide.png",
@@ -52,23 +55,26 @@
   {
     "id": "hellio",
     "name": "헬리오",
-    "enName": "Hellio",
+    "enName": "HELLIO",
     "gender": "남성",
-    "role": "전사·선봉",
+    "role": "전사",
     "rank": "제9품계 하급 천사",
-    "rankBadge": "제9품계 하급 천사 · 전사·선봉",
-    "meta": "남성 / 전사·선봉 / 제9품계",
+    "rankBadge": "제9품계 하급 천사 · 전사",
+    "meta": "남성 / 전사 / 제9품계",
     "weapon": {
       "icon": "gavel",
-      "text": "묵직한 대검"
+      "text": "까마귀 성령수"
     },
     "tags": [
       "#침착",
       "#절제"
     ],
-    "appearance": "차분하게 정돈된 회색 머리, 건조하고 단호한 회안(Grey Eyes). 단련된 다부진 체격 위에 낡은 검은 가죽 코트를 걸치고 있으며, 거대한 양손 대검을 덤덤하게 짊어지고 있습니다.",
-    "personality": "철저한 현실주의자이자 감정에 휘둘리지 않는 든든한 선봉장. 과거 상위 천사에게 희생양으로 버림받았던 기억이 있습니다. 단정하고 건조한 존댓말/반존대를 구사하며 철저히 팩트만을 전달합니다.",
-    "quote": "신이 우릴 버렸다는 걸 인정하면 편해집니다. 멍청하게 서 있지 말고 내 뒤로 붙으세요.",
+    "appearance": "회색 머리 / 회안(Grey Eyes).",
+    "personality": "지독한 현실주의자.<br>까칠하고 건조하게 철저히 팩트만을 전달한다.",
+    "quote": [
+      "신이 우릴 버렸다는 걸 인정하면 편해집니다. 멍청하게 서 있지 말고 내 뒤로 붙으세요.",
+      "앞에 문의 이미 닫혔는데...굳이 가야하나?"
+    ],
     "image": "assets/images/hellio/hellio_01.png",
     "wideImage": "assets/images/hellio/hellio_wide.png",
     "visualClass": "char-visual-hellio",
@@ -77,23 +83,23 @@
   {
     "id": "sinope",
     "name": "시노페",
-    "enName": "Sinope",
+    "enName": "SINOPE",
     "gender": "남성",
-    "role": "전사·유격",
+    "role": "전사",
     "rank": "제9품계 하급 천사",
-    "rankBadge": "제9품계 하급 천사 · 전사·유격",
-    "meta": "남성 / 전사·유격 / 제9품계",
+    "rankBadge": "제9품계 하급 천사 · 전사",
+    "meta": "남성 / 전사 / 제9품계",
     "weapon": {
       "icon": "colorize",
-      "text": "흑은의 쌍단검"
+      "text": "쌍단검"
     },
     "tags": [
       "#능글",
       "#희생"
     ],
-    "appearance": "느슨하게 반묶음한 은발, 장난기 가득한 붉은 적안(Ruby Eyes). 헐렁한 제복 셔츠를 입고 있으며, 과거 지상에서 동료들을 보호하려다 인계 침식이 신체 일부로 번져 검게 물들어 있습니다.",
-    "personality": "항상 싱글벙글 웃는 유쾌한 트릭스터. 자신의 고통과 침식의 상처를 농담 뒤로 철저히 숨깁니다. 나른하고 리듬감 있는 가벼운 반말을 쓰며 언제든 동료를 위해 미끼가 될 각오를 품고 있습니다.",
-    "quote": "대충 해, 대충.",
+    "appearance": "은발 / 적안(Ruby Eyes).",
+    "personality": "매사 능글맞고 여유로운 태도.<br>나른하고 귀찮아 하면서도 동료를 위한다.",
+    "quote": "대충 하자, 대충.",
     "image": "assets/images/sinope/sinope_01.png",
     "wideImage": "assets/images/sinope/sinope_wide.png",
     "visualClass": "char-visual-sinope",
