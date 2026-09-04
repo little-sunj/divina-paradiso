@@ -7,7 +7,7 @@
     {
       "id": "vision",
       "tabName": "기획 의도",
-      "tabIcon": "fa-solid fa-pen-nib",
+      "tabIcon": "history_edu",
       "tag": "CREATOR'S VISION · PILGRIMAGE",
       "title": "불완전한 존재들의 실존적 순례에 관하여",
       "paragraphs": [
@@ -27,7 +27,7 @@
     {
       "id": "dante_lore",
       "tabName": "월구와 제9품계",
-      "tabIcon": "fa-solid fa-moon",
+      "tabIcon": "dark_mode",
       "tag": "DEEP LORE · THE 9TH CHOIR",
       "title": "단테 《신곡》과 월구(Primo Cielo)의 철학",
       "paragraphs": [
@@ -47,7 +47,7 @@
     {
       "id": "silence_lore",
       "tabName": "신의 침묵과 봉쇄",
-      "tabIcon": "fa-solid fa-key",
+      "tabIcon": "key",
       "tag": "MYSTERY · DEUS SILENS",
       "title": "전쟁 97년 차 월구 대문 봉쇄 사건",
       "paragraphs": [
@@ -66,7 +66,7 @@
     {
       "id": "tower_lore",
       "tabName": "달의 위상 연금술",
-      "tabIcon": "fa-solid fa-flask",
+      "tabIcon": "science",
       "tag": "ALCHEMICAL ASCENT · 7 PHASES",
       "title": "7대 위상과 정화의 나선 구조",
       "paragraphs": [

@@ -439,6 +439,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Helper to render Google Material Symbols (or legacy FontAwesome) icon
+    function renderIcon(iconName, defaultName = '', extraClasses = '') {
+        const icon = iconName || defaultName;
+        if (!icon) return '';
+        if (icon.startsWith('fa-') || icon.includes('fa-')) {
+            return `<i class="${icon} ${extraClasses}"></i>`;
+        }
+        return `<span class="material-symbols-outlined ${extraClasses}">${icon}</span>`;
+    }
+
     // ----------------------------------------------------
     // 6. Dynamic Floors Data Loader (from data/floors.json)
     // ----------------------------------------------------
@@ -468,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
             roman: "VII",
             phase: "월식",
             phaseEn: "Eclipse",
-            icon: "fa-solid fa-circle-notch",
+            icon: "radio_button_unchecked",
             title: "7층: 붉은 관문",
             name: "붉은 관문",
             spinnerClass: "spinner-7",
@@ -492,7 +502,7 @@ document.addEventListener("DOMContentLoaded", () => {
             roman: "VI",
             phase: "하현",
             phaseEn: "Last Quarter",
-            icon: "fa-solid fa-moon fa-flip-horizontal",
+            icon: "brightness_2",
             title: "6층: 침식의 극점",
             name: "침식의 극점",
             spinnerClass: "spinner-6",
@@ -504,8 +514,8 @@ document.addEventListener("DOMContentLoaded", () => {
             imgClass: "floor-img-6",
             description: "인간계의 오염과 탑의 왜곡된 마력이 융합되어 천사의 영핵(신성 코어)을 한계까지 쥐어짜는 지옥 같은 층입니다. 칼리스테의 날개는 석화에 가깝게 굳어가고, 시노페의 신체 침식은 전신으로 번져가며 모두가 한계에 다다릅니다.",
             stats: [
-                { icon: "fa-solid fa-biohazard", label: "위험 요소: 신성 영핵 급속 붕괴 & 석화" },
-                { icon: "fa-solid fa-ghost", label: "주요 조우: 극점의 침식 괴수" }
+                { icon: "warning", label: "위험 요소: 신성 영핵 급속 붕괴 & 석화" },
+                { icon: "sentiment_very_dissatisfied", label: "주요 조우: 극점의 침식 괴수" }
             ],
             characters: [
                 { char: "sinope", name: "시노페 (침식 억제 유격전)" },
@@ -517,7 +527,7 @@ document.addEventListener("DOMContentLoaded", () => {
             roman: "V",
             phase: "만월",
             phaseEn: "Full Moon",
-            icon: "fa-solid fa-circle",
+            icon: "circle",
             title: "5층: 광휘 성당",
             name: "광휘 성당",
             spinnerClass: "spinner-5",
@@ -529,8 +539,8 @@ document.addEventListener("DOMContentLoaded", () => {
             imgClass: "floor-img-5",
             description: "만월의 순백 성광이 눈이 멀도록 쏟아져 내리는 거대한 대성당 구역입니다. 하지만 그 찬란한 빛 속에는 신의 자비가 아닌 잔인한 침묵만이 깃들어 있습니다.",
             stats: [
-                { icon: "fa-solid fa-sun", label: "위험 요소: 실명 유발 성광 & 자동 방어 성물" },
-                { icon: "fa-solid fa-monument", label: "주요 조우: 성당의 백은 수호기사" }
+                { icon: "light_mode", label: "위험 요소: 실명 유발 성광 & 자동 방어 성물" },
+                { icon: "shield", label: "주요 조우: 성당의 백은 수호기사" }
             ],
             characters: [
                 { char: "hellio", name: "헬리오 (대검 결계 방어)" },
@@ -542,7 +552,7 @@ document.addEventListener("DOMContentLoaded", () => {
             roman: "IV",
             phase: "반월",
             phaseEn: "Gibbous Moon",
-            icon: "fa-solid fa-adjust",
+            icon: "contrast",
             title: "4층: 거울 회랑",
             name: "거울 회랑",
             spinnerClass: "spinner-4",
@@ -554,8 +564,8 @@ document.addEventListener("DOMContentLoaded", () => {
             imgClass: "floor-img-4",
             description: "수만 개의 차가운 은빛 거울로 둘러싸인 미로 회랑입니다. 거울 속에는 천사들이 지상에서 겪은 수치, 상위 천사에게 버림받았던 상처, 신체에 진행 중인 인계 침식의 모습이 투영됩니다.",
             stats: [
-                { icon: "fa-solid fa-clone", label: "위험 요소: 죄책감의 도플갱어" },
-                { icon: "fa-solid fa-gem", label: "주요 조우: 거울의 복제자" }
+                { icon: "copy_all", label: "위험 요소: 죄책감의 도플갱어" },
+                { icon: "diamond", label: "주요 조우: 거울의 복제자" }
             ],
             characters: [
                 { char: "sinope", name: "시노페 (쌍단검 거울 파괴)" },
@@ -567,7 +577,7 @@ document.addEventListener("DOMContentLoaded", () => {
             roman: "III",
             phase: "상현",
             phaseEn: "First Quarter",
-            icon: "fa-solid fa-moon",
+            icon: "dark_mode",
             title: "3층: 이성의 균열",
             name: "이성의 균열",
             spinnerClass: "spinner-3",
@@ -579,8 +589,8 @@ document.addEventListener("DOMContentLoaded", () => {
             imgClass: "floor-img-3",
             description: "탑의 중층부로 접어들며 신의 침묵에 대한 분노와 동료에 대한 불신이 극대화되는 층입니다. 공간 자체가 기하학적으로 찢겨 있으며, 영혼의 파장을 증폭시키는 균열이 이성을 갉아먹습니다.",
             stats: [
-                { icon: "fa-solid fa-brain", label: "위험 요소: 광기 유발 파동 & 불신 증폭" },
-                { icon: "fa-solid fa-bolt", label: "주요 조우: 균열의 사념체" }
+                { icon: "psychology", label: "위험 요소: 광기 유발 파동 & 불신 증폭" },
+                { icon: "bolt", label: "주요 조우: 균열의 사념체" }
             ],
             characters: [
                 { char: "nebbia", name: "네비아 (분노의 레이피어)" },
@@ -592,7 +602,7 @@ document.addEventListener("DOMContentLoaded", () => {
             roman: "II",
             phase: "초승",
             phaseEn: "Crescent",
-            icon: "fa-solid fa-moon",
+            icon: "dark_mode",
             title: "2층: 갈망의 안개",
             name: "갈망의 안개",
             spinnerClass: "spinner-2",
@@ -604,8 +614,8 @@ document.addEventListener("DOMContentLoaded", () => {
             imgClass: "floor-img-2",
             description: "돌아가지 못한 천사들의 애끓는 염원이 보랏빛 환각의 안개로 응결된 층입니다. 안개 속에서는 이미 닫혀버린 월구 너머의 그리운 천계 풍경과 신의 따스한 목소리가 환청으로 울려 퍼집니다.",
             stats: [
-                { icon: "fa-solid fa-eye-slash", label: "위험 요소: 천계 환각 & 청각 교란" },
-                { icon: "fa-solid fa-wind", label: "주요 조우: 갈망의 환영체" }
+                { icon: "visibility_off", label: "위험 요소: 천계 환각 & 청각 교란" },
+                { icon: "air", label: "주요 조우: 갈망의 환영체" }
             ],
             characters: [
                 { char: "calliste", name: "칼리스테 (기록 및 환각 식별)" },
@@ -617,7 +627,7 @@ document.addEventListener("DOMContentLoaded", () => {
             roman: "I",
             phase: "삭",
             phaseEn: "New Moon",
-            icon: "fa-regular fa-circle",
+            icon: "circle",
             title: "1층: 망각의 진흙 늪",
             name: "망각의 진흙 늪",
             spinnerClass: "spinner-1",
@@ -629,8 +639,8 @@ document.addEventListener("DOMContentLoaded", () => {
             imgClass: "floor-img-1",
             description: "인간계 전장에서 탑의 기저부로 이어지는 최하층입니다. 신성을 갉아먹는 검은 진흙과 탁한 수맥이 얽혀 있으며, 발을 딛는 순간 과거의 영광스러운 천계 기억을 잃어버리는 '망각의 침식'이 시작됩니다.",
             stats: [
-                { icon: "fa-solid fa-skull", label: "위험 요소: 망각의 진흙 & 날개 오염" },
-                { icon: "fa-solid fa-shield-halved", label: "주요 조우: 침식된 수호령 & 이형의 악마" }
+                { icon: "skull", label: "위험 요소: 망각의 진흙 & 날개 오염" },
+                { icon: "shield", label: "주요 조우: 침식된 수호령 & 이형의 악마" }
             ],
             characters: [
                 { char: "hellio", name: "헬리오 (선봉 돌파)" },
@@ -664,7 +674,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
                 <div class="orbit-content">
-                    <span class="orbit-number"><i class="${f.icon || 'fa-solid fa-moon'}"></i> ${f.roman}층 · ${f.phase}</span>
+                    <span class="orbit-number">${renderIcon(f.icon, 'dark_mode')} ${f.roman}층 · ${f.phase}</span>
                 </div>
             </div>
         `).join('');
@@ -682,7 +692,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="card-divider ${f.isBossCard ? 'boss-divider' : ''}"></div>
                         <p class="card-text">${f.description || ''}</p>
                     </div>
-                    <div class="phase-symbol ${f.isBossCard ? 'eclipse-symbol' : ''}"><i class="${f.icon || 'fa-solid fa-moon'}"></i> ${f.phaseSymbol || f.phase}</div>
+                    <div class="phase-symbol ${f.isBossCard ? 'eclipse-symbol' : ''}">${renderIcon(f.icon, 'dark_mode')} ${f.phaseSymbol || f.phase}</div>
                 </div>
             </div>
         `).join('');
@@ -981,10 +991,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return `
             <div class="slide-nav-bar">
                 <button class="slide-nav-btn btn-slide-prev" ${prevDisabled} title="이전" aria-label="이전">
-                    <i class="fa-solid fa-arrow-left"></i>
+                    <span class="material-symbols-outlined">arrow_back</span>
                 </button>
                 <button class="slide-nav-btn btn-slide-next" ${nextDisabled} title="다음" aria-label="다음">
-                    <i class="fa-solid fa-arrow-right"></i>
+                    <span class="material-symbols-outlined">arrow_forward</span>
                 </button>
             </div>
         `;
@@ -994,12 +1004,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // 7. Worldview & Prologue (from data/worldview.json)
     // ----------------------------------------------------
     const defaultWorldview = {
-        header: { tag: "DIVINA PARADISO LORE", title: "세계관" },
+        header: { tag: "DIVINA LUNA LORE", title: "세계관" },
         chapters: [
             {
                 id: "prologue",
                 tabName: "프롤로그",
-                tabIcon: "fa-solid fa-scroll",
+                tabIcon: "auto_stories",
                 tag: "PROLOGUE · THE SILENCE OF HEAVEN",
                 title: "닫혀버린 하늘, 지상에 고립된 낙천사들의 순례",
                 paragraphs: [
@@ -1008,12 +1018,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     "신은 침묵하고 구원의 손길은 사라진 절망의 대지. 서로 다른 상처와 고뇌를 품은 4인의 천사가 하늘로 돌아갈 유일한 길은, 지상에서 월구로 이어지는 거대한 에테르 나선 '달의 그림자 탑'을 오르는 것뿐입니다."
                 ],
                 tags: ["#대봉쇄", "#신의침묵", "#제9품계", "#인계침식", "#달의그림자탑"],
-                quote: "하늘이 우리를 버렸을지라도, 우리가 서로를 놓지 않는 한 이곳은 지옥이 아니다."
+                quote: "하늘이 우리를 버렸을지라도, 우리가 서로를 놓지 않는 한 이곳은 지옥이 아닙니다."
             },
             {
                 id: "dante",
                 tabName: "단테 《신곡》 모티프",
-                tabIcon: "fa-solid fa-book-bible",
+                tabIcon: "menu_book",
                 tag: "LITERARY MOTIF · PRIMO CIELO",
                 title: "불완전한 영혼들이 머무는 제1천 '월구(Sphere of the Moon)'",
                 paragraphs: [
@@ -1027,7 +1037,7 @@ document.addEventListener("DOMContentLoaded", () => {
             {
                 id: "silence",
                 tabName: "신의 침묵",
-                tabIcon: "fa-solid fa-cross",
+                tabIcon: "church",
                 tag: "CRISIS · DEUS SILENS",
                 title: "100년 성전 속 돌연 시작된 신의 절대적 침묵",
                 paragraphs: [
@@ -1041,7 +1051,7 @@ document.addEventListener("DOMContentLoaded", () => {
             {
                 id: "erosion",
                 tabName: "인계 침식",
-                tabIcon: "fa-solid fa-feather",
+                tabIcon: "feather",
                 tag: "CORRUPTION · MORTAL EROSION",
                 title: "천사성의 상실, 3단계 인계 침식(Mortal Erosion)",
                 paragraphs: [
@@ -1055,7 +1065,7 @@ document.addEventListener("DOMContentLoaded", () => {
             {
                 id: "tower",
                 tabName: "달의 그림자 탑",
-                tabIcon: "fa-solid fa-tower-observation",
+                tabIcon: "fort",
                 tag: "ASCENT · 7 LUNAR PHASES",
                 title: "연금술적 시련의 공간, 7대 달의 위상과 정화의 나선",
                 paragraphs: [
@@ -1093,7 +1103,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         worldviewTabsContainer.innerHTML = chapters.map((ch, i) => `
             <button class="tab-slider-btn ${i === 0 ? 'active' : ''}" data-index="${i}">
-                <i class="${ch.tabIcon || 'fa-solid fa-scroll'}"></i>
+                ${renderIcon(ch.tabIcon, 'auto_stories')}
                 <span>${ch.tabName}</span>
             </button>
         `).join('');
@@ -1109,7 +1119,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const footerQuoteHtml = ch.quote ? `
                 <div class="single-card-footer">
-                    <i class="fa-solid fa-quote-left"></i>
+                    <span class="material-symbols-outlined">format_quote</span>
                     <p>"${ch.quote}"</p>
                 </div>
             ` : '';
@@ -1166,7 +1176,7 @@ document.addEventListener("DOMContentLoaded", () => {
             enName: "Nebbia",
             rankBadge: "제9품계 하급 천사 · 전사",
             meta: "여성 / 전사 / 제9품계",
-            weapon: { icon: "fa-solid fa-wand-magic-sparkles", text: "은빛 레이피어" },
+            weapon: { icon: "auto_fix_high", text: "은빛 레이피어" },
             tags: ["#까칠한츤데레", "#신의침묵에분노", "#속정깊음", "#잿빛날개"],
             appearance: "헝클어진 금발 단발, 날카롭고 강렬한 녹안(Emerald Eyes). 지상 전장의 흙먼지가 묻은 은빛 경갑주를 걸쳤으며, 인계 침식으로 인해 본래 순백이던 날개가 잿빛으로 흐려져 있습니다.",
             personality: "까칠하고 틱틱대는 츤데레 전사. 신의 침묵을 명백한 배신으로 여겨 분노를 감추지 않습니다. 그러나 동료를 누구보다 아끼며, 툭툭 내뱉는 날 선 반말 뒤로 혀를 차거나 시선을 피하며 챙겨줍니다.",
@@ -1182,7 +1192,7 @@ document.addEventListener("DOMContentLoaded", () => {
             enName: "Calliste",
             rankBadge: "제9품계 하급 천사 · 관조·기록",
             meta: "여성 / 관조·기록 / 제9품계",
-            weapon: { icon: "fa-solid fa-scroll", text: "낡은 면사포 & 경화된 날개" },
+            weapon: { icon: "menu_book", text: "낡은 면사포 & 경화된 날개" },
             tags: ["#소심하고조용함", "#체념적성향", "#비행불가", "#서글픈존댓말"],
             appearance: "풍성하게 구불거리는 긴 은발, 항상 눈물이 고인 듯 맑고 투명한 벽안(Cyan Eyes). 머리에는 올이 풀린 낡은 면사포를 둘렀으며, 한쪽 날개가 완전히 석화처럼 경화되어 더 이상 하늘을 날 수 없습니다.",
             personality: "소심하고 조용하며, 버려진 처지를 서글프게 직시하는 체념적 성향. 말끝을 흐리는 나지막하고 가녀린 존댓말을 쓰며, 불안할 때면 낡은 옷소매를 꼭 쥐는 버릇이 있습니다.",
@@ -1198,7 +1208,7 @@ document.addEventListener("DOMContentLoaded", () => {
             enName: "Hellio",
             rankBadge: "제9품계 하급 천사 · 전사·선봉",
             meta: "남성 / 전사·선봉 / 제9품계",
-            weapon: { icon: "fa-solid fa-gavel", text: "묵직한 대검" },
+            weapon: { icon: "gavel", text: "묵직한 대검" },
             tags: ["#철저한현실주의", "#감정절제", "#과거배신경험", "#듬직한탱커"],
             appearance: "차분하게 정돈된 회색 머리, 건조하고 단호한 회안(Grey Eyes). 단련된 다부진 체격 위에 낡은 검은 가죽 코트를 걸치고 있으며, 거대한 양손 대검을 덤덤하게 짊어지고 있습니다.",
             personality: "철저한 현실주의자이자 감정에 휘둘리지 않는 든든한 선봉장. 과거 상위 천사에게 희생양으로 버림받았던 기억이 있습니다. 단정하고 건조한 존댓말/반존대를 구사하며 철저히 팩트만을 전달합니다.",
@@ -1214,7 +1224,7 @@ document.addEventListener("DOMContentLoaded", () => {
             enName: "Sinope",
             rankBadge: "제9품계 하급 천사 · 궁수·정찰",
             meta: "여성 / 궁수·정찰 / 제9품계",
-            weapon: { icon: "fa-solid fa-bow-arrow", text: "칠흑의 곡궁" },
+            weapon: { icon: "colorize", text: "칠흑의 곡궁" },
             tags: ["#능글맞은장난기", "#가면뒤의어둠", "#가장깊은침식", "#유쾌한독설"],
             appearance: "어깨까지 내려오는 흑발의 웨이브, 붉은 빛이 도는 자안(Violet Eyes). 눈가에 장난스러운 눈웃음을 띠고 있으며, 인계 침식이 가장 깊이 진행되어 날개 끝에서 검은 재가 흩날립니다.",
             personality: "늘 가볍고 장난기 넘치는 말투로 본심을 감추는 기만형 궁수. 겉으로는 실없는 소리를 던지지만, 누구보다 냉철하게 전장의 흐름을 읽고 있습니다.",
@@ -1268,17 +1278,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
 
                         <div class="ch-section">
-                            <h4><i class="fa-solid fa-user"></i> 외형</h4>
+                            <h4><span class="material-symbols-outlined">person</span> 외형</h4>
                             <p>${c.appearance || ''}</p>
                         </div>
 
                         <div class="ch-section">
-                            <h4><i class="fa-solid fa-comment-dots"></i> 성격</h4>
+                            <h4><span class="material-symbols-outlined">chat_bubble</span> 성격</h4>
                             <p>${c.personality || ''}</p>
                         </div>
 
                         <div class="ch-quote-box">
-                            <div class="quote-tag"><i class="fa-solid fa-quote-left"></i> 대표 대사</div>
+                            <div class="quote-tag"><span class="material-symbols-outlined">format_quote</span> 대표 대사</div>
                             <p class="quote-text">"${c.quote || ''}"</p>
                         </div>
                     </div>
@@ -1359,7 +1369,7 @@ document.addEventListener("DOMContentLoaded", () => {
             {
                 id: "vision",
                 tabName: "기획 의도",
-                tabIcon: "fa-solid fa-pen-nib",
+                tabIcon: "history_edu",
                 tag: "CREATOR'S VISION · PILGRIMAGE",
                 title: "불완전한 존재들의 실존적 순례에 관하여",
                 paragraphs: [
@@ -1373,7 +1383,7 @@ document.addEventListener("DOMContentLoaded", () => {
             {
                 id: "dante_lore",
                 tabName: "월구와 제9품계",
-                tabIcon: "fa-solid fa-moon",
+                tabIcon: "dark_mode",
                 tag: "DEEP LORE · THE 9TH CHOIR",
                 title: "단테 《신곡》과 월구(Primo Cielo)의 철학",
                 paragraphs: [
@@ -1387,7 +1397,7 @@ document.addEventListener("DOMContentLoaded", () => {
             {
                 id: "silence_lore",
                 tabName: "신의 침묵과 봉쇄",
-                tabIcon: "fa-solid fa-key",
+                tabIcon: "key",
                 tag: "MYSTERY · DEUS SILENS",
                 title: "전쟁 97년 차 월구 대문 봉쇄 사건",
                 paragraphs: [
@@ -1401,7 +1411,7 @@ document.addEventListener("DOMContentLoaded", () => {
             {
                 id: "tower_lore",
                 tabName: "달의 위상 연금술",
-                tabIcon: "fa-solid fa-flask",
+                tabIcon: "science",
                 tag: "ALCHEMICAL ASCENT · 7 PHASES",
                 title: "7대 위상과 정화의 나선 구조",
                 paragraphs: [
@@ -1439,7 +1449,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         authorNotesTabsContainer.innerHTML = chapters.map((ch, i) => `
             <button class="tab-slider-btn ${i === 0 ? 'active' : ''}" data-index="${i}">
-                <i class="${ch.tabIcon || 'fa-solid fa-pen-nib'}"></i>
+                ${renderIcon(ch.tabIcon, 'history_edu')}
                 <span>${ch.tabName}</span>
             </button>
         `).join('');
@@ -1455,7 +1465,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const footerQuoteHtml = ch.quote ? `
                 <div class="single-card-footer">
-                    <i class="fa-solid fa-quote-left"></i>
+                    <span class="material-symbols-outlined quote-icon">format_quote</span>
                     <p>"${ch.quote}"</p>
                 </div>
             ` : '';
@@ -1546,11 +1556,11 @@ document.addEventListener("DOMContentLoaded", () => {
         function updateBgmUI(playing) {
             if (playing) {
                 bgmPlayer.classList.add("bgm-playing");
-                bgmIcon.className = "fa-solid fa-pause";
+                if (bgmIcon) bgmIcon.textContent = "pause";
                 bgmToggleBtn.setAttribute("title", "음악 일시정지");
             } else {
                 bgmPlayer.classList.remove("bgm-playing");
-                bgmIcon.className = "fa-solid fa-play";
+                if (bgmIcon) bgmIcon.textContent = "play_arrow";
                 bgmToggleBtn.setAttribute("title", "음악 재생");
             }
         }
@@ -1587,11 +1597,11 @@ document.addEventListener("DOMContentLoaded", () => {
         function updateVolumeIcon(vol) {
             if (!volumeIcon) return;
             if (vol === 0) {
-                volumeIcon.className = "fa-solid fa-volume-xmark volume-icon";
+                volumeIcon.textContent = "volume_off";
             } else if (vol < 0.5) {
-                volumeIcon.className = "fa-solid fa-volume-low volume-icon";
+                volumeIcon.textContent = "volume_down";
             } else {
-                volumeIcon.className = "fa-solid fa-volume-high volume-icon";
+                volumeIcon.textContent = "volume_up";
             }
         }
 
@@ -1616,7 +1626,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 navHamburger.setAttribute("aria-expanded", "false");
             }
             if (navHamburgerIcon) {
-                navHamburgerIcon.className = "fa-solid fa-bars";
+                navHamburgerIcon.textContent = "menu";
             }
         }
     }
@@ -1629,7 +1639,7 @@ document.addEventListener("DOMContentLoaded", () => {
             navHamburger.setAttribute("aria-expanded", isOpen ? "true" : "false");
         }
         if (navHamburgerIcon) {
-            navHamburgerIcon.className = isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars";
+            navHamburgerIcon.textContent = isOpen ? "close" : "menu";
         }
     }
 

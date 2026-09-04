@@ -9,7 +9,7 @@
     "rankBadge": "제9품계 하급 천사 · 전사",
     "meta": "여성 / 전사 / 제9품계",
     "weapon": {
-      "icon": "fa-solid fa-wand-magic-sparkles",
+      "icon": "auto_fix_high",
       "text": "은빛 레이피어"
     },
     "tags": [
@@ -34,7 +34,7 @@
     "rankBadge": "제9품계 하급 천사 · 관조·기록",
     "meta": "여성 / 관조·기록 / 제9품계",
     "weapon": {
-      "icon": "fa-solid fa-scroll",
+      "icon": "menu_book",
       "text": "낡은 면사포 & 경화된 날개"
     },
     "tags": [
@@ -59,7 +59,7 @@
     "rankBadge": "제9품계 하급 천사 · 전사·선봉",
     "meta": "남성 / 전사·선봉 / 제9품계",
     "weapon": {
-      "icon": "fa-solid fa-gavel",
+      "icon": "gavel",
       "text": "묵직한 대검"
     },
     "tags": [
@@ -84,7 +84,7 @@
     "rankBadge": "제9품계 하급 천사 · 전사·유격",
     "meta": "남성 / 전사·유격 / 제9품계",
     "weapon": {
-      "icon": "fa-solid fa-khanda",
+      "icon": "colorize",
       "text": "흑은의 쌍단검"
     },
     "tags": [

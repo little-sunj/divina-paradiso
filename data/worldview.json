@@ -1,14 +1,14 @@
 {
   "header": {
-    "tag": "DIVINA PARADISO LORE",
+    "tag": "DIVINA LUNA LORE",
     "title": "세계관"
   },
   "chapters": [
     {
       "id": "prologue",
       "tabName": "프롤로그",
-      "tabIcon": "fa-solid fa-scroll",
-      "tag": "PROLOGUE · THE SILENCE OF HEAVEN",
+      "tabIcon": "auto_stories",
+      "tag": "PROLOGUE",
       "title": "닫혀버린 하늘, 지상에 고립된 낙천사들의 순례",
       "paragraphs": [
         "천사들과 악마들의 오랜 전쟁 속에서 천계 최하층 '월구(달)'의 문이 안쪽에서 일방적으로 봉쇄되었습니다.",
@@ -22,12 +22,12 @@
         "#인계침식",
         "#달의그림자탑"
       ],
-      "quote": "하늘이 우리를 버렸을지라도, 우리가 서로를 놓지 않는 한 이곳은 지옥이 아니다."
+      "quote": "하늘이 우리를 버렸을지라도, 우리가 서로를 놓지 않는 한 이곳은 지옥이 아닙니다."
     },
     {
       "id": "dante",
       "tabName": "단테 《신곡》 모티프",
-      "tabIcon": "fa-solid fa-book-bible",
+      "tabIcon": "menu_book",
       "tag": "LITERARY MOTIF · PRIMO CIELO",
       "title": "불완전한 영혼들이 머무는 제1천 '월구(Sphere of the Moon)'",
       "paragraphs": [
@@ -46,7 +46,7 @@
     {
       "id": "silence",
       "tabName": "신의 침묵",
-      "tabIcon": "fa-solid fa-cross",
+      "tabIcon": "church",
       "tag": "CRISIS · DEUS SILENS",
       "title": "100년 성전 속 돌연 시작된 신의 절대적 침묵",
       "paragraphs": [
@@ -65,7 +65,7 @@
     {
       "id": "erosion",
       "tabName": "인계 침식",
-      "tabIcon": "fa-solid fa-feather",
+      "tabIcon": "feather",
       "tag": "CORRUPTION · MORTAL EROSION",
       "title": "천사성의 상실, 3단계 인계 침식(Mortal Erosion)",
       "paragraphs": [
@@ -84,7 +84,7 @@
     {
       "id": "tower",
       "tabName": "달의 그림자 탑",
-      "tabIcon": "fa-solid fa-tower-observation",
+      "tabIcon": "fort",
       "tag": "ASCENT · 7 LUNAR PHASES",
       "title": "연금술적 시련의 공간, 7대 달의 위상과 정화의 나선",
       "paragraphs": [

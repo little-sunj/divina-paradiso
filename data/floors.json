@@ -4,7 +4,7 @@
     "roman": "VII",
     "phase": "월식",
     "phaseEn": "Eclipse",
-    "icon": "fa-solid fa-circle-notch",
+    "icon": "radio_button_unchecked",
     "title": "7층: 붉은 관문",
     "name": "붉은 관문",
     "spinnerClass": "spinner-7",
@@ -28,7 +28,7 @@
     "roman": "VI",
     "phase": "하현",
     "phaseEn": "Last Quarter",
-    "icon": "fa-solid fa-moon fa-flip-horizontal",
+    "icon": "brightness_2",
     "title": "6층: 침식의 극점",
     "name": "침식의 극점",
     "spinnerClass": "spinner-6",
@@ -40,8 +40,8 @@
     "imgClass": "floor-img-6",
     "description": "인간계의 오염과 탑의 왜곡된 마력이 융합되어 천사의 영핵(신성 코어)을 한계까지 쥐어짜는 지옥 같은 층입니다. 칼리스테의 날개는 석화에 가깝게 굳어가고, 시노페의 신체 침식은 전신으로 번져가며 모두가 한계에 다다릅니다.",
     "stats": [
-      { "icon": "fa-solid fa-biohazard", "label": "위험 요소: 신성 영핵 급속 붕괴 & 석화" },
-      { "icon": "fa-solid fa-ghost", "label": "주요 조우: 극점의 침식 괴수" }
+      { "icon": "warning", "label": "위험 요소: 신성 영핵 급속 붕괴 & 석화" },
+      { "icon": "sentiment_very_dissatisfied", "label": "주요 조우: 극점의 침식 괴수" }
     ],
     "characters": [
       { "char": "sinope", "name": "시노페 (침식 억제 유격전)" },
@@ -53,7 +53,7 @@
     "roman": "V",
     "phase": "만월",
     "phaseEn": "Full Moon",
-    "icon": "fa-solid fa-circle",
+    "icon": "circle",
     "title": "5층: 광휘 성당",
     "name": "광휘 성당",
     "spinnerClass": "spinner-5",
@@ -65,8 +65,8 @@
     "imgClass": "floor-img-5",
     "description": "만월의 순백 성광이 눈이 멀도록 쏟아져 내리는 거대한 대성당 구역입니다. 하지만 그 찬란한 빛 속에는 신의 자비가 아닌 잔인한 침묵만이 깃들어 있습니다.",
     "stats": [
-      { "icon": "fa-solid fa-sun", "label": "위험 요소: 실명 유발 성광 & 자동 방어 성물" },
-      { "icon": "fa-solid fa-monument", "label": "주요 조우: 성당의 백은 수호기사" }
+      { "icon": "light_mode", "label": "위험 요소: 실명 유발 성광 & 자동 방어 성물" },
+      { "icon": "shield", "label": "주요 조우: 성당의 백은 수호기사" }
     ],
     "characters": [
       { "char": "hellio", "name": "헬리오 (대검 결계 방어)" },
@@ -78,7 +78,7 @@
     "roman": "IV",
     "phase": "반월",
     "phaseEn": "Gibbous Moon",
-    "icon": "fa-solid fa-adjust",
+    "icon": "contrast",
     "title": "4층: 거울 회랑",
     "name": "거울 회랑",
     "spinnerClass": "spinner-4",
@@ -90,8 +90,8 @@
     "imgClass": "floor-img-4",
     "description": "수만 개의 차가운 은빛 거울로 둘러싸인 미로 회랑입니다. 거울 속에는 천사들이 지상에서 겪은 수치, 상위 천사에게 버림받았던 상처, 신체에 진행 중인 인계 침식의 모습이 투영됩니다.",
     "stats": [
-      { "icon": "fa-solid fa-clone", "label": "위험 요소: 죄책감의 도플갱어" },
-      { "icon": "fa-solid fa-gem", "label": "주요 조우: 거울의 복제자" }
+      { "icon": "copy_all", "label": "위험 요소: 죄책감의 도플갱어" },
+      { "icon": "diamond", "label": "주요 조우: 거울의 복제자" }
     ],
     "characters": [
       { "char": "sinope", "name": "시노페 (쌍단검 거울 파괴)" },
@@ -103,7 +103,7 @@
     "roman": "III",
     "phase": "상현",
     "phaseEn": "First Quarter",
-    "icon": "fa-solid fa-moon",
+    "icon": "dark_mode",
     "title": "3층: 이성의 균열",
     "name": "이성의 균열",
     "spinnerClass": "spinner-3",
@@ -115,8 +115,8 @@
     "imgClass": "floor-img-3",
     "description": "탑의 중층부로 접어들며 신의 침묵에 대한 분노와 동료에 대한 불신이 극대화되는 층입니다. 공간 자체가 기하학적으로 찢겨 있으며, 영혼의 파장을 증폭시키는 균열이 이성을 갉아먹습니다.",
     "stats": [
-      { "icon": "fa-solid fa-brain", "label": "위험 요소: 광기 유발 파동 & 불신 증폭" },
-      { "icon": "fa-solid fa-bolt", "label": "주요 조우: 균열의 사념체" }
+      { "icon": "psychology", "label": "위험 요소: 광기 유발 파동 & 불신 증폭" },
+      { "icon": "bolt", "label": "주요 조우: 균열의 사념체" }
     ],
     "characters": [
       { "char": "nebbia", "name": "네비아 (분노의 레이피어)" },
@@ -128,7 +128,7 @@
     "roman": "II",
     "phase": "초승",
     "phaseEn": "Crescent",
-    "icon": "fa-solid fa-moon",
+    "icon": "dark_mode",
     "title": "2층: 갈망의 안개",
     "name": "갈망의 안개",
     "spinnerClass": "spinner-2",
@@ -140,8 +140,8 @@
     "imgClass": "floor-img-2",
     "description": "돌아가지 못한 천사들의 애끓는 염원이 보랏빛 환각의 안개로 응결된 층입니다. 안개 속에서는 이미 닫혀버린 월구 너머의 그리운 천계 풍경과 신의 따스한 목소리가 환청으로 울려 퍼집니다.",
     "stats": [
-      { "icon": "fa-solid fa-eye-slash", "label": "위험 요소: 천계 환각 & 청각 교란" },
-      { "icon": "fa-solid fa-wind", "label": "주요 조우: 갈망의 환영체" }
+      { "icon": "visibility_off", "label": "위험 요소: 천계 환각 & 청각 교란" },
+      { "icon": "air", "label": "주요 조우: 갈망의 환영체" }
     ],
     "characters": [
       { "char": "calliste", "name": "칼리스테 (기록 및 환각 식별)" },
@@ -153,7 +153,7 @@
     "roman": "I",
     "phase": "삭",
     "phaseEn": "New Moon",
-    "icon": "fa-regular fa-circle",
+    "icon": "circle",
     "title": "1층: 망각의 진흙 늪",
     "name": "망각의 진흙 늪",
     "spinnerClass": "spinner-1",
@@ -165,8 +165,8 @@
     "imgClass": "floor-img-1",
     "description": "인간계 전장에서 탑의 기저부로 이어지는 최하층입니다. 신성을 갉아먹는 검은 진흙과 탁한 수맥이 얽혀 있으며, 발을 딛는 순간 과거의 영광스러운 천계 기억을 잃어버리는 '망각의 침식'이 시작됩니다.",
     "stats": [
-      { "icon": "fa-solid fa-skull", "label": "위험 요소: 망각의 진흙 & 날개 오염" },
-      { "icon": "fa-solid fa-shield-halved", "label": "주요 조우: 침식된 수호령 & 이형의 악마" }
+      { "icon": "skull", "label": "위험 요소: 망각의 진흙 & 날개 오염" },
+      { "icon": "shield", "label": "주요 조우: 침식된 수호령 & 이형의 악마" }
     ],
     "characters": [
       { "char": "hellio", "name": "헬리오 (선봉 돌파)" },
