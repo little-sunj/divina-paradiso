@@ -5,10 +5,15 @@
     box-sizing: border-box;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+}
+
 body {
     background-color: #04050b;
     color: #e2e2e9;
-    font-family: 'Noto Serif KR', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
+    font-weight: 300;
     overflow: hidden;
     width: 100vw;
     height: 100vh;
@@ -81,9 +86,9 @@ body {
 
 .intro-badge {
     display: inline-block;
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 0.82rem;
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0.35rem;
     text-indent: 0.35rem;
     color: #fef9c3;
@@ -97,7 +102,7 @@ body {
 .intro-sphere {
     font-family: 'Noto Serif KR', serif;
     font-size: 1.05rem;
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: 0.45rem;
     text-indent: 0.45rem;
     color: #ffffff;
@@ -109,7 +114,7 @@ body {
 .intro-title {
     font-family: 'Noto Serif KR', serif;
     font-size: 3.2rem;
-    font-weight: 400;
+    font-weight: 300;
     letter-spacing: 1.6rem;
     text-indent: 1.6rem;
     color: #ffffff;
@@ -132,8 +137,9 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 0.95rem;
+    font-weight: 300;
     letter-spacing: 0.35rem;
     text-indent: 0.35rem;
     color: #fefce8;
@@ -186,7 +192,7 @@ body {
 }
 
 .brand-sub {
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 0.65rem;
     font-weight: 400;
     letter-spacing: 0.25rem;
@@ -296,7 +302,7 @@ body {
 }
 
 .bgm-title {
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 0.68rem;
     font-weight: 400;
     letter-spacing: 0.12rem;
@@ -723,9 +729,9 @@ body {
 }
 
 .orbit-number {
-    font-family: 'Cinzel', 'Noto Serif KR', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: 400;
     color: #fef9c3;
     letter-spacing: 0.08rem;
     display: flex;
@@ -737,7 +743,7 @@ body {
 
 .orbit-title {
     font-size: 1.05rem;
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0.1rem;
     color: #ffffff;
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
@@ -893,7 +899,7 @@ body {
     background: rgba(20, 20, 24, 0.8);
     border: none;
     color: #e5e0d3;
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 0.85rem;
     letter-spacing: 0.15rem;
     padding: 8px 18px;
@@ -925,18 +931,18 @@ body {
 }
 
 .section-tag {
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 0.75rem;
     letter-spacing: 0.3rem;
     color: #fffad9;
-    font-weight: 700;
+    font-weight: 400;
     margin-bottom: 6px;
     display: block;
 }
 
 .modal-header h2 {
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 400;
     color: #ffffff;
     letter-spacing: 0.15rem;
 }
@@ -1024,9 +1030,9 @@ body {
 
 .floor-badge {
     align-self: flex-start;
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 400;
     letter-spacing: 0.2rem;
     color: #fefce8;
     background: rgba(6, 6, 8, 0.85);
@@ -1077,16 +1083,16 @@ body {
 }
 
 .card-category {
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 0.78rem;
     color: #fff7bf;
     letter-spacing: 0.2rem;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 .card-info h2 {
     font-size: 1.9rem;
-    font-weight: 600;
+    font-weight: 400;
     color: #ffffff;
     margin-top: 6px;
     margin-bottom: 14px;
@@ -1406,7 +1412,7 @@ body {
 .tab-btn.active {
     background: linear-gradient(135deg, rgba(28, 28, 32, 0.98) 0%, rgba(16, 16, 18, 0.98) 100%);
     color: #ffffff;
-    font-weight: 600;
+    font-weight: 400;
     box-shadow: 0 6px 25px rgba(0, 0, 0, 0.85), 0 0 16px rgba(255, 255, 255, 0.1);
 }
 
@@ -1471,52 +1477,13 @@ body {
     }
 }
 
-/* Slide Navigation Bar */
+/* Slide Navigation Bar (Hidden as requested) */
 .slide-nav-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 900px;
-    margin: 30px auto 0;
-    padding-top: 18px;
-    border: none;
-}
-
-.slide-nav-btn {
-    background: rgba(18, 18, 20, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: #e5e1d4;
-    width: 42px;
-    height: 42px;
-    font-size: 0.95rem;
-    cursor: pointer;
-    border-radius: 4px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
-}
-
-.slide-nav-btn .material-symbols-outlined {
-    font-size: 1.35rem;
-}
-
-.slide-nav-btn:hover:not(:disabled) {
-    background: rgba(28, 28, 32, 0.95);
-    color: #ffffff;
-    border-color: rgba(254, 249, 195, 0.25);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), 0 0 10px rgba(254, 249, 195, 0.12);
-}
-
-.slide-nav-btn:disabled {
-    opacity: 0.2;
-    cursor: not-allowed;
-    border-color: transparent;
+    display: none !important;
 }
 
 .slide-page-indicator {
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 0.82rem;
     letter-spacing: 0.15rem;
     color: #fef08a;
@@ -1538,19 +1505,19 @@ body {
 
 .editorial-tag {
     display: inline-block;
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 0.72rem;
     letter-spacing: 0.2rem;
     color: #fffad9;
     margin-bottom: 8px;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 .editorial-title {
     font-size: 1.3rem;
     color: #fefce8;
     margin-bottom: 10px;
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0.02rem;
 }
 
@@ -1593,9 +1560,9 @@ body {
 }
 
 .flow-step-num {
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 0.78rem;
-    font-weight: 700;
+    font-weight: 400;
     color: #fef08a;
     letter-spacing: 0.1rem;
     background: rgba(254, 240, 138, 0.1);
@@ -1610,7 +1577,7 @@ body {
 }
 
 .flow-card-tag {
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 0.65rem;
     letter-spacing: 0.15rem;
     color: #b5b0a1;
@@ -1622,7 +1589,7 @@ body {
     font-size: 1.02rem;
     color: #fefce8;
     margin-bottom: 10px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .story-flow-card p {
@@ -1737,7 +1704,7 @@ body {
     border: none;
     color: #e5e1d4;
     border-radius: 2px;
-    font-family: 'Cinzel', 'Noto Serif KR', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     letter-spacing: 0.02rem;
 }
 
@@ -1769,12 +1736,12 @@ body {
 .single-card-tag,
 .author-card-tag {
     display: inline-block;
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 0.74rem;
     letter-spacing: 0.2rem;
     color: #fffad9;
     margin-bottom: 10px;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 .single-card-title,
@@ -1782,7 +1749,7 @@ body {
     font-size: 1.4rem;
     color: #fefce8;
     margin-bottom: 4px;
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0.02rem;
     line-height: 1.45;
 }
@@ -1889,7 +1856,7 @@ body {
 .char-rank-badge {
     align-self: flex-start;
     font-size: 0.72rem;
-    font-weight: 600;
+    font-weight: 400;
     color: #fefce8;
     background: rgba(6, 6, 8, 0.85);
     border: none;
@@ -1956,15 +1923,15 @@ body {
 
 .ch-name-row h3 {
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 400;
     color: #ffffff;
 }
 
 .ch-en {
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 1.05rem;
     color: #fef08a;
-    font-weight: 400;
+    font-weight: 300;
     margin-left: 8px;
 }
 
@@ -2027,7 +1994,7 @@ body {
 
 .quote-tag {
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 400;
     color: #fef08a;
     letter-spacing: 0.1rem;
     margin-bottom: 6px;
@@ -2222,12 +2189,12 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 0.72rem;
     letter-spacing: 0.2rem;
     color: #fffad9;
     margin-bottom: 12px;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 .author-intro-text {
@@ -2275,16 +2242,16 @@ body {
 }
 
 .deep-lore-num {
-    font-family: 'Cinzel', serif;
+    font-family: 'Noto Serif', 'Noto Serif KR', serif;
     font-size: 1.1rem;
-    font-weight: 700;
+    font-weight: 400;
     color: #fef08a;
     opacity: 0.8;
 }
 
 .deep-lore-header h3 {
     font-size: 1.02rem;
-    font-weight: 600;
+    font-weight: 400;
     color: #ffffff;
     letter-spacing: 0.05rem;
 }

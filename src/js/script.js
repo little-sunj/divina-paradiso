@@ -983,21 +983,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let charactersSlider = null;
     let authorNotesSlider = null;
 
-    // Helper for Slide Navigation Footer
-    function createSlideNavBarHtml(currentIndex, totalCount) {
-        const prevDisabled = currentIndex === 0 ? 'disabled' : '';
-        const nextDisabled = currentIndex === totalCount - 1 ? 'disabled' : '';
-
-        return `
-            <div class="slide-nav-bar">
-                <button class="slide-nav-btn btn-slide-prev" ${prevDisabled} title="이전" aria-label="이전">
-                    <span class="material-symbols-outlined">arrow_back</span>
-                </button>
-                <button class="slide-nav-btn btn-slide-next" ${nextDisabled} title="다음" aria-label="다음">
-                    <span class="material-symbols-outlined">arrow_forward</span>
-                </button>
-            </div>
-        `;
+    // Helper for Slide Navigation Footer (Removed as requested)
+    function createSlideNavBarHtml() {
+        return '';
     }
 
     // ----------------------------------------------------
@@ -1017,7 +1005,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     "미처 천상으로 귀환하지 못한 채 인간계 전장에 남겨진 제9품계 하급 천사들은 점차 지상의 탁기에 노출되어 '인계 침식'의 고통에 젖어갑니다. 순백이던 날개는 잿빛으로 굳어가고, 성스러운 광륜은 빛을 잃어갑니다.",
                     "신은 침묵하고 구원의 손길은 사라진 절망의 대지. 서로 다른 상처와 고뇌를 품은 4인의 천사가 하늘로 돌아갈 유일한 길은, 지상에서 월구로 이어지는 거대한 에테르 나선 '달의 그림자 탑'을 오르는 것뿐입니다."
                 ],
-                tags: ["#대봉쇄", "#신의침묵", "#제9품계", "#인계침식", "#달의그림자탑"],
                 quote: "하늘이 우리를 버렸을지라도, 우리가 서로를 놓지 않는 한 이곳은 지옥이 아닙니다."
             },
             {
@@ -1031,7 +1018,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     "《달의 그림자 탑》은 이 고전적 모티프를 현대적 다크 판타지로 재해석했습니다. 완전무결함을 강요받는 상위 품계와 달리, 제9품계 천사들은 상처받고 흔들리며 서로에게 의지하는 가장 인간적인 존재들입니다.",
                     "달의 위상이 차오르고 기울듯 불완전하기에 흔들리는 그들의 서사는, 맹목적인 복종이 아닌 '자신의 의지와 동료를 향한 유대'로 신성한 구원을 쟁취하는 여정을 보여줍니다."
                 ],
-                tags: ["#단테신곡", "#천국편제1천", "#월구모티프", "#불완전함의미학"],
                 quote: "완벽하지 않기에 흔들리고, 흔들리기에 서로의 온기를 온전히 갈망한다."
             },
             {
@@ -1045,7 +1031,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     "사전 경고도 사후 해명도 없이 월구의 대문은 굳게 닫혔고, 최전선에서 싸우던 제9품계 병사들은 차가운 지상에 버려졌습니다. 이것이 상급 천사들의 배신인지, 아니면 신의 또 다른 안배인지는 베일에 싸여 있습니다.",
                     "침묵하는 신을 향한 분노와 배신감, 그리고 체념 속에서도 그들은 결코 무릎 꿇지 않고 탑의 정상에서 진실을 확인하고자 합니다."
                 ],
-                tags: ["#월구대문봉쇄", "#절대침묵", "#사라진계시", "#천상계의의문"],
                 quote: "어찌하여 문은 봉쇄되었고, 신은 침묵하는가에 대해서는 추후 시리즈로 다루길 고대하고 있습니다."
             },
             {
@@ -1059,7 +1044,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     "1단계에서 순백의 날개가 잿빛으로 퇴색되고 광륜이 점멸하며, 2단계에선 깃털이 석화처럼 굳어져 하늘을 날 수 없게 됩니다. 마지막 3단계에 이르면 영핵(Core)마저 붕괴되어 천사성을 영영 잃고 낙천사로 전락합니다.",
                     "시간이 지날수록 침식은 깊어지지만, 그들은 인간들의 고통과 온기에 공감하며 역설적으로 광기를 이겨내고 스스로의 존재 가치를 증명해 나갑니다."
                 ],
-                tags: ["#인계침식", "#날개변색", "#깃털석화", "#영핵붕괴"],
                 quote: "순백의 깃털이 잿빛으로 굳어갈지라도, 존재의 존엄마저 탁기에 바치진 않는다."
             },
             {
@@ -1073,7 +1057,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     "탑은 1층 삭(망각)에서부터 상현, 만월(각성), 그리고 7층 월식(붉은 문)에 이르는 7개의 위상으로 이루어져 있습니다. 층을 오르는 행위는 침식된 자아와 각자의 내면적 상처(분노, 체념, 침묵, 기만)를 직면하는 연금술적 시련입니다.",
                     "네 천사가 서로의 영혼을 믿고 온전히 하나로 맞물릴 때, 비로소 최상층 월식의 문이 열리고 닫혀버린 월구로의 귀환로가 드러나게 됩니다."
                 ],
-                tags: ["#달의그림자탑", "#7대위상", "#만월의각성", "#월식의문"],
                 quote: "일곱 번의 어둠과 시험을 통과한 자만이 비로소 붉은 문 너머의 새벽을 마주하리라."
             }
         ]
@@ -1111,11 +1094,6 @@ document.addEventListener("DOMContentLoaded", () => {
         worldviewPanesContainer.innerHTML = chapters.map((ch, i) => {
             const paragraphs = ch.paragraphs || (ch.summary ? [ch.summary] : (ch.lead ? [ch.lead] : []));
             const paragraphsHtml = paragraphs.map(p => `<p>${p}</p>`).join('');
-            const tagsHtml = (ch.tags && ch.tags.length) ? `
-                <div class="single-card-tags">
-                    ${ch.tags.map(t => `<span class="keyword-chip">${t}</span>`).join('')}
-                </div>
-            ` : '';
 
             const footerQuoteHtml = ch.quote ? `
                 <div class="single-card-footer">
@@ -1133,11 +1111,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                         <div class="single-card-body">
                             ${paragraphsHtml}
-                            ${tagsHtml}
                         </div>
                         ${footerQuoteHtml}
                     </div>
-                    ${createSlideNavBarHtml(i, total)}
                 </div>
             `;
         }).join('');
@@ -1293,7 +1269,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                     </div>
                 </div>
-                ${createSlideNavBarHtml(i, total)}
             </div>
         `).join('');
 
@@ -1377,7 +1352,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     "하늘로부터 버림받은 하급 천사들은 더 이상 명령이나 사명에 의해 움직이지 않습니다. 오직 '동료와의 유대'와 '자기 자신의 의지'로써 하늘을 향해 발을 내딛습니다.",
                     "달의 그림자 탑을 오르는 것은 물리적인 이동이 아닌, 각 층마다 마주하는 자신의 내면적 상처와 타락의 공포를 극복하는 정화(Catharsis)의 과정입니다."
                 ],
-                tags: ["#실존주의", "#버려진천사", "#유대와선택", "#정화의나선", "#내면의치유"],
                 quote: "하늘이 우리를 버렸을지라도, 우리가 서로를 놓지 않는 한 이곳은 지옥이 아니다."
             },
             {
@@ -1391,7 +1365,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     "치천사(세라핌)부터 최말단 천사(엔젤)에 이르는 9품계 중, 제9품계는 신의 옥좌와 가장 멀리 떨어진 전선의 병사들로 가장 인간에 가까운 감정을 지니고 있습니다.",
                     "완벽하지 않기에 흔들리고, 흔들리기에 서로를 갈망하는 불완전한 서원의 존재들이 만들어내는 비장하고도 따뜻한 드라마를 그리고자 했습니다."
                 ],
-                tags: ["#제9품계", "#말단천사", "#인간적감정", "#불완전함의미학", "#서원과갈등"],
                 quote: "완벽하지 않기에 흔들리고, 흔들리기에 서로의 온기를 온전히 갈망한다."
             },
             {
@@ -1405,7 +1378,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     "사전 경고도 사후 해명도 없이 기도의 응답은 끊겼으며, 상급 천사들의 배신 의혹과 지상 방치에 대한 의문은 작품 전반을 관통하는 거대한 미스터리입니다.",
                     "지상에 버려진 제9품계 천사들은 상급 계층의 사슬에서 벗어나 비로소 자신만의 의지로 운명을 개척해 나갑니다."
                 ],
-                tags: ["#천계봉쇄", "#사라진신탁", "#음모와의문", "#자유의지"],
                 quote: "어찌하여 문은 봉쇄되었고, 신은 침묵하는가에 대해서는 추후 시리즈로 다루길 고대하고 있습니다."
             },
             {
@@ -1419,7 +1391,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     "삭(망각)에서 월식(붉은 관문)에 이르는 7개 층은 4명의 천사가 각자 품고 있는 내면의 균열(분노, 체념, 방관, 기만)을 강제로 직면하게 만듭니다.",
                     "붉게 물든 최상층 월식의 문 앞에는 탑의 수호자가 기다리고 있으며, 4인의 천사가 서로의 영혼을 믿고 합일할 때 비로소 문이 열리게 됩니다."
                 ],
-                tags: ["#7개위상", "#내면의시련", "#심리적관문", "#월식의문"],
                 quote: "일곱 번의 어둠과 시험을 통과한 자만이 비로소 붉은 문 너머의 새벽을 마주하리라."
             }
         ]
@@ -1457,11 +1428,6 @@ document.addEventListener("DOMContentLoaded", () => {
         authorNotesPanesContainer.innerHTML = chapters.map((ch, i) => {
             const paragraphs = ch.paragraphs || (ch.lead ? [ch.lead] : []);
             const paragraphsHtml = paragraphs.map(p => `<p>${p}</p>`).join('');
-            const tagsHtml = (ch.tags && ch.tags.length) ? `
-                <div class="single-card-tags">
-                    ${ch.tags.map(t => `<span class="keyword-chip">${t}</span>`).join('')}
-                </div>
-            ` : '';
 
             const footerQuoteHtml = ch.quote ? `
                 <div class="single-card-footer">
@@ -1479,11 +1445,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                         <div class="single-card-body">
                             ${paragraphsHtml}
-                            ${tagsHtml}
                         </div>
                         ${footerQuoteHtml}
                     </div>
-                    ${createSlideNavBarHtml(i, total)}
                 </div>
             `;
         }).join('');
