@@ -1235,8 +1235,7 @@ document.addEventListener("DOMContentLoaded", () => {
             images: [
                 "assets/images/hellio/hellio_01.png",
                 "assets/images/hellio/hellio_02.png",
-                "assets/images/hellio/hellio_03.png",
-                "assets/images/hellio/hellio_04.png"
+                "assets/images/hellio/hellio_03.png"
             ],
             wideImage: "assets/images/hellio/hellio_wide.png",
             visualClass: "char-visual-hellio",
@@ -1257,8 +1256,7 @@ document.addEventListener("DOMContentLoaded", () => {
             images: [
                 "assets/images/sinope/sinope_01.png",
                 "assets/images/sinope/sinope_02.png",
-                "assets/images/sinope/sinope_03.png",
-                "assets/images/sinope/sinope_04.png"
+                "assets/images/sinope/sinope_03.png"
             ],
             wideImage: "assets/images/sinope/sinope_wide.png",
             visualClass: "char-visual-sinope",
