@@ -7,7 +7,7 @@
     "role": "전사",
     "rank": "제9품계 하급 천사",
     "rankBadge": "제9품계 하급 천사 · 전사",
-    "meta": "여성 / 전사 / 제9품계",
+    "meta": "전사 / 제9품계",
     "weapon": {
       "icon": "auto_fix_high",
       "text": "은빛 레이피어"
@@ -35,7 +35,7 @@
     "role": "기도사",
     "rank": "제9품계 하급 천사",
     "rankBadge": "제9품계 하급 천사 · 기도사",
-    "meta": "여성 / 기도사 / 제9품계",
+    "meta": "기도사 / 제9품계",
     "weapon": {
       "icon": "menu_book",
       "text": "낡은 면사포 & 경화된 날개"
@@ -63,7 +63,7 @@
     "role": "전사",
     "rank": "제9품계 하급 천사",
     "rankBadge": "제9품계 하급 천사 · 전사",
-    "meta": "남성 / 전사 / 제9품계",
+    "meta": "전사 / 제9품계",
     "weapon": {
       "icon": "gavel",
       "text": "까마귀 성령수"
@@ -91,7 +91,7 @@
     "role": "전사",
     "rank": "제9품계 하급 천사",
     "rankBadge": "제9품계 하급 천사 · 전사",
-    "meta": "남성 / 전사 / 제9품계",
+    "meta": "전사 / 제9품계",
     "weapon": {
       "icon": "colorize",
       "text": "쌍단검"
@@ -119,7 +119,7 @@
     "role": "문지기",
     "rank": "제8품계 천사",
     "rankBadge": "제8품계 하급 천사 · 문지기",
-    "meta": "여성 / 문지기 / 제8품계",
+    "meta": "문지기 / 제8품계",
     "weapon": {
       "icon": "colorize",
       "text": "천계의 벼락"

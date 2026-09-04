@@ -2108,6 +2108,41 @@ body {
         padding: 22px 18px;
     }
 
+    .ch-name-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 14px;
+    }
+
+    .ch-name-row h3 {
+        display: flex;
+        flex-direction: column;
+        font-size: 1.85rem;
+        margin: 0;
+        line-height: 1.15;
+    }
+
+    .ch-en {
+        order: -1;
+        font-size: 0.82rem;
+        color: #fef08a;
+        margin-left: 0;
+        margin-bottom: 6px;
+        letter-spacing: 0.14rem;
+        text-transform: uppercase;
+        font-weight: 300;
+        opacity: 0.92;
+    }
+
+    .ch-meta {
+        font-size: 0.8rem;
+        color: #c4bfb2;
+        white-space: nowrap;
+        margin-bottom: 3px;
+        flex-shrink: 0;
+    }
+
     .worldview-box .modal-close-btn,
     .characters-box .modal-close-btn,
     .author-notes-box .modal-close-btn {
