@@ -1495,16 +1495,53 @@ document.addEventListener("DOMContentLoaded", () => {
             </button>
         `).join('');
 
+        const charImageMap = {
+            "도나티": "assets/images/donati/donati_01.png",
+            "네비아": "assets/images/nebbia/nebbia_01.png",
+            "칼리스테": "assets/images/calliste/calliste_01.png",
+            "헬리오": "assets/images/hellio/hellio_01.png",
+            "시노페": "assets/images/sinope/sinope_01.png"
+        };
+        if (typeof characterList !== "undefined" && characterList.length) {
+            characterList.forEach(c => {
+                if (c.name && c.image) {
+                    charImageMap[c.name] = c.image;
+                }
+            });
+        }
+
         authorNotesPanesContainer.innerHTML = chapters.map((ch, i) => {
             const paragraphs = ch.paragraphs || (ch.lead ? [ch.lead] : []);
-            const paragraphsHtml = paragraphs.map(p => `<p>${p}</p>`).join('');
+            let paragraphsHtml = '';
 
-            const footerQuoteHtml = ch.quote ? `
-                <div class="single-card-footer">
-                    <span class="material-symbols-outlined quote-icon">format_quote</span>
-                    <p>"${ch.quote}"</p>
-                </div>
-            ` : '';
+            if (ch.id === 'dante_lore') {
+                paragraphsHtml = paragraphs.map(p => {
+                    let matchedChar = null;
+                    for (const charName of Object.keys(charImageMap)) {
+                        const regex = new RegExp(`\\[(<strong>)?${charName}(<\\/strong>)?\\]`);
+                        if (regex.test(p)) {
+                            matchedChar = charName;
+                            break;
+                        }
+                    }
+                    if (matchedChar) {
+                        return `
+                            <div class="author-char-item">
+                                <div class="author-char-thumb">
+                                    <img src="${charImageMap[matchedChar]}" alt="${matchedChar}" loading="lazy">
+                                </div>
+                                <div class="author-char-desc">
+                                    <p>${p}</p>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        return `<p class="author-note-intro">${p}</p>`;
+                    }
+                }).join('');
+            } else {
+                paragraphsHtml = paragraphs.map(p => `<p>${p}</p>`).join('');
+            }
 
             return `
                 <div class="tab-slider-pane ${i === 0 ? 'active' : ''}" id="an-pane-${ch.id}">
@@ -1516,7 +1553,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="single-card-body">
                             ${paragraphsHtml}
                         </div>
-                        ${footerQuoteHtml}
                     </div>
                 </div>
             `;
