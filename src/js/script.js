@@ -1241,6 +1241,22 @@ document.addEventListener("DOMContentLoaded", () => {
             wideImage: "assets/images/sinope/sinope_wide.png",
             visualClass: "char-visual-sinope",
             tabAvatarClass: "tab-sinope"
+        },
+        {
+            id: "donati",
+            name: "도나티",
+            enName: "DONATI",
+            rankBadge: "제8품계 하급 천사 · 전사",
+            meta: "여성 / 문지기 / 제8품계",
+            weapon: { icon: "colorize", text: "천계의 벼락" },
+            tags: ["#복종", "#원칙"],
+            appearance: "은발 / 금안(Golden Eyes).",
+            personality: "신에 대한 절대적인 복종.<br>의무와 원리 원칙 준수.",
+            quote: "신의 뜻에 온전히 합치되는 것, 그것이 곧 우리의 평화입니다",
+            image: "assets/images/donati/donati_01.png",
+            wideImage: "assets/images/donati/donati_wide.png",
+            visualClass: "char-visual-donati",
+            tabAvatarClass: "tab-donati"
         }
     ];
 
