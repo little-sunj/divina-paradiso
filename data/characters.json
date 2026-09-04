@@ -23,6 +23,11 @@
     "이 마음은, 이 분노는 대체 어디로 향해야 하는 거야?"
     ],
     "image": "assets/images/nebbia/nebbia_01.png",
+    "images": [
+      "assets/images/nebbia/nebbia_01.png",
+      "assets/images/nebbia/nebbia_02.png",
+      "assets/images/nebbia/nebbia_03.png"
+    ],
     "wideImage": "assets/images/nebbia/nebbia_wide.png",
     "visualClass": "char-visual-nebbia",
     "tabAvatarClass": "tab-nebbia"
@@ -51,6 +56,11 @@
       "아무도... 다치지 않았으면 좋겠어요."
     ],
     "image": "assets/images/calliste/calliste_01.png",
+    "images": [
+      "assets/images/calliste/calliste_01.png",
+      "assets/images/calliste/calliste_02.png",
+      "assets/images/calliste/calliste_03.png"
+    ],
     "wideImage": "assets/images/calliste/calliste_wide.png",
     "visualClass": "char-visual-calliste",
     "tabAvatarClass": "tab-calliste"
@@ -79,6 +89,12 @@
       "문은 이미 닫혔는데... 굳이 가야 하나?"
     ],
     "image": "assets/images/hellio/hellio_01.png",
+    "images": [
+      "assets/images/hellio/hellio_01.png",
+      "assets/images/hellio/hellio_02.png",
+      "assets/images/hellio/hellio_03.png",
+      "assets/images/hellio/hellio_04.png"
+    ],
     "wideImage": "assets/images/hellio/hellio_wide.png",
     "visualClass": "char-visual-hellio",
     "tabAvatarClass": "tab-hellio"
@@ -107,6 +123,12 @@
       "하하, 그렇게 쉽게 속으면 어떡해?"
     ],
     "image": "assets/images/sinope/sinope_01.png",
+    "images": [
+      "assets/images/sinope/sinope_01.png",
+      "assets/images/sinope/sinope_02.png",
+      "assets/images/sinope/sinope_03.png",
+      "assets/images/sinope/sinope_04.png"
+    ],
     "wideImage": "assets/images/sinope/sinope_wide.png",
     "visualClass": "char-visual-sinope",
     "tabAvatarClass": "tab-sinope"
@@ -135,6 +157,11 @@
       "신의 뜻에 온전히 합치되는 것, 그것이 곧 우리의 평화입니다."
     ],
     "image": "assets/images/donati/donati_01.png",
+    "images": [
+      "assets/images/donati/donati_01.png",
+      "assets/images/donati/donati_02.png",
+      "assets/images/donati/donati_03.png"
+    ],
     "wideImage": "assets/images/donati/donati_wide.png",
     "visualClass": "char-visual-donati",
     "tabAvatarClass": "tab-donati"

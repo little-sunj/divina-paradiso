@@ -1440,8 +1440,15 @@ body {
     align-items: start;
 }
 
+.char-gallery-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
 .pane-visual {
-    height: clamp(500px, 62vh, 600px);
+    height: clamp(450px, 55vh, 540px);
     border-radius: 0;
     border: 1px solid rgba(255, 255, 255, 0.16);
     position: relative;
@@ -1450,8 +1457,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(255, 255, 255, 0.05);
-    background-size: cover;
-    background-position: center top;
+    background: #0d0e14;
     overflow: hidden;
 }
 
@@ -1481,29 +1487,198 @@ body {
 }
 
 .pane-visual:hover .char-portrait-img {
+    transform: scale(1.04);
+}
+
+/* Character Portrait Carousel Controls & Counter */
+.char-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(10, 10, 16, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(254, 240, 138, 0.35);
+    color: #fef08a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    opacity: 0.8;
+    padding: 0;
+    outline: none;
+}
+
+.char-nav-btn .material-symbols-outlined {
+    font-size: 26px;
+    line-height: 1;
+    user-select: none;
+}
+
+.char-nav-btn:hover {
+    opacity: 1;
+    background: rgba(24, 24, 34, 0.95);
+    border-color: #fde047;
+    color: #ffffff;
+    box-shadow: 0 0 16px rgba(253, 224, 71, 0.45);
+    transform: translateY(-50%) scale(1.08);
+}
+
+.char-nav-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.char-prev-btn {
+    left: 10px;
+}
+
+.char-next-btn {
+    right: 10px;
+}
+
+.char-img-counter {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 11px;
+    background: rgba(8, 8, 14, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: 0.78rem;
+    font-family: 'Noto Serif KR', serif;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.75);
+    pointer-events: none;
+    user-select: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.char-counter-current {
+    color: #fde047;
+    font-weight: 700;
+}
+
+/* Character Mini Thumbnail Strip */
+.char-thumbs-strip {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 2px 2px 6px 2px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(254, 240, 138, 0.3) transparent;
+}
+
+.char-thumbs-strip::-webkit-scrollbar {
+    height: 4px;
+}
+
+.char-thumbs-strip::-webkit-scrollbar-thumb {
+    background: rgba(254, 240, 138, 0.25);
+    border-radius: 2px;
+}
+
+.char-thumb-btn {
+    position: relative;
+    width: 62px;
+    height: 78px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: #0d0d14;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.char-thumb-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    opacity: 0.5;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    display: block;
+}
+
+.char-thumb-btn:hover {
+    border-color: rgba(254, 240, 138, 0.6);
+    transform: translateY(-2px);
+}
+
+.char-thumb-btn:hover img {
+    opacity: 0.85;
     transform: scale(1.05);
 }
 
-/* Character Visual Art Backgrounds - Pale Moonlight Dark Fantasy Tones */
-.char-visual-nebbia {
-    background: #141416 url('../../assets/images/nebbia/nebbia_01.png') no-repeat center top / cover;
+.char-thumb-btn.active {
+    border: 2px solid #fde047;
+    box-shadow: 0 0 14px rgba(253, 224, 71, 0.5), inset 0 0 8px rgba(253, 224, 71, 0.25);
+    transform: translateY(-2px);
 }
 
-.char-visual-calliste {
-    background: #141416 url('../../assets/images/calliste/calliste_01.png') no-repeat center top / cover;
+.char-thumb-btn.active img {
+    opacity: 1;
 }
 
+.char-thumb-index {
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    font-size: 0.62rem;
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(10, 10, 15, 0.75);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    padding: 1px 4px;
+    border-radius: 2px;
+    line-height: 1.1;
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
+
+.char-thumb-btn.active .char-thumb-index {
+    color: #fde047;
+    background: rgba(0, 0, 0, 0.85);
+}
+
+/* Character Image Switch Transition */
+@keyframes charImgFadeIn {
+    0% {
+        opacity: 0.35;
+        transform: scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.char-portrait-img.is-animating {
+    animation: charImgFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Character Visual Art Backgrounds - Neutral Dark Base */
+.char-visual-nebbia,
+.char-visual-calliste,
 .char-visual-hellio,
-.char-visual-helio {
-    background: #141416 url('../../assets/images/hellio/hellio_01.png') no-repeat center top / cover;
-}
-
-.char-visual-sinope {
-    background: #141416 url('../../assets/images/sinope/sinope_01.png') no-repeat center top / cover;
-}
-
+.char-visual-helio,
+.char-visual-sinope,
 .char-visual-donati {
-    background: #141416 url('../../assets/images/donati/donati_01.png') no-repeat center top / cover;
+    background: #0d0e14;
 }
 
 /* Character Details */
@@ -2097,8 +2272,17 @@ body {
         gap: 24px;
     }
 
+    .char-gallery-column {
+        max-width: 440px;
+        margin: 0 auto;
+    }
+
+    .char-thumbs-strip {
+        justify-content: center;
+    }
+
     .pane-visual {
-        height: clamp(320px, 48vh, 420px);
+        height: clamp(320px, 44vh, 400px);
         max-width: 440px;
         margin: 0 auto;
         width: 100%;

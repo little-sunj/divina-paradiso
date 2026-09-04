@@ -1190,6 +1190,11 @@ document.addEventListener("DOMContentLoaded", () => {
             personality: "까칠하고 틱틱대는 츤데레 전사. 신의 침묵을 명백한 배신으로 여겨 분노를 감추지 않습니다. 그러나 동료를 누구보다 아끼며, 툭툭 내뱉는 날 선 반말 뒤로 혀를 차거나 시선을 피하며 챙겨줍니다.",
             quote: "착각하지 마. 널 구한 게 아니라 저놈 모가지를 벤 것뿐이니까. 따라올 거면 발소리나 죽여.",
             image: "assets/images/nebbia/nebbia_01.png",
+            images: [
+                "assets/images/nebbia/nebbia_01.png",
+                "assets/images/nebbia/nebbia_02.png",
+                "assets/images/nebbia/nebbia_03.png"
+            ],
             wideImage: "assets/images/nebbia/nebbia_wide.png",
             visualClass: "char-visual-nebbia",
             tabAvatarClass: "tab-nebbia"
@@ -1206,6 +1211,11 @@ document.addEventListener("DOMContentLoaded", () => {
             personality: "소심하고 조용하며, 버려진 처지를 서글프게 직시하는 체념적 성향. 말끝을 흐리는 나지막하고 가녀린 존댓말을 쓰며, 불안할 때면 낡은 옷소매를 꼭 쥐는 버릇이 있습니다.",
             quote: "돌아갈 수 있을까요……? 우린 버려진 거예요. 그러니…… 너무 애쓰지 마세요.",
             image: "assets/images/calliste/calliste_01.png",
+            images: [
+                "assets/images/calliste/calliste_01.png",
+                "assets/images/calliste/calliste_02.png",
+                "assets/images/calliste/calliste_03.png"
+            ],
             wideImage: "assets/images/calliste/calliste_wide.png",
             visualClass: "char-visual-calliste",
             tabAvatarClass: "tab-calliste"
@@ -1222,6 +1232,12 @@ document.addEventListener("DOMContentLoaded", () => {
             personality: "철저한 현실주의자이자 감정에 휘둘리지 않는 든든한 선봉장. 과거 상위 천사에게 희생양으로 버림받았던 기억이 있습니다. 단정하고 건조한 존댓말/반존대를 구사하며 철저히 팩트만을 전달합니다.",
             quote: "방패는 부러지지 않았다. 네 몫까지 내가 버틸 테니, 뒤돌아보지 마라.",
             image: "assets/images/hellio/hellio_01.png",
+            images: [
+                "assets/images/hellio/hellio_01.png",
+                "assets/images/hellio/hellio_02.png",
+                "assets/images/hellio/hellio_03.png",
+                "assets/images/hellio/hellio_04.png"
+            ],
             wideImage: "assets/images/hellio/hellio_wide.png",
             visualClass: "char-visual-hellio",
             tabAvatarClass: "tab-hellio"
@@ -1238,6 +1254,12 @@ document.addEventListener("DOMContentLoaded", () => {
             personality: "늘 가볍고 장난기 넘치는 말투로 본심을 감추는 기만형 궁수. 겉으로는 실없는 소리를 던지지만, 누구보다 냉철하게 전장의 흐름을 읽고 있습니다.",
             quote: "어머, 신앙심이라니? 날개가 부러지면 신도 악마도 다 똑같은 신세인걸요~ 안 그래요?",
             image: "assets/images/sinope/sinope_01.png",
+            images: [
+                "assets/images/sinope/sinope_01.png",
+                "assets/images/sinope/sinope_02.png",
+                "assets/images/sinope/sinope_03.png",
+                "assets/images/sinope/sinope_04.png"
+            ],
             wideImage: "assets/images/sinope/sinope_wide.png",
             visualClass: "char-visual-sinope",
             tabAvatarClass: "tab-sinope"
@@ -1254,11 +1276,53 @@ document.addEventListener("DOMContentLoaded", () => {
             personality: "신에 대한 절대적인 복종.<br>의무와 원리 원칙 준수.",
             quote: "신의 뜻에 온전히 합치되는 것, 그것이 곧 우리의 평화입니다.",
             image: "assets/images/donati/donati_01.png",
+            images: [
+                "assets/images/donati/donati_01.png",
+                "assets/images/donati/donati_02.png",
+                "assets/images/donati/donati_03.png"
+            ],
             wideImage: "assets/images/donati/donati_wide.png",
             visualClass: "char-visual-donati",
             tabAvatarClass: "tab-donati"
         }
     ];
+
+    const charImageState = {};
+
+    function switchCharacterImage(charId, newIndex) {
+        const state = charImageState[charId];
+        if (!state || !state.images || state.images.length <= 1) return;
+        const total = state.images.length;
+        const nextIdx = (newIndex % total + total) % total;
+        state.currentIndex = nextIdx;
+
+        const imgEl = document.getElementById(`char-img-${charId}`);
+        const counterEl = document.getElementById(`char-counter-${charId}`);
+        const thumbsContainer = document.getElementById(`char-thumbs-${charId}`);
+
+        if (imgEl) {
+            imgEl.classList.remove('is-animating');
+            void imgEl.offsetWidth; // trigger reflow
+            imgEl.src = state.images[nextIdx];
+            imgEl.classList.add('is-animating');
+        }
+
+        if (counterEl) {
+            counterEl.textContent = nextIdx + 1;
+        }
+
+        if (thumbsContainer) {
+            const thumbBtns = thumbsContainer.querySelectorAll('.char-thumb-btn');
+            thumbBtns.forEach((btn, idx) => {
+                if (idx === nextIdx) {
+                    btn.classList.add('active');
+                    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+    }
 
     async function loadAndRenderCharacters() {
         try {
@@ -1277,6 +1341,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderCharacterDossier(characters) {
         if (!charTabsContainer || !charPanesContainer) return;
+
+        // Initialize per-character gallery image state
+        characters.forEach(c => {
+            const rawImages = (Array.isArray(c.images) && c.images.length > 0)
+                ? c.images
+                : (c.image ? [c.image] : []);
+            // Exclude wide images from carousel/thumbnails
+            const filteredImages = rawImages.filter(img => !img.includes('wide'));
+            charImageState[c.id] = {
+                images: filteredImages.length > 0 ? filteredImages : [c.image].filter(Boolean),
+                currentIndex: 0
+            };
+        });
 
         charTabsContainer.innerHTML = characters.map((c, i) => `
             <button class="tab-slider-btn tab-btn ${i === 0 ? 'active' : ''}" data-target="char-${c.id}">
@@ -1303,11 +1380,37 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             ` : '';
 
+            const charImgs = charImageState[c.id]?.images || [c.image].filter(Boolean);
+            const hasMultipleImages = charImgs.length > 1;
+
             return `
                 <div class="tab-slider-pane char-pane ${i === 0 ? 'active' : ''}" id="char-${c.id}">
                     <div class="pane-grid">
-                        <div class="pane-visual ${c.visualClass || 'char-visual-' + c.id}" ${c.image ? `style="background-image: url('${c.image}'); background-size: cover; background-position: center top;"` : ''}>
-                            ${c.image ? `<img src="${c.image}" alt="${c.name}" class="char-portrait-img">` : ''}
+                        <div class="char-gallery-column">
+                            <div class="pane-visual ${c.visualClass || 'char-visual-' + c.id}">
+                                <img src="${charImgs[0] || c.image || ''}" alt="${c.name}" class="char-portrait-img" id="char-img-${c.id}">
+                                ${hasMultipleImages ? `
+                                    <button class="char-nav-btn char-prev-btn" data-char-id="${c.id}" title="이전 일러스트" aria-label="이전 일러스트">
+                                        <span class="material-symbols-outlined">chevron_left</span>
+                                    </button>
+                                    <button class="char-nav-btn char-next-btn" data-char-id="${c.id}" title="다음 일러스트" aria-label="다음 일러스트">
+                                        <span class="material-symbols-outlined">chevron_right</span>
+                                    </button>
+                                    <div class="char-img-counter">
+                                        <span class="char-counter-current" id="char-counter-${c.id}">1</span> / <span class="char-counter-total">${charImgs.length}</span>
+                                    </div>
+                                ` : ''}
+                            </div>
+                            ${hasMultipleImages ? `
+                                <div class="char-thumbs-strip" id="char-thumbs-${c.id}">
+                                    ${charImgs.map((img, imgIdx) => `
+                                        <button class="char-thumb-btn ${imgIdx === 0 ? 'active' : ''}" data-char-id="${c.id}" data-img-index="${imgIdx}" title="${c.name} 일러스트 ${imgIdx + 1}">
+                                            <img src="${img}" alt="${c.name} ${imgIdx + 1}" loading="lazy">
+                                            <span class="char-thumb-index">${String(imgIdx + 1).padStart(2, '0')}</span>
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
                         </div>
                         <div class="pane-details">
                             <div class="ch-name-row">
@@ -1361,6 +1464,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         charactersSlider = setupTabSlider(charTabsContainer, charPanesContainer, (index) => {
             updateCharacterBackdrop(index);
+            const char = characters[index];
+            if (char) {
+                switchCharacterImage(char.id, 0);
+            }
         });
 
         // Set initial backdrop on Layer A
@@ -1378,9 +1485,48 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialize character loading
     loadAndRenderCharacters();
 
+    if (charPanesContainer) {
+        charPanesContainer.addEventListener('click', (e) => {
+            const prevBtn = e.target.closest('.char-prev-btn');
+            if (prevBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                const charId = prevBtn.dataset.charId;
+                const state = charImageState[charId];
+                if (state) switchCharacterImage(charId, state.currentIndex - 1);
+                return;
+            }
+
+            const nextBtn = e.target.closest('.char-next-btn');
+            if (nextBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                const charId = nextBtn.dataset.charId;
+                const state = charImageState[charId];
+                if (state) switchCharacterImage(charId, state.currentIndex + 1);
+                return;
+            }
+
+            const thumbBtn = e.target.closest('.char-thumb-btn');
+            if (thumbBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                const charId = thumbBtn.dataset.charId;
+                const imgIdx = parseInt(thumbBtn.dataset.imgIndex, 10);
+                if (!isNaN(imgIdx)) {
+                    switchCharacterImage(charId, imgIdx);
+                }
+                return;
+            }
+        });
+    }
+
     if (btnOpenCharacters) {
         btnOpenCharacters.addEventListener("click", () => {
             if (charactersSlider) charactersSlider.goTo(0);
+            if (characterList && characterList[0]) {
+                switchCharacterImage(characterList[0].id, 0);
+            }
             openCustomModal(charactersModal);
         });
     }
