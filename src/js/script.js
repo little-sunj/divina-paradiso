@@ -1,4 +1,65 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // ----------------------------------------------------
+    // Production Protection: Block Right-Click & F12 / DevTools in Non-Local Environments
+    // ----------------------------------------------------
+    const isLocalEnvironment = (() => {
+        const host = window.location.hostname;
+        const proto = window.location.protocol;
+        return (
+            proto === 'file:' ||
+            host === 'localhost' ||
+            host === '127.0.0.1' ||
+            host === '0.0.0.0' ||
+            host.startsWith('192.168.') ||
+            host.startsWith('10.') ||
+            host.endsWith('.local') ||
+            host === ''
+        );
+    })();
+
+    if (!isLocalEnvironment) {
+        // 1. Block mouse right-click (context menu)
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
+
+        // 2. Block F12 and common DevTools inspection keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // F12 key
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+
+            // Windows / Linux: Ctrl + Shift + I, Ctrl + Shift + J, Ctrl + Shift + C
+            if (e.ctrlKey && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+
+            // Windows / Linux: Ctrl + U (View Source)
+            if (e.ctrlKey && ['u', 'U'].includes(e.key)) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+
+            // macOS: Cmd + Option + I / J / C / U
+            if (e.metaKey && e.altKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+            if (e.metaKey && ['u', 'U'].includes(e.key)) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        }, true);
+    }
+
     const introScreen = document.getElementById("intro-screen");
     const introContent = document.getElementById("intro-content");
     const mainContainer = document.getElementById("main-container");
