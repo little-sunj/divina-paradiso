@@ -20,21 +20,34 @@ body {
     user-select: none;
 }
 
-/* Google Material Symbols */
-.material-symbols-outlined {
-    font-family: 'Material Symbols Outlined';
-    font-weight: normal;
+/* Luna SVG Icon System (Zero Latency & No External Font Dependency) */
+.material-symbols-outlined,
+.svg-icon {
     font-style: normal;
-    font-size: 20px;
-    line-height: 1;
-    display: inline-block;
-    direction: ltr;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: 'liga';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     vertical-align: middle;
+    line-height: 1;
     user-select: none;
+    flex-shrink: 0;
+}
+
+svg.svg-icon,
+svg.material-symbols-outlined {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+span.material-symbols-outlined > svg.svg-icon {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 /* Common Utility Classes */

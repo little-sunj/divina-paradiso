@@ -499,12 +499,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Helper to render Google Material Symbols (or legacy FontAwesome) icon
+    // Helper to render Luna SVG icons (with legacy FontAwesome fallback)
     function renderIcon(iconName, defaultName = '', extraClasses = '') {
         const icon = iconName || defaultName;
         if (!icon) return '';
         if (icon.startsWith('fa-') || icon.includes('fa-')) {
             return `<i class="${icon} ${extraClasses}"></i>`;
+        }
+        if (window.renderSvgIcon) {
+            return window.renderSvgIcon(icon, extraClasses);
         }
         return `<span class="material-symbols-outlined ${extraClasses}">${icon}</span>`;
     }
@@ -1180,7 +1183,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const footerQuoteHtml = ch.quote ? `
                 <div class="single-card-footer">
-                    <span class="material-symbols-outlined">format_quote</span>
+                    ${renderIcon('format_quote')}
                     <p>"${ch.quote}"</p>
                 </div>
             ` : '';
@@ -1434,7 +1437,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const quoteBoxHtml = quotesHtml ? `
                 <div class="ch-quote-box">
-                    <div class="quote-tag"><span class="material-symbols-outlined">format_quote</span> 대표 대사</div>
+                    <div class="quote-tag">${renderIcon('format_quote')} 대표 대사</div>
                     ${quotesHtml}
                 </div>
             ` : '';
@@ -1450,10 +1453,10 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <img src="${charImgs[0] || c.image || ''}" alt="${c.name}" class="char-portrait-img" id="char-img-${c.id}">
                                 ${hasMultipleImages ? `
                                     <button class="char-nav-btn char-prev-btn" data-char-id="${c.id}" title="이전 일러스트" aria-label="이전 일러스트">
-                                        <span class="material-symbols-outlined">chevron_left</span>
+                                        ${renderIcon('chevron_left')}
                                     </button>
                                     <button class="char-nav-btn char-next-btn" data-char-id="${c.id}" title="다음 일러스트" aria-label="다음 일러스트">
-                                        <span class="material-symbols-outlined">chevron_right</span>
+                                        ${renderIcon('chevron_right')}
                                     </button>
                                     <div class="char-img-counter">
                                         <span class="char-counter-current" id="char-counter-${c.id}">1</span> / <span class="char-counter-total">${charImgs.length}</span>
@@ -1481,12 +1484,12 @@ document.addEventListener("DOMContentLoaded", () => {
                             </div>
 
                             <div class="ch-section">
-                                <h4><span class="material-symbols-outlined">person</span> 외형</h4>
+                                <h4>${renderIcon('person')} 외형</h4>
                                 <p>${c.appearance || ''}</p>
                             </div>
 
                             <div class="ch-section">
-                                <h4><span class="material-symbols-outlined">chat_bubble</span> 성격</h4>
+                                <h4>${renderIcon('chat_bubble')} 성격</h4>
                                 <p>${c.personality || ''}</p>
                             </div>
 
@@ -1853,11 +1856,11 @@ document.addEventListener("DOMContentLoaded", () => {
         function updateBgmUI(playing) {
             if (playing) {
                 bgmPlayer.classList.add("bgm-playing");
-                if (bgmIcon) bgmIcon.textContent = "pause";
+                if (bgmIcon) bgmIcon.innerHTML = renderIcon("pause");
                 bgmToggleBtn.setAttribute("title", "음악 일시정지");
             } else {
                 bgmPlayer.classList.remove("bgm-playing");
-                if (bgmIcon) bgmIcon.textContent = "play_arrow";
+                if (bgmIcon) bgmIcon.innerHTML = renderIcon("play_arrow");
                 bgmToggleBtn.setAttribute("title", "음악 재생");
             }
         }
@@ -1894,11 +1897,11 @@ document.addEventListener("DOMContentLoaded", () => {
         function updateVolumeIcon(vol) {
             if (!volumeIcon) return;
             if (vol === 0) {
-                volumeIcon.textContent = "volume_off";
+                volumeIcon.innerHTML = renderIcon("volume_off");
             } else if (vol < 0.5) {
-                volumeIcon.textContent = "volume_down";
+                volumeIcon.innerHTML = renderIcon("volume_down");
             } else {
-                volumeIcon.textContent = "volume_up";
+                volumeIcon.innerHTML = renderIcon("volume_up");
             }
         }
 
@@ -1923,7 +1926,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 navHamburger.setAttribute("aria-expanded", "false");
             }
             if (navHamburgerIcon) {
-                navHamburgerIcon.textContent = "menu";
+                navHamburgerIcon.innerHTML = renderIcon("menu");
             }
         }
     }
@@ -1936,7 +1939,7 @@ document.addEventListener("DOMContentLoaded", () => {
             navHamburger.setAttribute("aria-expanded", isOpen ? "true" : "false");
         }
         if (navHamburgerIcon) {
-            navHamburgerIcon.textContent = isOpen ? "close" : "menu";
+            navHamburgerIcon.innerHTML = renderIcon(isOpen ? "close" : "menu");
         }
     }
 
