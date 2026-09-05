@@ -151,7 +151,7 @@ span.material-symbols-outlined > svg.svg-icon {
     align-items: center;
     gap: 12px;
     font-family: 'Noto Serif', 'Noto Serif KR', serif;
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     font-weight: 300;
     letter-spacing: 0.35rem;
     text-indent: 0.35rem;
@@ -159,6 +159,7 @@ span.material-symbols-outlined > svg.svg-icon {
 }
 
 .pulse-text {
+    font-size: 0.8rem;
     animation: textPulse 2.2s infinite ease-in-out;
 }
 
@@ -780,26 +781,44 @@ span.material-symbols-outlined > svg.svg-icon {
     position: absolute;
     top: 0;
     left: 50%;
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
-    transform: translate(-50%, -50%);
     background-color: #ffffff;
-    box-shadow: 0 0 5px #ffffff, 0 0 10px rgba(254, 249, 195, 0.7), 0 0 16px rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 4px #ffffff, 0 0 8px rgba(254, 249, 195, 0.85), 0 0 14px rgba(255, 255, 255, 0.45);
+    will-change: transform;
 }
 
-/* Sparkle Animations */
+/* Sparkle Animations: Rotator spins along orbit, Sparkle counter-spins to stay a true 2D circle facing the screen */
 .spinner-7 { animation: orbitSpin 14s linear infinite; }
+.spinner-7 .orbit-sparkle { animation: orbitCounterSpin 14s linear infinite; }
+
 .spinner-6 { animation: orbitSpin 18s linear infinite reverse; }
+.spinner-6 .orbit-sparkle { animation: orbitCounterSpin 18s linear infinite reverse; }
+
 .spinner-5 { animation: orbitSpin 22s linear infinite; }
+.spinner-5 .orbit-sparkle { animation: orbitCounterSpin 22s linear infinite; }
+
 .spinner-4 { animation: orbitSpin 26s linear infinite reverse; }
+.spinner-4 .orbit-sparkle { animation: orbitCounterSpin 26s linear infinite reverse; }
+
 .spinner-3 { animation: orbitSpin 30s linear infinite; }
+.spinner-3 .orbit-sparkle { animation: orbitCounterSpin 30s linear infinite; }
+
 .spinner-2 { animation: orbitSpin 34s linear infinite reverse; }
+.spinner-2 .orbit-sparkle { animation: orbitCounterSpin 34s linear infinite reverse; }
+
 .spinner-1 { animation: orbitSpin 38s linear infinite; }
+.spinner-1 .orbit-sparkle { animation: orbitCounterSpin 38s linear infinite; }
 
 @keyframes orbitSpin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
+}
+
+@keyframes orbitCounterSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg) rotateX(-76deg); }
+    to { transform: translate(-50%, -50%) rotate(-360deg) rotateX(-76deg); }
 }
 
 /* Floor Orbit Hover States - Pale Moonlit Tone */
@@ -929,7 +948,7 @@ span.material-symbols-outlined > svg.svg-icon {
 
 .section-tag {
     font-family: 'Noto Serif', 'Noto Serif KR', serif;
-    font-size: 0.85rem;
+    font-size: 0.6rem;
     letter-spacing: 0.3rem;
     color: #fffad9;
     font-weight: 400;
@@ -1093,14 +1112,14 @@ span.material-symbols-outlined > svg.svg-icon {
 
 .card-category {
     font-family: 'Noto Serif', 'Noto Serif KR', serif;
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     color: #fff7bf;
     letter-spacing: 0.2rem;
     font-weight: 400;
 }
 
 .card-info h2 {
-    font-size: 2.15rem;
+    font-size: 1.95rem;
     font-weight: 400;
     color: #ffffff;
     margin-top: 6px;
@@ -1115,7 +1134,7 @@ span.material-symbols-outlined > svg.svg-icon {
 }
 
 .card-text {
-    font-size: 1.05rem;
+    font-size: 0.96rem;
     line-height: 1.85;
     color: #dcd8cb;
     font-weight: 300;
@@ -1157,22 +1176,19 @@ span.material-symbols-outlined > svg.svg-icon {
     padding: 10px 25px 18px;
     flex-shrink: 0;
     overflow-x: auto;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(254, 240, 138, 0.2) transparent;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .tab-slider-tabs::-webkit-scrollbar {
-    height: 4px;
-}
-
-.tab-slider-tabs::-webkit-scrollbar-thumb {
-    background: rgba(254, 240, 138, 0.25);
-    border-radius: 0;
+    display: none;
+    width: 0;
+    height: 0;
 }
 
 .tab-slider-btn,
 .tab-btn {
-    background: rgba(255, 255, 255, 0.07);
+    background: rgba(16, 16, 18, 0.6);
     border: none;
     color: #e5e0d3;
     padding: 9px 20px;
@@ -1213,7 +1229,7 @@ span.material-symbols-outlined > svg.svg-icon {
 .tab-btn:hover i,
 .tab-btn:hover .material-symbols-outlined {
     opacity: 1;
-    color: #fef08a;
+    color: #d1c7a7;
 }
 
 .tab-slider-btn.active,
@@ -1264,7 +1280,7 @@ span.material-symbols-outlined > svg.svg-icon {
 .char-pane {
     display: none;
     max-width: 1060px;
-    margin: 0 auto;
+    margin: 0 auto 30px;
     width: 100%;
 }
 
@@ -1289,7 +1305,7 @@ span.material-symbols-outlined > svg.svg-icon {
 /* Unified Single Codex Card (One Box per Category) */
 /* ==================================================== */
 .single-codex-card {
-    background: rgba(255, 255, 255, 0.07);
+    background: none;
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border: none;
@@ -1313,7 +1329,7 @@ span.material-symbols-outlined > svg.svg-icon {
 .single-card-tag {
     display: inline-block;
     font-family: 'Noto Serif', 'Noto Serif KR', serif;
-    font-size: 0.84rem;
+    font-size: 0.8rem;
     letter-spacing: 0.2rem;
     color: #fffad9;
     margin-bottom: 10px;
@@ -1321,7 +1337,7 @@ span.material-symbols-outlined > svg.svg-icon {
 }
 
 .single-card-title {
-    font-size: 1.6rem;
+    font-size: 1.45rem;
     color: #fefce8;
     margin-bottom: 4px;
     font-weight: 400;
@@ -1340,7 +1356,7 @@ span.material-symbols-outlined > svg.svg-icon {
 
 .single-card-body p {
     font-family: 'Noto Sans', 'Noto Sans KR', sans-serif;
-    font-size: 1.06rem;
+    font-size: 0.98rem;
     line-height: 1.95;
     color: #ded9cd;
     margin: 0;
@@ -1361,13 +1377,13 @@ span.material-symbols-outlined > svg.svg-icon {
 .single-card-footer i,
 .single-card-footer .material-symbols-outlined {
     font-size: 1.55rem;
-    color: #fef08a;
+    color: #d1c7a7;
     opacity: 0.9;
     flex-shrink: 0;
 }
 
 .single-card-footer p {
-    font-size: 1.02rem;
+    font-size: 0.94rem;
     line-height: 1.65;
     color: #fef9c3;
     font-style: italic;
@@ -1423,8 +1439,8 @@ span.material-symbols-outlined > svg.svg-icon {
 }
 
 .author-char-desc p {
-    font-size: 1.03rem;
-    line-height: 1.9;
+    font-size: 0.95rem;
+    line-height: 1.85;
     margin: 0;
     color: #ded9cd;
 }
@@ -1432,7 +1448,7 @@ span.material-symbols-outlined > svg.svg-icon {
 .author-char-desc strong {
     color: #fff7bf;
     font-family: 'Noto Serif', 'Noto Serif KR', serif;
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     letter-spacing: 0.05rem;
     font-weight: 600;
 }
@@ -1514,8 +1530,8 @@ span.material-symbols-outlined > svg.svg-icon {
     background: rgba(10, 10, 16, 0.72);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(254, 240, 138, 0.35);
-    color: #fef08a;
+    border: 1px solid rgba(209, 199, 167, 0.3);
+    color: #d1c7a7;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1536,9 +1552,9 @@ span.material-symbols-outlined > svg.svg-icon {
 .char-nav-btn:hover {
     opacity: 1;
     background: rgba(24, 24, 34, 0.95);
-    border-color: #fde047;
+    border-color: #d1c7a7;
     color: #ffffff;
-    box-shadow: 0 0 16px rgba(253, 224, 71, 0.45);
+    box-shadow: 0 0 14px rgba(209, 199, 167, 0.3);
     transform: translateY(-50%) scale(1.08);
 }
 
@@ -1577,7 +1593,7 @@ span.material-symbols-outlined > svg.svg-icon {
 }
 
 .char-counter-current {
-    color: #fde047;
+    color: #d1c7a7;
     font-weight: 700;
 }
 
@@ -1589,7 +1605,7 @@ span.material-symbols-outlined > svg.svg-icon {
     padding: 2px 2px 6px 2px;
     overflow-x: auto;
     scrollbar-width: thin;
-    scrollbar-color: rgba(254, 240, 138, 0.3) transparent;
+    scrollbar-color: rgba(209, 199, 167, 0.25) transparent;
 }
 
 .char-thumbs-strip::-webkit-scrollbar {
@@ -1597,7 +1613,7 @@ span.material-symbols-outlined > svg.svg-icon {
 }
 
 .char-thumbs-strip::-webkit-scrollbar-thumb {
-    background: rgba(254, 240, 138, 0.25);
+    background: rgba(209, 199, 167, 0.2);
     border-radius: 2px;
 }
 
@@ -1625,7 +1641,7 @@ span.material-symbols-outlined > svg.svg-icon {
 }
 
 .char-thumb-btn:hover {
-    border-color: rgba(254, 240, 138, 0.6);
+    border-color: rgba(209, 199, 167, 0.5);
     transform: translateY(-2px);
 }
 
@@ -1635,8 +1651,8 @@ span.material-symbols-outlined > svg.svg-icon {
 }
 
 .char-thumb-btn.active {
-    border: 2px solid #fde047;
-    box-shadow: 0 0 14px rgba(253, 224, 71, 0.5), inset 0 0 8px rgba(253, 224, 71, 0.25);
+    border: 2px solid rgba(209, 199, 167, 0.85);
+    box-shadow: 0 0 12px rgba(209, 199, 167, 0.3), inset 0 0 6px rgba(209, 199, 167, 0.15);
     transform: translateY(-2px);
 }
 
@@ -1664,7 +1680,7 @@ span.material-symbols-outlined > svg.svg-icon {
 }
 
 .char-thumb-btn.active .char-thumb-index {
-    color: #fde047;
+    color: #d1c7a7;
     background: rgba(0, 0, 0, 0.85);
 }
 
@@ -1703,21 +1719,21 @@ span.material-symbols-outlined > svg.svg-icon {
 }
 
 .ch-name-row h3 {
-    font-size: 2.25rem;
+    font-size: 2.05rem;
     font-weight: 400;
     color: #ffffff;
 }
 
 .ch-en {
     font-family: 'Noto Serif', 'Noto Serif KR', serif;
-    font-size: 1.18rem;
-    color: #fef08a;
+    font-size: 1.05rem;
+    color: #d1c7a7;
     font-weight: 300;
     margin-left: 8px;
 }
 
 .ch-meta {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     color: #dcd8cb;
 }
 
@@ -1729,7 +1745,7 @@ span.material-symbols-outlined > svg.svg-icon {
 }
 
 .tag {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     background: rgba(255, 255, 255, 0.03);
     border: none;
     color: #fefce8;
@@ -1743,7 +1759,7 @@ span.material-symbols-outlined > svg.svg-icon {
 }
 
 .ch-section h4 {
-    font-size: 1.0rem;
+    font-size: 0.94rem;
     color: #fefce8;
     margin-bottom: 6px;
     display: flex;
@@ -1753,20 +1769,21 @@ span.material-symbols-outlined > svg.svg-icon {
 
 .ch-section h4 i,
 .ch-section h4 .material-symbols-outlined {
-    color: #fef9c3;
-    font-size: 1.12rem;
+    color: #d1c7a7;
+    font-size: 1.08rem;
 }
 
 .ch-section p {
-    font-size: 1.0rem;
+    font-size: 0.94rem;
     line-height: 1.75;
     color: #dcd8cb;
     font-weight: 300;
 }
 
 .ch-quote-box {
-    background: rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.05);
     border: none;
+    border-left: 2px solid rgba(209, 199, 167, 0.4);
     border-radius: 0;
     padding: 18px 22px;
     margin-top: 20px;
@@ -1776,9 +1793,9 @@ span.material-symbols-outlined > svg.svg-icon {
 }
 
 .quote-tag {
-    font-size: 0.84rem;
+    font-size: 0.78rem;
     font-weight: 400;
-    color: #fef08a;
+    color: #d1c7a7;
     letter-spacing: 0.1rem;
     margin-bottom: 6px;
     display: flex;
@@ -1787,9 +1804,9 @@ span.material-symbols-outlined > svg.svg-icon {
 }
 
 .quote-text {
-    font-size: 1.05rem;
+    font-size: 0.96rem;
     font-weight: 400;
-    color: #ffffff;
+    color: #f3f0e8;
     line-height: 1.7;
     font-style: italic;
     margin: 0;
@@ -1922,7 +1939,9 @@ span.material-symbols-outlined > svg.svg-icon {
 
 .worldview-box .modal-close-btn,
 .characters-box .modal-close-btn,
-.author-notes-box .modal-close-btn {
+.author-notes-box .modal-close-btn,
+#detail-container .modal-close-btn,
+#detail-container .close-btn {
     position: fixed;
     top: 25px;
     right: 35px;
@@ -1945,7 +1964,9 @@ span.material-symbols-outlined > svg.svg-icon {
 
 .worldview-box .modal-close-btn:hover,
 .characters-box .modal-close-btn:hover,
-.author-notes-box .modal-close-btn:hover {
+.author-notes-box .modal-close-btn:hover,
+#detail-container .modal-close-btn:hover,
+#detail-container .close-btn:hover {
     background: rgba(255, 255, 255, 0.18);
     color: #ffffff;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 255, 255, 0.15);
@@ -2199,20 +2220,6 @@ span.material-symbols-outlined > svg.svg-icon {
         overflow: hidden;
     }
 
-    #detail-container .close-btn {
-        top: 14px;
-        right: 14px;
-        padding: 7px 13px;
-        font-size: 0.72rem;
-        background: rgba(14, 14, 18, 0.85);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: none;
-        border-radius: 0;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7);
-        z-index: 100;
-    }
-
     #detail-cards-container {
         width: 100%;
         height: 100%;
@@ -2260,7 +2267,7 @@ span.material-symbols-outlined > svg.svg-icon {
     }
 
     .card-info h2 {
-        font-size: 1.85rem;
+        font-size: 1.68rem;
         margin-top: 4px;
         margin-bottom: 10px;
     }
@@ -2270,8 +2277,8 @@ span.material-symbols-outlined > svg.svg-icon {
     }
 
     .card-text {
-        font-size: 1.02rem;
-        line-height: 1.85;
+        font-size: 0.94rem;
+        line-height: 1.8;
         margin-bottom: 24px;
     }
 
@@ -2315,7 +2322,7 @@ span.material-symbols-outlined > svg.svg-icon {
     .ch-name-row h3 {
         display: flex;
         flex-direction: column;
-        font-size: 1.85rem;
+        font-size: 1.68rem;
         margin: 0;
         line-height: 1.15;
     }
@@ -2323,7 +2330,7 @@ span.material-symbols-outlined > svg.svg-icon {
     .ch-en {
         order: -1;
         font-size: 0.82rem;
-        color: #fef08a;
+        color: #d1c7a7;
         margin-left: 0;
         margin-bottom: 6px;
         letter-spacing: 0.14rem;
@@ -2342,7 +2349,9 @@ span.material-symbols-outlined > svg.svg-icon {
 
     .worldview-box .modal-close-btn,
     .characters-box .modal-close-btn,
-    .author-notes-box .modal-close-btn {
+    .author-notes-box .modal-close-btn,
+    #detail-container .modal-close-btn,
+    #detail-container .close-btn {
         top: 15px;
         right: 15px;
         padding: 8px 14px;
@@ -2364,8 +2373,12 @@ span.material-symbols-outlined > svg.svg-icon {
 
     .tab-slider-tabs {
         justify-content: flex-start;
-        padding: 8px 16px 14px;
+        padding: 8px 16px;
         gap: 8px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        -webkit-mask-image: linear-gradient(to right, black 0%, black calc(100% - 32px), transparent 100%);
+        mask-image: linear-gradient(to right, black 0%, black calc(100% - 32px), transparent 100%);
     }
 
     .tab-slider-btn {
@@ -2374,7 +2387,12 @@ span.material-symbols-outlined > svg.svg-icon {
     }
 
     .tab-slider-panes {
-        padding: 10px 16px 40px;
+        padding: 6px 16px 40px;
+    }
+
+    .tab-slider-pane,
+    .char-pane {
+        margin-bottom: 36px;
     }
 
     .single-card-header {
@@ -2382,7 +2400,7 @@ span.material-symbols-outlined > svg.svg-icon {
     }
 
     .single-card-title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
 
     .single-card-body {
@@ -2390,7 +2408,7 @@ span.material-symbols-outlined > svg.svg-icon {
     }
 
     .single-card-body p {
-        font-size: 0.98rem;
+        font-size: 0.92rem;
     }
 
     .single-card-footer {
@@ -2399,7 +2417,7 @@ span.material-symbols-outlined > svg.svg-icon {
     }
 
     .single-card-footer p {
-        font-size: 0.84rem;
+        font-size: 0.8rem;
     }
 
     .author-char-item {
@@ -2414,7 +2432,7 @@ span.material-symbols-outlined > svg.svg-icon {
     }
 
     .author-char-desc p {
-        font-size: 0.96rem;
+        font-size: 0.9rem;
     }
 }
 

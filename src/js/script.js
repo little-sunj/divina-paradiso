@@ -919,6 +919,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 easing: 'easeOutQuint'
             });
         }
+        const modalTabs = modalElement.querySelector(".tab-slider-tabs");
+        if (modalTabs) {
+            setTimeout(() => {
+                modalTabs.dispatchEvent(new Event("scroll"));
+            }, 60);
+        }
     }
 
     function closeCustomModal(modalElement) {
@@ -992,6 +998,33 @@ document.addEventListener("DOMContentLoaded", () => {
             if (typeof onTabChange === 'function') {
                 onTabChange(index);
             }
+
+            setTimeout(updateTabMask, 180);
+        }
+
+        function updateTabMask() {
+            if (!tabsContainer) return;
+            const maxScroll = tabsContainer.scrollWidth - tabsContainer.clientWidth;
+            if (maxScroll <= 4) {
+                tabsContainer.style.maskImage = "none";
+                tabsContainer.style.webkitMaskImage = "none";
+                return;
+            }
+            const hasLeft = tabsContainer.scrollLeft > 6;
+            const hasRight = tabsContainer.scrollLeft < maxScroll - 6;
+
+            let mask = "";
+            if (hasLeft && hasRight) {
+                mask = "linear-gradient(to right, transparent 0px, black 36px, black calc(100% - 36px), transparent 100%)";
+            } else if (hasLeft) {
+                mask = "linear-gradient(to right, transparent 0px, black 36px, black 100%)";
+            } else if (hasRight) {
+                mask = "linear-gradient(to right, black 0%, black calc(100% - 36px), transparent 100%)";
+            } else {
+                mask = "none";
+            }
+            tabsContainer.style.maskImage = mask;
+            tabsContainer.style.webkitMaskImage = mask;
         }
 
         function bindEvents() {
@@ -999,15 +1032,30 @@ document.addEventListener("DOMContentLoaded", () => {
             tabs.forEach((tab, i) => {
                 tab.addEventListener("click", () => goTo(i));
             });
+
+            // Update fade masks dynamically on scroll/swipe
+            tabsContainer.addEventListener("scroll", updateTabMask, { passive: true });
+
+            // Smooth horizontal scroll with mouse wheel
+            tabsContainer.addEventListener("wheel", (e) => {
+                if (e.deltaY !== 0 && tabsContainer.scrollWidth > tabsContainer.clientWidth) {
+                    e.preventDefault();
+                    tabsContainer.scrollLeft += e.deltaY;
+                }
+            }, { passive: false });
+
+            window.addEventListener("resize", updateTabMask);
         }
 
         bindEvents();
+        setTimeout(updateTabMask, 100);
 
         return {
             goTo,
             next: () => goTo(currentIndex + 1),
             prev: () => goTo(currentIndex - 1),
-            getIndex: () => currentIndex
+            getIndex: () => currentIndex,
+            updateMask: updateTabMask
         };
     }
 
@@ -1181,13 +1229,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const paragraphs = ch.paragraphs || (ch.summary ? [ch.summary] : (ch.lead ? [ch.lead] : []));
             const paragraphsHtml = paragraphs.map(p => `<p>${p}</p>`).join('');
 
-            const footerQuoteHtml = ch.quote ? `
-                <div class="single-card-footer">
-                    ${renderIcon('format_quote')}
-                    <p>"${ch.quote}"</p>
-                </div>
-            ` : '';
-
             return `
                 <div class="tab-slider-pane ${i === 0 ? 'active' : ''}" id="wv-pane-${ch.id}">
                     <div class="single-codex-card">
@@ -1198,7 +1239,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="single-card-body">
                             ${paragraphsHtml}
                         </div>
-                        ${footerQuoteHtml}
                     </div>
                 </div>
             `;
@@ -1790,25 +1830,39 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Author's Notes Modal triggers
+    // Author's Notes visibility: Only exposed in local development environments (or with ?dev=1 / ?notes=1)
+    const urlParams = new URLSearchParams(window.location.search);
+    const allowAuthorNotes = isLocalEnvironment || urlParams.has("dev") || urlParams.has("notes") || urlParams.has("author_notes");
+
     if (btnOpenAuthorNotes) {
-        btnOpenAuthorNotes.addEventListener("click", () => {
-            if (authorNotesSlider) authorNotesSlider.goTo(0);
-            if (anBackdropManager) anBackdropManager.update();
-            openCustomModal(authorNotesModal);
-        });
-    }
-    if (btnCloseAuthorNotes) {
-        btnCloseAuthorNotes.addEventListener("click", () => closeCustomModal(authorNotesModal));
-    }
-    if (authorNotesModal) {
-        authorNotesModal.addEventListener("click", (e) => {
-            if (e.target === authorNotesModal) closeCustomModal(authorNotesModal);
-        });
+        if (allowAuthorNotes) {
+            btnOpenAuthorNotes.style.display = "";
+        } else {
+            btnOpenAuthorNotes.style.display = "none";
+        }
     }
 
-    // Initialize author notes loading
-    loadAndRenderAuthorNotes();
+    if (allowAuthorNotes) {
+        // Author's Notes Modal triggers
+        if (btnOpenAuthorNotes) {
+            btnOpenAuthorNotes.addEventListener("click", () => {
+                if (authorNotesSlider) authorNotesSlider.goTo(0);
+                if (anBackdropManager) anBackdropManager.update();
+                openCustomModal(authorNotesModal);
+            });
+        }
+        if (btnCloseAuthorNotes) {
+            btnCloseAuthorNotes.addEventListener("click", () => closeCustomModal(authorNotesModal));
+        }
+        if (authorNotesModal) {
+            authorNotesModal.addEventListener("click", (e) => {
+                if (e.target === authorNotesModal) closeCustomModal(authorNotesModal);
+            });
+        }
+
+        // Initialize author notes loading
+        loadAndRenderAuthorNotes();
+    }
 
     // ----------------------------------------------------
     // 9. Background Music (BGM) Player Controller
